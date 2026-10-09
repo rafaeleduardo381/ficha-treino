@@ -118,6 +118,10 @@ footer{color:var(--muted);font-size:.8rem}
 .lg input:focus{border-color:var(--pc);outline:none;box-shadow:0 0 0 2px color-mix(in srgb,var(--pc) 30%,transparent)}
 .lg .set{width:100%;height:44px;border-radius:8px;font-size:1.25rem}
 .lg .set[aria-pressed="true"]{color:var(--surface)}
+.meta{margin:0;font-size:.9rem;color:var(--ink)}
+.meta b{font-family:var(--f-mono);font-weight:600;color:var(--pc)}
+.lg .sn.extra{color:var(--muted)}
+.addset{align-self:flex-start;min-height:40px}
 .lg input.ok{background:color-mix(in srgb,var(--pc) 12%,var(--surface));border-color:color-mix(in srgb,var(--pc) 45%,var(--line))}
 @media (prefers-reduced-motion:no-preference){.bar i{transition:width .9s linear}}
 /* Celular: cabeçalho compacto para o 1º exercício aparecer na tela, letra maior, timer numa linha só */
@@ -423,7 +427,7 @@ function renderDay(d){
   const cards = d.ex.map((e,i)=>{
     const [name,sets,reps,rir,rest,flag,cues] = e;
     const log = rir !== "—";
-    const boxes = log ? setRows(d, i, name, sets, marks) : `<div class="sets">${Array.from({length:sets},(_,s)=>
+    const boxes = log ? setRows(d, i, name, sets, marks, reps) : `<div class="sets">${Array.from({length:sets},(_,s)=>
       `<button type="button" class="set" data-ex="${i}" data-s="${s}" aria-pressed="${!!marks[i+"-"+s]}" aria-label="Série ${s+1} de ${name}">${s+1}</button>`).join("")}</div>`;
     const allDone = Array.from({length:sets}).every((_,s)=>marks[i+"-"+s]);
     return `<article class="ex${allDone?" done":""}" id="ex-${d.id}-${i}">
@@ -437,7 +441,7 @@ function renderDay(d){
           ${flag?`<span class="tag drop">${flag}</span>`:""}
         </div>
       </div>
-      ${log ? `<p class="last" data-name="${esc(name)}"></p>` : ""}
+      ${log ? `<p class="last" data-name="${esc(name)}"></p><p class="meta" hidden></p>` : ""}
       ${boxes}
       <details><summary>Execução</summary><ul>${cues.map(c=>`<li>${c}</li>`).join("")}</ul></details>
     </article>`;
@@ -501,16 +505,40 @@ function lastFor(p, name, before){
   }
   return best;
 }
-function setRows(d, i, name, sets, marks){
+const addRows = {};   // séries a mais abertas pelo botão "+ série" (por pessoa, data e exercício)
+function setRows(d, i, name, sets, marks, reps){
   const cur = (LOGS[docId(person.id, logDate)]?.ex?.[name]?.sets) || [];
-  const rows = Array.from({length:sets}, (_, s) => {
-    const v = cur[s] || {}, on = !!(marks[i+"-"+s] ?? v.done), a = `data-name="${esc(name)}" data-set="${s}" data-n="${sets}"`;
-    return `<span class="sn">${s+1}</span>
+  const k = `${person.id}:${logDate}:${name}`;
+  const total = Math.max(sets, cur.length, sets + (addRows[k] || 0));
+  const rows = Array.from({length:total}, (_, s) => {
+    const v = cur[s] || {}, on = !!(marks[i+"-"+s] ?? v.done), a = `data-name="${esc(name)}" data-set="${s}" data-n="${total}"`;
+    return `<span class="sn${s >= sets ? " extra" : ""}">${s+1}</span>
       <input id="kg-${d.id}-${i}-${s}" class="${on?"ok":""}" inputmode="decimal" autocomplete="off" placeholder="kg" aria-label="Série ${s+1}: carga em kg" ${a} data-field="kg" value="${esc(num(v.kg))}">
       <input id="rp-${d.id}-${i}-${s}" class="${on?"ok":""}" inputmode="numeric" autocomplete="off" placeholder="reps" aria-label="Série ${s+1}: repetições" ${a} data-field="reps" value="${esc(v.reps ?? "")}">
       <button type="button" class="set" data-ex="${i}" data-s="${s}" aria-pressed="${on}" aria-label="Marcar série ${s+1} de ${esc(name)} como feita">✓</button>`;
   }).join("");
-  return `<div class="lg" data-name="${esc(name)}"><span class="h">Série</span><span class="h">kg</span><span class="h">Reps</span><span class="h">Feita</span>${rows}</div>`;
+  const leg = d.id === "d2" || d.id === "d4";
+  return `<div class="lg" data-name="${esc(name)}" data-reps="${esc(reps)}" data-sets="${sets}" data-leg="${leg}"><span class="h">Série</span><span class="h">kg</span><span class="h">Reps</span><span class="h">Feita</span>${rows}</div>
+    <button type="button" class="ghost addset" data-ex="${i}" data-k="${esc(k)}" data-total="${total}" data-sets="${sets}">+ série</button>`;
+}
+// Meta do dia pela dupla progressão: bateu o topo da faixa em todas as séries → sobe a carga; senão, mesma carga buscando o topo.
+// No graviton o peso é ajuda: progredir é tirar peso.
+function metaFor(last, reps, sets, leg, name){
+  const m = String(reps).match(/(\d+)\s*[–-]\s*(\d+)/); if (!m || !last) return "";
+  const lo = +m[1], hi = +m[2], help = /Graviton/.test(name);
+  const ok = (last.sets || []).filter(s => typeof s.kg === "number" && typeof s.reps === "number" && s.reps > 0);
+  if (!ok.length) return "";
+  const inRange = ok.filter(s => s.reps >= lo);
+  if (!inRange.length) {
+    const ref = help ? Math.max(...ok.map(s => s.kg)) : Math.min(...ok.map(s => s.kg));
+    return `<b>${num(ref)} kg</b>, buscando ${lo}–${hi} reps (se não sair ${lo}, ${help ? "aumente a ajuda" : "tire uns 10%"})`;
+  }
+  const ref = help ? Math.min(...inRange.map(s => s.kg)) : Math.max(...inRange.map(s => s.kg));
+  const top = ok.filter(s => (help ? s.kg <= ref : s.kg >= ref) && s.reps >= hi).length >= sets;
+  if (!top) return `<b>${num(ref)} kg</b>, buscando ${hi} reps em todas as séries`;
+  const step = help ? 2.5 : /halter/i.test(name) ? (ref < 10 ? 1 : 2) : leg && ref >= 20 ? 5 : 2.5;
+  const next = Math.max(0, help ? ref - step : ref + step);
+  return `<b>${num(next)} kg</b> × ${lo}–${hi} (${help ? "menos ajuda" : "subiu"}: bateu ${hi} em todas)`;
 }
 function refreshCarga(){
   if (!Object.keys(pending).length) setStatus(modeText());
@@ -521,6 +549,8 @@ function refreshCarga(){
     const last = lastFor(person.id, name, logDate);
     const p = box.parentElement.querySelector(".last");
     if (p) p.innerHTML = last ? `Última vez (${brDate(last.date)}): <b>${fmtSets(last.sets)}</b>` : "Primeira vez: anote kg e reps de cada série.";
+    const mt = box.parentElement.querySelector(".meta");
+    if (mt) { const t = metaFor(last, box.dataset.reps, +box.dataset.sets, box.dataset.leg === "true", name); mt.innerHTML = t ? `Meta de hoje: ${t}` : ""; mt.hidden = !t; }
     box.querySelectorAll("input").forEach(inp => {
       const s = +inp.dataset.set, f = inp.dataset.field, lv = last?.sets?.[s]?.[f];
       const ph = lv === "" || lv == null ? (f === "kg" ? "kg" : "reps") : (f === "kg" ? num(lv) : String(lv));
@@ -548,7 +578,7 @@ function writeSet(name, n, s, patch){
   const id = docId(person.id, logDate);
   const doc = LOGS[id] ? JSON.parse(JSON.stringify(LOGS[id])) : {person:person.id, date:logDate, day:current, ex:{}};
   const e = doc.ex[name] || (doc.ex[name] = {sets:[]});
-  while (e.sets.length < n) e.sets.push({kg:"", reps:""});
+  while (e.sets.length < Math.max(n, s + 1)) e.sets.push({kg:"", reps:""});
   Object.assign(e.sets[s], patch);
   doc.updated = new Date().toISOString();
   LOGS[id] = doc; pending[id] = true; refreshSend(); keepDate(logDate);
@@ -743,6 +773,13 @@ tabs.addEventListener("click", e=>{
   window.scrollTo({top:0});
 });
 view.addEventListener("click", e=>{
+  const add = e.target.closest(".addset");
+  if (add){
+    addRows[add.dataset.k] = +add.dataset.total - +add.dataset.sets + 1;
+    const y = scrollY; draw(); scrollTo(0, y);
+    document.getElementById(`kg-${current}-${add.dataset.ex}-${add.dataset.total}`)?.focus();
+    return;
+  }
   const wa = e.target.closest("#sendwa"), cp = e.target.closest("#copytxt");
   if (wa || cp){
     const t = treinoText(), sum = document.getElementById("sendsum");
