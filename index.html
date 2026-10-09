@@ -509,16 +509,17 @@ const addRows = {};   // séries a mais abertas pelo botão "+ série" (por pess
 function setRows(d, i, name, sets, marks, reps){
   const cur = (LOGS[docId(person.id, logDate)]?.ex?.[name]?.sets) || [];
   const k = `${person.id}:${logDate}:${name}`;
+  const kgLbl = /halter|búlgaro|martelo/i.test(name) ? "kg/halter" : "kg";   // halter: anota o peso de um halter só
   const total = Math.max(sets, cur.length, sets + (addRows[k] || 0));
   const rows = Array.from({length:total}, (_, s) => {
     const v = cur[s] || {}, on = !!(marks[i+"-"+s] ?? v.done), a = `data-name="${esc(name)}" data-set="${s}" data-n="${total}"`;
     return `<span class="sn${s >= sets ? " extra" : ""}">${s+1}</span>
-      <input id="kg-${d.id}-${i}-${s}" class="${on?"ok":""}" inputmode="decimal" autocomplete="off" placeholder="kg" aria-label="Série ${s+1}: carga em kg" ${a} data-field="kg" value="${esc(num(v.kg))}">
+      <input id="kg-${d.id}-${i}-${s}" class="${on?"ok":""}" inputmode="decimal" autocomplete="off" placeholder="${kgLbl}" aria-label="Série ${s+1}: carga em ${kgLbl}" ${a} data-field="kg" value="${esc(num(v.kg))}">
       <input id="rp-${d.id}-${i}-${s}" class="${on?"ok":""}" inputmode="numeric" autocomplete="off" placeholder="reps" aria-label="Série ${s+1}: repetições" ${a} data-field="reps" value="${esc(v.reps ?? "")}">
       <button type="button" class="set" data-ex="${i}" data-s="${s}" aria-pressed="${on}" aria-label="Marcar série ${s+1} de ${esc(name)} como feita">✓</button>`;
   }).join("");
   const leg = d.id === "d2" || d.id === "d4";
-  return `<div class="lg" data-name="${esc(name)}" data-reps="${esc(reps)}" data-sets="${sets}" data-leg="${leg}"><span class="h">Série</span><span class="h">kg</span><span class="h">Reps</span><span class="h">Feita</span>${rows}</div>
+  return `<div class="lg" data-name="${esc(name)}" data-reps="${esc(reps)}" data-sets="${sets}" data-leg="${leg}" data-kg="${kgLbl}"><span class="h">Série</span><span class="h">${kgLbl}</span><span class="h">Reps</span><span class="h">Feita</span>${rows}</div>
     <button type="button" class="ghost addset" data-ex="${i}" data-k="${esc(k)}" data-total="${total}" data-sets="${sets}">+ série</button>`;
 }
 // Meta do dia pela dupla progressão: bateu o topo da faixa em todas as séries → sobe a carga; senão, mesma carga buscando o topo.
@@ -553,7 +554,7 @@ function refreshCarga(){
     if (mt) { const t = metaFor(last, box.dataset.reps, +box.dataset.sets, box.dataset.leg === "true", name); mt.innerHTML = t ? `Meta de hoje: ${t}` : ""; mt.hidden = !t; }
     box.querySelectorAll("input").forEach(inp => {
       const s = +inp.dataset.set, f = inp.dataset.field, lv = last?.sets?.[s]?.[f];
-      const ph = lv === "" || lv == null ? (f === "kg" ? "kg" : "reps") : (f === "kg" ? num(lv) : String(lv));
+      const ph = lv === "" || lv == null ? (f === "kg" ? box.dataset.kg : "reps") : (f === "kg" ? num(lv) : String(lv));
       inp.placeholder = ph; inp.dataset.last = lv === "" || lv == null ? "" : String(lv);
       if (inp === document.activeElement) return;
       const v = (sets[s] || {})[f];
