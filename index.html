@@ -1,4 +1,4 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#14181D"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0D0E10"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Treino"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
 <title>Ficha do Rafael · Bloco 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,6 +107,7 @@ body.mov .ck.win{animation:ck-glow .9s ease-out}body.mov .ck.win .ring{animation
 .dock button span{display:none}
 .dock button[aria-current="page"]{background:var(--lime);color:var(--lime-ink);padding:0 22px}
 .dock button[aria-current="page"] span{display:inline}
+@media(max-width:390px){.dock{gap:2px;padding:5px;max-width:calc(100% - 16px)}.dock button{height:48px;min-width:44px;padding:0 11px}.dock button[aria-current="page"]{padding:0 12px;font-size:.82rem}.dock button svg{width:20px;height:20px}}
 
 /* Mais */
 .menu{display:flex;flex-direction:column;gap:10px}
@@ -138,8 +139,6 @@ nav.days button[aria-selected="true"] .nm{color:var(--bg)}
 .presc{grid-column:2;display:flex;flex-wrap:wrap;gap:6px}
 .tag{font-size:.8rem;font-weight:700;background:var(--surface2);color:var(--soft);border-radius:8px;padding:3px 9px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .tag.drop{background:var(--coral);color:#1A0B06}
-.last{margin:0;font-size:.85rem;color:var(--muted)}
-.last b{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
 .meta{margin:0;font-size:.9rem;color:var(--soft)}
 .meta b{font-weight:800;color:var(--lime)}
 .lg{display:grid;grid-template-columns:2rem minmax(0,1fr) minmax(0,1fr) 3.2rem;gap:8px;align-items:center}
@@ -213,6 +212,9 @@ body.mov .anim .st-bar i,body.mov .anim .pbar i,body.mov .anim .pf-segs i.ok,bod
 /* Estilo de cartão comum: degradê leve da cor do assunto e ícone tingido */
 .ck{background:linear-gradient(180deg,color-mix(in srgb,var(--c,var(--muted)) 10%,var(--surface)) 0,var(--surface) 78px)}
 button.todaycard,button.dcard{background:linear-gradient(180deg,color-mix(in srgb,var(--pc) 10%,var(--surface)) 0,var(--surface) 78px)}
+/* Safari alinha o conteúdo de <button> à esquerda (align-items:flex-start no padrão dele); aqui os filhos ocupam a largura toda */
+button.todaycard,button.dcard,.opt{align-items:stretch}
+button.todaycard > *,button.dcard > *{align-self:stretch;min-width:0}
 .panel.tinted{background:linear-gradient(180deg,color-mix(in srgb,var(--c) 10%,var(--surface)) 0,var(--surface) 78px)}
 .ex{background:linear-gradient(180deg,color-mix(in srgb,var(--pc,var(--muted)) 7%,var(--surface)) 0,var(--surface) 78px)}
 .rel-t{margin:0;font-weight:700;font-size:.98rem;line-height:1.4}
@@ -257,6 +259,40 @@ body.mov .pt[aria-pressed="true"] .pt-b{animation:check .4s cubic-bezier(.3,1.6,
 .pt-refs .st-bar{height:8px}
 .chips.two-c{display:grid;grid-template-columns:1fr 1fr}
 .chips.two-c .chip{text-align:center}
+.sup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sup-dayhead{display:flex;align-items:center;gap:12px}
+.sup-dayhead .dayhead{flex:1;min-width:0}
+.sup-dayhead .avatar{flex:none;color:var(--ink)}
+.sup-dayhead .dayhead h2{color:var(--violet)}
+.sup-dayhead .dayhead p{line-height:1.4}
+.sup-card .ph{flex-wrap:wrap}
+.sup-card .tag{white-space:normal;overflow-wrap:anywhere}
+.sup-card .chips{display:flex;gap:6px;flex-wrap:wrap}
+.sup-card label{display:block;font-size:.8rem;font-weight:700;color:var(--soft)}
+.sup-card input,.sup-card select{display:block;width:100%;min-width:0;margin-top:5px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit;font-size:1rem}
+.sup-card input[data-sup-dia]{font-size:1.65rem;font-family:var(--f-mono);font-weight:700;color:var(--c)}
+.sup-card input::placeholder{font-size:.9rem;color:var(--muted)}
+.sup-card input:disabled{opacity:.5}
+.sup-card input:focus,.sup-card select:focus{outline:2px solid var(--lime);outline-offset:1px}
+.sup-card .chip[aria-pressed="true"]{background:var(--lime);color:var(--lime-ink)}
+.sup-card form{display:flex;flex-direction:column;gap:12px;padding-top:12px}
+.sup-card form .ghost{display:flex;align-items:center;justify-content:center;gap:8px}
+.sup-card form .ghost svg{width:18px;height:18px}
+.sup-card .sup-result{margin:0;font-size:.87rem;color:var(--soft);line-height:1.4;min-height:2.8em}
+.sup-card .sup-result b{color:var(--c,var(--lime))}
+.sup-card .sup-result.warn b{color:var(--warn)}
+.sup-card .sup-result.high b{color:var(--coral)}
+.sup-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.sup-actions button{min-height:44px}
+.sup-reg{margin:0;font-size:.95rem;line-height:1.5}
+.sup-photo{display:block;max-width:100%;max-height:220px;margin:10px 0;border-radius:10px;object-fit:contain}
+.sup-history{width:100%;table-layout:fixed;border-collapse:collapse;font-size:.8rem}
+.sup-history caption{text-align:left;color:var(--muted);padding-bottom:10px}
+.sup-history th,.sup-history td{text-align:left;padding:8px 4px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.sup-history th:first-child{width:24%}
+.sup-history thead{color:var(--muted)}
+.sup-history button{min-height:44px;text-align:left}
+@media(max-width:480px){.sup-grid{grid-template-columns:1fr}}
 .cd-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;position:relative}
 .cd-r{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:12px 14px;display:flex;flex-direction:column;gap:6px}
 .cd-r.bol{background:linear-gradient(180deg,color-mix(in srgb,var(--coral) 9%,var(--surface)) 0,var(--surface) 70px)}
@@ -296,6 +332,143 @@ body.mov .al-r[aria-pressed="true"] .al-c{animation:check .4s cubic-bezier(.3,1.
 .sw-c{display:grid;grid-template-columns:1fr;gap:6px}
 .sw-c .chip{text-align:left;border-radius:12px}
 .sw-c .chip b{display:inline-block;min-width:2.4em;color:var(--muted)}
+.calbar{display:flex;align-items:center;gap:8px}
+.cal-nav{width:38px;height:38px;flex:none;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:1.3rem;line-height:1;cursor:pointer}
+.cal-mes{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;height:38px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
+.cal-mes svg{width:17px;height:17px;color:var(--lime);flex:none}
+.cal-mes b{font-size:.92rem}
+.cal-mes span{font-size:.74rem;color:var(--muted);white-space:nowrap}
+.week{touch-action:pan-y}
+@keyframes week-l{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@keyframes week-r{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+body.mov .week.slide-l{animation:week-l .3s cubic-bezier(.2,.8,.2,1)}
+body.mov .week.slide-r{animation:week-r .3s cubic-bezier(.2,.8,.2,1)}
+.cal-h{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cal-h h2{font-size:1.15rem}
+.cal-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal-wd span{text-align:center;font-size:.68rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.cal-d{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:12px;border:1px solid transparent;background:var(--surface2);color:var(--ink);font:inherit;cursor:pointer;padding:0}
+.cal-d b{font-size:.9rem;font-variant-numeric:tabular-nums}
+.cal-d i{width:6px;height:6px;border-radius:50%;background:transparent}
+.cal-d i.tr,.cal-leg i.tr{background:var(--lime)}
+.cal-d.ck{box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--blue) 55%,transparent)}
+.cal-d.fora{opacity:.35}
+.cal-d.fut b{color:var(--muted)}
+.cal-d.hoje{border-color:var(--ink)}
+.cal-d.on{background:var(--lime);color:var(--lime-ink)}
+.cal-d.on i.tr{background:var(--lime-ink)}
+.cal-leg{display:flex;align-items:center;gap:6px;justify-content:center}
+.cal-leg i{display:inline-block;width:8px;height:8px;border-radius:50%}
+.cal-leg i.ckl{box-shadow:inset 0 0 0 1.5px var(--blue)}
+.streak.risco{border-color:color-mix(in srgb,var(--warn) 60%,var(--line))}
+.streak.urgente{border-color:var(--coral)}
+.streak.urgente .st-t{color:var(--coral)}
+@keyframes of-pulso{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--coral) 45%,transparent)}50%{box-shadow:0 0 0 8px transparent}}
+body.mov .streak.urgente{animation:of-pulso 1.6s ease-in-out infinite}
+.ofmodal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;background:rgba(5,6,7,.86);opacity:0;transition:opacity .25s}
+.ofmodal.open{opacity:1}
+.ofmodal.perdeu{background:rgba(24,4,2,.92)}
+.of-box{width:min(380px,100%);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:26px 22px 20px}
+.ofmodal.ganhou .of-box{border-color:color-mix(in srgb,var(--fa) 55%,var(--line));background:radial-gradient(circle at 50% 0,color-mix(in srgb,var(--fa) 22%,var(--surface)),var(--surface) 62%)}
+.ofmodal.perdeu .of-box{border-color:color-mix(in srgb,var(--coral) 60%,var(--line))}
+.of-fl .flame-ico{width:92px;height:108px}
+.of-fl.apagada .flame-ico{filter:grayscale(1) brightness(.7)}
+.of-n{margin:0;font-size:3.4rem;font-weight:800;line-height:1}
+.ofmodal.perdeu .of-n{font-size:2rem;color:var(--coral)}
+.ofmodal.perdeu .of-n s{color:var(--muted)}
+.of-box h2{font-size:1.25rem}
+.of-f{margin:6px 0 0;font-size:1.08rem;font-weight:800;line-height:1.35;text-wrap:balance}
+.ofmodal.perdeu .of-f{color:var(--coral)}
+.of-s{margin:0 0 8px;font-size:.84rem;color:var(--muted)}
+.of-box .done-btn{align-self:stretch}
+.ofmodal.perdeu .done-btn{background:var(--coral);color:#1A0B06}
+@keyframes of-entra{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.06);opacity:1}100%{transform:none}}
+@keyframes of-treme{0%,100%{transform:none}15%{transform:translateX(-9px) rotate(-1deg)}30%{transform:translateX(8px) rotate(1deg)}45%{transform:translateX(-6px)}60%{transform:translateX(5px)}80%{transform:translateX(-2px)}}
+@keyframes of-apaga{0%{filter:none;transform:scale(1)}60%{filter:grayscale(.4);transform:scale(1.08)}100%{filter:grayscale(1) brightness(.7);transform:scale(.92)}}
+body.mov .ofmodal.ganhou.open .of-box{animation:of-entra .55s cubic-bezier(.3,1.4,.5,1)}
+body.mov .ofmodal.ganhou.open .of-fl .flame-ico{transform-origin:50% 92%;animation:flicker 2.2s ease-in-out infinite}
+body.mov .ofmodal.perdeu.open .of-box{animation:of-treme .6s ease .15s}
+body.mov .ofmodal.perdeu.open .of-fl .flame-ico{animation:of-apaga 1.1s ease both}
+.ex .meta{display:flex;align-items:center;gap:12px;margin:0;padding:14px;border-radius:14px;background:color-mix(in srgb,var(--blue) 13%,var(--surface2));border:1px solid color-mix(in srgb,var(--blue) 60%,var(--line));border-left:4px solid var(--blue)}
+.ex .meta .mt-ico,.daymetas .mt-ico{width:34px;height:34px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--blue);color:var(--bg)}
+.ex .meta .mt-ico svg,.daymetas .mt-ico svg{width:19px;height:19px}
+.ex .meta small{display:block;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+.ex .meta p{margin:3px 0 0;font-size:.95rem;font-weight:650;color:var(--ink);line-height:1.4}
+.ex .meta p b{font-size:1.35rem;font-weight:850;color:var(--blue);font-variant-numeric:tabular-nums}
+.ex .meta.up{background:color-mix(in srgb,var(--lime) 13%,var(--surface2));border-color:color-mix(in srgb,var(--lime) 60%,var(--line));border-left-color:var(--lime)}
+.ex .meta.up .mt-ico{background:var(--lime);color:var(--lime-ink)}
+.ex .meta.up small{color:var(--lime)}
+.ex .meta.up p b{color:var(--lime)}
+.daymetas{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;border:1px solid color-mix(in srgb,var(--lime) 35%,var(--line));background:linear-gradient(180deg,color-mix(in srgb,var(--lime) 9%,var(--surface)) 0,var(--surface) 78px)}
+.daymetas .mt-ico{background:var(--lime);color:var(--lime-ink)}
+.daymetas b{font-size:.95rem}
+.daymetas p{margin:1px 0;font-size:.86rem;color:var(--soft)}
+.daymetas p b.up{color:var(--lime)}
+.daymetas small{font-size:.72rem;color:var(--muted)}
+button.todaycard{gap:10px;padding:16px}
+.tc-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tc-day{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--pc)}
+.tc-st{font-size:.72rem;font-weight:800;border-radius:999px;padding:3px 10px;background:var(--surface2);color:var(--soft);white-space:nowrap}
+.todaycard.andando .tc-st{background:color-mix(in srgb,var(--warn) 22%,var(--surface2));color:var(--warn)}
+.todaycard.feito .tc-st{background:var(--lime);color:var(--lime-ink)}
+.todaycard h3{font-size:1.45rem;font-weight:800;line-height:1.15}
+.todaycard .tc-sub{margin:-6px 0 0;font-size:.85rem;color:var(--muted);line-height:1.35}
+.tc-nums{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:6px}
+.tc-nums span{display:flex;flex-direction:column;align-items:flex-start;gap:1px;background:var(--surface2);border-radius:12px;padding:8px 10px;font-size:.7rem;font-weight:700;color:var(--muted)}
+.tc-nums b{font-size:1.05rem;font-weight:800;color:var(--ink);line-height:1.1}
+.tc-prog{display:flex;align-items:center;gap:10px}
+.tc-prog .pbar{flex:1}
+.tc-prog span{font-size:.78rem;font-weight:800;color:var(--soft)}
+.tc-cta{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:14px;background:var(--lime);color:var(--lime-ink);font-weight:800;font-size:.98rem}
+.tc-cta svg{width:18px;height:18px}
+.todaycard.feito .tc-cta{background:var(--surface2);color:var(--ink)}
+.ck.alc .ck-h .pt-v{color:var(--warn)}
+.alc-q{margin:0;font-size:.9rem;color:var(--soft)}
+.alc-q small{display:block;font-size:.74rem;color:var(--muted)}
+.alc-row{display:grid;grid-template-columns:1.9fr repeat(6,minmax(0,1fr));gap:5px}
+.alc-row .chip{padding:10px 0;text-align:center;font-size:.86rem;border-radius:12px}
+.alc-row .chip[aria-pressed="true"]{background:var(--warn);border-color:var(--warn);color:#1A1205}
+.alc-mais{grid-column:1/-1;font:inherit;font-size:.82rem;font-weight:700;color:var(--muted);background:none;border:1px dashed var(--line);border-radius:14px;padding:10px;cursor:pointer}
+.alc-m{margin:0;font-size:.92rem;color:var(--soft)}
+.alc-linha{margin:0;font-size:.78rem;color:var(--warn)}
+.avatar.tem-foto{background-size:cover;background-position:center;color:transparent}
+.foto-btn{position:relative;cursor:pointer}
+.foto-btn i{position:absolute;right:-4px;bottom:-4px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--surface2);color:var(--ink);border:2px solid var(--surface)}
+.foto-btn i svg{width:13px;height:13px}
+.pf-foto{margin:6px 0 0;font-size:.8rem;color:var(--muted)}
+.linkbtn{font:inherit;font-size:.8rem;font-weight:700;color:var(--lime);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.ap-ok{margin:0;font-weight:800;color:var(--lime)}
+.ap-passos{list-style:none;margin:0;padding:0!important;display:flex;flex-direction:column;gap:8px}
+.ap-passos li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--soft);line-height:1.4}
+.ap-n{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--lime);color:var(--lime-ink);font-weight:800;font-size:.8rem}
+.ap-share{width:18px;height:18px;vertical-align:-4px;color:var(--blue)}
+.ap-msg{margin:0;font-size:.85rem;font-weight:700;color:var(--soft);background:var(--surface2);border-radius:12px;padding:8px 12px}
+.app-p .ap-lista{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px;font-size:.84rem;color:var(--soft)}
+.ap-lista b{display:inline-block;min-width:2.6em;color:var(--ink)}
+.ex-acts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ex-acts .ghost,.ghost.shr{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px;font-size:.84rem}
+.ex-acts svg,.ghost.shr svg{width:17px;height:17px;flex:none}
+.ex-acts .ghost[aria-pressed="true"]{background:var(--lime);color:var(--lime-ink)}
+body.mov .ex-acts .ghost[aria-pressed="true"]{animation:of-pulso 1.2s ease-in-out infinite}
+.ghost.shr{width:100%;min-height:48px;border:1px solid var(--line);background:var(--surface)}
+.pm li{padding:12px 0}
+.pm .pm-b{flex:none}
+.pm .chip{padding:8px 14px}
+.fg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.fg-i{position:relative;aspect-ratio:3/4;padding:0;border:0;border-radius:12px;overflow:hidden;background:var(--surface2);cursor:pointer}
+.fg-i img{width:100%;height:100%;object-fit:cover;display:block}
+.fg-i span{position:absolute;left:6px;bottom:6px;font-size:.7rem;font-weight:800;color:#fff;background:rgba(0,0,0,.6);border-radius:8px;padding:1px 6px}
+.camv{position:fixed;inset:0;z-index:70;background:#000;display:flex;align-items:center;justify-content:center}
+.camv video,.camv img{width:100%;height:100%;object-fit:contain;background:#000}
+.cam-top,.cam-bar{position:absolute;left:0;right:0;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;color:#fff}
+.cam-top{top:env(safe-area-inset-top,0px);background:linear-gradient(180deg,rgba(0,0,0,.7),transparent)}
+.cam-bar{bottom:env(safe-area-inset-bottom,0px);padding-bottom:22px;background:linear-gradient(0deg,rgba(0,0,0,.75),transparent)}
+.cam-top b{font-size:1rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cam-bar .ghost,.cam-bar .done-btn{min-height:46px;padding:0 16px}
+.cam-bar .done-btn{flex:1}
+.cam-shot{width:70px;height:70px;border-radius:50%;border:4px solid #fff;background:rgba(255,255,255,.25);cursor:pointer;flex:none}
+.cam-shot.rec{background:var(--coral);border-color:var(--coral);border-radius:22px;transform:scale(.8)}
+.cam-t{min-width:6.5em;text-align:right;font-size:.82rem;font-weight:800;font-variant-numeric:tabular-nums}
 .ph-t{display:flex;align-items:center;gap:10px;min-width:0}
 .dc-stats svg{color:var(--pc)}
 .dstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
@@ -406,7 +579,7 @@ body:not(.mov) .toast{transition:none}
 .dc-stats svg{width:18px;height:18px;color:var(--muted)}
 .dc-stats small{grid-column:2;font-weight:500;font-size:.7rem;color:var(--muted)}
 .dc-mus{margin:0;font-size:.78rem;color:var(--muted)}
-body[data-tela="treino"] .top,body[data-tela="perfil"] .top,body[data-tela="cardapio"] .top,body[data-tela="regras"] .top,body[data-tela="breno"] .top,body[data-tela="dieta"] .top,body[data-tela="medidas"] .top{display:none}
+body[data-tela="treino"] .top,body[data-tela="perfil"] .top,body[data-tela="cardapio"] .top,body[data-tela="suplementos"] .top,body[data-tela="regras"] .top,body[data-tela="breno"] .top,body[data-tela="dieta"] .top,body[data-tela="medidas"] .top{display:none}
 .chips.five{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
 .chips.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
 .chips.five .chip,.chips.three .chip{padding:9px 2px;font-size:.78rem;text-align:center}
@@ -544,6 +717,107 @@ body[data-tela="treino"] .toprow{justify-content:flex-end}
 .setctl .ghost:disabled{opacity:.35;cursor:default}
 .setctl span{font-size:.82rem;color:var(--muted);font-weight:700}
 @media (max-width:380px){.fl{min-width:84px}}
+/* INICIO TREINO CSS */
+/* Pacote de treino: sem substituir os estilos das telas existentes. */
+.treino-dialog{width:min(528px,calc(100vw - 24px));max-height:85dvh;overflow:auto;border:1px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink);padding:20px;font:inherit}
+.treino-dialog::backdrop{background:#000b}
+.treino-dialog h2{margin:16px 0}
+.resumo-row{border-top:1px solid var(--line);padding:18px 0;overflow-wrap:anywhere}
+.resumo-row dl{margin:12px 0}.resumo-row dt{color:var(--muted);font-size:.8rem}.resumo-row dd{margin:0 0 8px;font-family:var(--f-mono);font-size:.85rem}
+.resumo-row .delta{white-space:normal}
+.volume-muscular table{width:100%;border-collapse:collapse;font-size:.85rem}.volume-muscular caption{text-align:left;font-size:.78rem;color:var(--muted);padding-bottom:12px}
+.volume-muscular th,.volume-muscular td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+.volume-muscular th:first-child{text-align:left;font-weight:500}.volume-muscular th[scope=col]{color:var(--muted)}
+.cal-d.excused i,.cal-leg .excused{background:var(--violet)}.sd.excused i{border-color:var(--violet);color:var(--violet)}
+.ex{position:relative}.ex.win{outline:2px solid var(--lime)}
+
+/* Limpeza de interface exclusiva do teste. */
+.treino-plus .link-action{font:inherit;font-size:.82rem;font-weight:600;color:var(--soft);background:transparent;border:0;padding:8px 4px;min-height:44px;cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:3px}
+.treino-plus .link-action:focus-visible,.treino-plus summary:focus-visible{outline:2px solid var(--lime);outline-offset:3px;border-radius:4px}
+.treino-plus .rows .setctl .sbtn{min-height:44px;flex:none}
+.treino-plus .rows .setctl .dictate-action{flex:none;margin-left:8px;padding-inline:8px;min-width:52px}
+.treino-plus .film-action{display:inline-flex;align-items:center;gap:8px}
+.treino-plus .film-action svg{width:18px;height:18px;flex:none}
+.treino-plus .today-training{margin-bottom:12px}
+.treino-plus .justify-action{display:block;margin-left:12px}
+.treino-plus .excuse-active{display:flex;align-items:center;flex-wrap:wrap;column-gap:8px;font-size:.8rem;color:var(--soft);padding:4px 12px}
+.treino-plus .excuse-active small{flex-basis:100%;color:var(--muted)}
+.treino-plus .volume-muscular>summary{display:block;min-height:44px;align-content:center;color:var(--ink)}
+.treino-plus .volume-muscular[open]>.hint{margin:8px 0}
+.treino-plus .ex>details>summary,.treino-plus .resumo-row>details>summary{min-height:44px;align-content:center}
+.treino-plus .resumo-row>h3{margin:0 0 8px;font-size:1rem}
+.treino-plus .resumo-row p{margin:6px 0;font-size:.85rem}
+.treino-plus .resumo-row .resumo-sets{color:var(--soft);font-variant-numeric:tabular-nums}
+.treino-plus .resumo-row .resumo-change{color:var(--soft)}
+.treino-plus .resumo-row .hint{font-size:.78rem}
+.treino-plus .resumo-row details{margin-top:10px}
+.treino-plus .treino-dialog>.done-btn{width:100%}
+
+.treino-plus .dictate-action[aria-pressed="true"]{color:var(--lime);font-weight:800}
+
+.treino-plus .ex .meta .mt-copy{min-width:0}
+.treino-plus .ex .meta .hint{font-size:.8rem;font-weight:400;color:var(--soft);line-height:1.5;margin-top:8px}
+.treino-plus #card-peso{grid-column:1/-1;background:var(--surface);padding:16px;border-radius:18px;gap:0}
+
+/* Peso corporal: uma linha de registro com contexto, sem ação duplicada. */
+.treino-plus #card-peso .pesorow{display:grid;grid-template-columns:36px minmax(0,1fr) minmax(0,7rem);grid-template-areas:"icon label field" "icon hint field";column-gap:12px;row-gap:3px;align-items:center}
+.treino-plus #card-peso .peso-icon{grid-area:icon;display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:color-mix(in srgb,var(--peso) 12%,var(--surface));color:var(--peso)}
+.treino-plus #card-peso .peso-icon svg{display:block;width:20px;height:20px}
+.treino-plus #card-peso .ck-h{grid-area:label;align-self:end;font-size:.875rem;font-weight:700;line-height:1.35}
+.treino-plus #card-peso .peso-field{grid-area:field;position:relative;min-width:0;border:1px solid color-mix(in srgb,var(--peso) 24%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--peso) 5%,var(--surface))}
+.treino-plus #card-peso .pesoin{display:block;width:100%;min-width:0;height:auto;min-height:52px;padding:10px 28px 10px 10px;font-size:1.5rem;line-height:1.25;letter-spacing:-.04em;text-align:center;color:var(--ink);background:transparent;border:0;border-radius:11px;-webkit-appearance:none;appearance:none}
+.treino-plus #card-peso .pesoin::placeholder{color:var(--peso);font-size:.9375rem;font-weight:600;letter-spacing:0;opacity:1}
+.treino-plus #card-peso .pesoin:focus{outline:2px solid var(--peso);outline-offset:3px}
+.treino-plus #card-peso .peso-field:focus-within{background:color-mix(in srgb,var(--peso) 10%,var(--surface))}
+.treino-plus #card-peso .peso-unit{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:.75rem;font-weight:500;color:var(--muted);pointer-events:none}
+.treino-plus #card-peso .ck-note{grid-area:hint;align-self:start;min-width:0;font-size:.75rem;line-height:1.5;color:var(--muted);text-align:left;text-wrap:wrap;overflow-wrap:anywhere}
+.treino-plus .ex .meta{align-items:flex-start;gap:10px}
+.treino-plus .ex .meta .mt-ico{width:28px;height:28px}
+.treino-plus .ex .meta .mt-copy{flex:1}
+.treino-plus .ex .meta .mt-value{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:4px}
+.treino-plus .ex .meta .mt-value b{font-size:2rem;line-height:1.15;overflow-wrap:anywhere}
+.treino-plus .ex .meta .mt-value .mt-unit{font-size:1rem;font-weight:600;color:var(--soft)}
+.treino-plus .ex .meta .mt-reps{font-size:.875rem;font-weight:600}
+@media(max-width:380px){.treino-plus #card-peso{padding:14px 12px}.treino-plus #card-peso .pesorow{grid-template-columns:30px minmax(0,1fr) minmax(0,6.5rem);column-gap:8px}.treino-plus #card-peso .peso-icon{width:30px;height:30px;border-radius:9px}}
+
+/* FIM TREINO CSS */
+/* INICIO FOGO CSS */
+/* Chama com alpha real; tamanho reservado evita pulo ao carregar/trocar estado. */
+.flame-ico.fogo-visual{display:inline-block;position:relative;width:44px;height:58px;flex:none;vertical-align:middle;filter:none;overflow:visible}
+.fogo-visual .fogo-img,.fogo-visual .fogo-brasa{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;pointer-events:none}
+.fogo-visual .fogo-img{opacity:0}
+.fogo-visual[data-fogo="aceso"] .fogo-img,.fogo-visual[data-fogo-playing] .fogo-img{opacity:1}
+.fogo-visual[data-fogo="aceso"] .fogo-brasa,.fogo-visual[data-fogo-playing] .fogo-brasa{opacity:0}
+.fogo-visual[data-fogo-loading] .fogo-img{opacity:0}
+.fogo-brasa .brasa-aura{fill:#f67d36;opacity:.12}
+.fogo-brasa .brasa-cinza{fill:var(--muted);opacity:.26}
+.fogo-brasa .brasa-carvao{fill:#55535a;stroke:#777078;stroke-width:.6}
+.fogo-brasa .brasa-fenda{fill:none;stroke:#ef964e;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.fogo-brasa .brasa-faisca{fill:#ffc880;opacity:.4}
+body.mov .fl.lit .fogo-visual,body.mov .ofmodal.ganhou.open .of-fl .fogo-visual,body.mov .ofmodal.perdeu.open .of-fl .fogo-visual{animation:none;transform:none;filter:none}
+.of-fl.apagada .fogo-visual{filter:none}
+.of-fl .flame-ico.fogo-visual{width:96px;height:144px}
+.fl .flame-ico.fogo-visual{width:52px;height:70px;margin:-4px 0 -2px}
+.fl .fogo-visual span{font-size:inherit}
+.streak.dormant::before{opacity:.18}
+.streak.dormant .fl{box-shadow:inset 0 0 0 1px var(--line)}
+.streak.dormant .fl b{color:var(--muted)}
+.streak.dormant .st-t{font-weight:600}
+@keyframes brasa-respira{0%,100%{opacity:.1}50%{opacity:.23}}
+@keyframes brasa-sopro{0%,100%{opacity:.15;transform:translateY(0)}60%{opacity:.55;transform:translateY(-5px)}}
+body.mov .fogo-visual[data-fogo="brasa"]:not([data-fogo-playing]) .brasa-aura{animation:brasa-respira 4.5s ease-in-out infinite}
+body.mov .fogo-visual[data-fogo="brasa"]:not([data-fogo-playing]) .brasa-faisca{animation:brasa-sopro 4.5s ease-in-out infinite}
+
+/* Contextos pequenos continuam compactos; só o cartão e o modal usam movimento. */
+.toast .flame-ico.fogo-visual{width:28px;height:38px}
+.st-ico .flame-ico.fogo-visual{width:16px;height:22px}
+
+/* Marcos já existentes mantêm suas cores; o primeiro nível usa a referência. */
+.fogo-visual[data-fogo-tier="5"] .fogo-img{filter:hue-rotate(-30deg)}
+.fogo-visual[data-fogo-tier="10"] .fogo-img{filter:hue-rotate(245deg)}
+.fogo-visual[data-fogo-tier="20"] .fogo-img{filter:hue-rotate(115deg)}
+
+/* FIM FOGO CSS */
 .navrow.info{grid-template-columns:repeat(2,minmax(0,1fr))}
 </style>
 
@@ -571,13 +845,85 @@ body[data-tela="treino"] .toprow{justify-content:flex-end}
 </div>
 
 <nav class="dock" id="dock" aria-label="Menu">
-  <button type="button" data-screen="hoje"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg><span>Hoje</span></button>
-  <button type="button" data-screen="treino"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><span>Treino</span></button>
-  <button type="button" data-screen="progresso"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Progresso</span></button>
+  <button type="button" data-screen="hoje" aria-label="Hoje"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg><span>Hoje</span></button>
+  <button type="button" data-screen="treino" aria-label="Treino"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></svg><span>Treino</span></button>
+  <button type="button" data-screen="progresso" aria-label="Progresso"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Progresso</span></button>
+  <button type="button" data-screen="suplementos" aria-label="Suplementos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8z"/><path d="M5 5.5h14M9.5 3h5"/><path d="M9.5 13.5h5"/></svg><span>Suplementos</span></button>
 </nav>
 
-<script>window.SUPA = {"url":"https://hixyzxzhhacneilvumcb.supabase.co","key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpeHl6eHpoaGFjbmVpbHZ1bWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE1MTM5NDAsImV4cCI6MjEwNzA4OTk0MH0.y_g3bCEhAfBPeuW7WKQndTZB1C-dPDnPtJbkQB-fxnI","table":"treinos","checkins":"checkins","relatorios":"relatorios"};</script>
+<script>window.SUPA = {"url":"https://hixyzxzhhacneilvumcb.supabase.co","key":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpeHl6eHpoaGFjbmVpbHZ1bWNiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE1MTM5NDAsImV4cCI6MjEwNzA4OTk0MH0.y_g3bCEhAfBPeuW7WKQndTZB1C-dPDnPtJbkQB-fxnI","table":"treinos","checkins":"checkins","relatorios":"relatorios","env":"prod","push":"https://hixyzxzhhacneilvumcb.supabase.co/functions/v1/push"};</script>
 <script>
+// INICIO TREINO CORE
+// Cálculos puros; sem dependências, DOM, banco ou código do openGym.
+const TreinoCore = (() => {
+  const valid = s => s && s.done === true && Number.isFinite(s.kg) && s.kg >= 0 && Number.isInteger(s.reps) && s.reps > 0;
+  const work = ss => (ss || []).filter(valid);
+  const assisted = p => /graviton/i.test(p.name);
+  const ambiguous = p => /\bou\b/i.test(p.name);
+  const timed = p => /\bs\b|seg|min|\//i.test(p.reps);
+  const e1 = s => valid(s) && s.kg > 0 && s.reps <= 12 ? s.kg * (1 + s.reps / 30) : null;
+  const add = (s,n) => { const d=new Date(s+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10); };
+  const weekday = s => { const n=new Date(s+'T12:00:00Z').getUTCDay();return n>0&&n<6; };
+  function history(logs, person, name, before, day) {
+    return Object.values(logs).filter(d => d && d.person===person && d.date<before && (!day || d.day===day) && d.ex?.[name]?.sets?.some(s=>s.done||s.kg!==''&&s.kg!=null||s.reps!==''&&s.reps!=null)).sort((a,b)=>a.date.localeCompare(b.date));
+  }
+  function target(hist,p) {
+    const range=String(p.reps).match(/^(\d+)\s*[–-]\s*(\d+)/), base={kind:'first',kg:null,reps:p.reps,stalled:false,reason:'Sem sessão anterior deste treino. Registre uma referência.'};
+    if(timed(p)||ambiguous(p)||!range)return {...base,kind:'manual',reason:'Siga a duração ou variação da ficha; sem sugestão automática de carga.'};
+    if(!hist.length)return base;
+    const lo=+range[1],hi=+range[2],last=hist.at(-1),entry=last.ex?.[p.name],old=entry?.plan;
+    if(old&&(old.sets!==p.sets||old.reps!==p.reps||old.rir!=null&&old.rir!==p.rir))return {...base,kind:'changed',reason:'A prescrição mudou. Registre uma nova referência antes de subir.'};
+    const ss=work(entry?.sets).slice(0,p.sets),all=(entry?.sets||[]).slice(0,p.sets);
+    if(!ss.length)return {...base,kind:'incomplete',reason:'Último registro sem séries confirmadas com kg e reps. Complete os dados.'};
+    const kg=ss[0].kg;
+    if(ss.some(s=>s.kg!==kg))return {...base,kind:'mixed',reason:'Cargas diferentes entre séries. Repita as cargas anotadas; sem aumento automático.'};
+    const full=all.length===p.sets&&all.every(valid),check=(d,top)=>{const e=d.ex?.[p.name];return (!e?.plan||e.plan.sets===p.sets&&e.plan.reps===p.reps&&(e.plan.rir==null||e.plan.rir===p.rir))&&e?.sets?.length>=p.sets&&e.sets.slice(0,p.sets).every(s=>valid(s)&&s.kg===kg&&s.reps>=top);};
+    const recent=hist.slice(-3),mins=recent.map(d=>{const e=d.ex?.[p.name];return check(d,lo)?Math.min(...e.sets.slice(0,p.sets).map(s=>s.reps)):null;});
+    const stalled=mins.length===3&&mins.every(n=>n!=null)&&mins[1]<=mins[0]&&mins[2]<=mins[1];
+    const held={...base,kind:'hold',kg,stalled,reason:full?'Mesma carga; busque o topo da faixa mantendo o sobrar da ficha.':'Séries faltantes ou não confirmadas: sem aumento de carga.'};
+    if(!assisted(p)&&kg===0)return {...held,reason:'Sem carga externa registrada. Siga a ficha; sem peso inventado.'};
+    if(!full||!check(last,hi))return held;
+    if(assisted(p)&&kg===0)return {...held,reason:'Sem assistência registrada. Mantenha a variação da ficha.'};
+    const step=assisted(p)?2.5:/halter|búlgaro|martelo/i.test(p.name)?(kg<10?1:2):p.leg&&kg>=20?5:2.5;
+    const next=Math.max(0,Math.round((kg+(assisted(p)?-step:step))*100)/100);
+    const reserve=String(p.rir),singular=reserve==='1';
+    const condition=reserve==='0'?'Se completou as repetições com boa execução':reserve==='0–1'||reserve==='0-1'?'Se manteve o esforço da ficha com boa execução':'Se ainda faria mais '+reserve+' '+(singular?'repetição':'repetições')+' com boa execução';
+    return {...base,kind:'up',kg:next,previousKg:kg,reason:condition+'. Ajuste '+(assisted(p)?'à assistência disponível.':'ao peso disponível.')};
+  }
+  function records(previous,set,p) {
+    const prev=work(previous);if(!valid(set)||!prev.length||timed(p)||ambiguous(p))return [];
+    if(assisted(p)){const comparable=prev.filter(s=>s.reps>=set.reps);return comparable.length&&set.kg<Math.min(...comparable.map(s=>s.kg))?[{key:'help',label:'Menor assistência com estas reps',value:set.kg}]:[];}
+    const out=[];const same=prev.filter(s=>s.kg===set.kg);if(set.kg===0&&same.length&&set.reps>Math.max(...same.map(s=>s.reps)))out.push({key:'reps',label:'Recorde de repetições sem carga externa',value:set.reps});if(set.kg>Math.max(...prev.map(s=>s.kg)))out.push({key:'kg',label:'Recorde de carga',value:set.kg});
+    const est=e1(set),old=prev.map(e1).filter(v=>v!=null);if(est&&old.length&&est>Math.max(...old)+.001)out.push({key:'e1',label:'Recorde de força estimada',value:Math.round(est*10)/10});return out;
+  }
+  function compare(today,last,p) {
+    const a=work(today),b=work(last);if(!b.length)return {kind:'first',label:'Primeira referência'};
+    if(!a.length)return {kind:'empty',label:'Sem séries confirmadas'};
+    if(a.length!==b.length)return {kind:'different',label:'Quantidade de séries diferente — veja os registros'};
+    if(a.some((s,i)=>s.kg!==b[i].kg)){
+      const sign=assisted(p)?-1:1,deltas=a.map((s,i)=>(s.kg-b[i].kg)*sign);
+      const up=deltas.every(v=>v>=0)&&deltas.some(v=>v>0)&&a.every((s,i)=>s.reps>=b[i].reps);
+      const down=deltas.every(v=>v<=0)&&deltas.some(v=>v<0)&&a.every((s,i)=>s.reps<=b[i].reps);
+      if(up)return {kind:'up',label:assisted(p)?'Menos assistência, mantendo as reps':'Mais carga, mantendo as reps'};
+      if(down)return {kind:'down',label:assisted(p)?'Mais assistência, sem aumentar reps':'Menos carga, sem aumentar reps'};
+      return {kind:'different',label:'Cargas e repetições diferentes — sem comparação direta'};
+    }
+    const diff=a.reduce((n,s)=>n+s.reps,0)-b.reduce((n,s)=>n+s.reps,0);
+    return {kind:diff>0?'up':diff<0?'down':'same',label:diff?'Mesmo peso: '+(diff>0?'+':'')+diff+' reps no total':'Mesmos pesos e repetições'};
+  }
+  function volume(days,logs,map) {
+    const out={};
+    const sum=(name,n,key)=>{const m=map[name];if(!m)return;const prim=new Set(m.p),sec=new Set(m.s);for(const k of new Set([...prim,...sec])){out[k]||={planned:0,done:0};out[k][key]+=n*(prim.has(k)?1:.5);}};
+    const eligible=new Set();for(const d of days||[])for(const e of d.ex)if(e[4]&&e[3]!=='—'){eligible.add(e[0]);sum(e[0],e[1],'planned');}
+    for(const d of logs)for(const [name,e] of Object.entries(d.ex||{}))if(eligible.has(name))sum(name,(e.sets||[]).filter(s=>s.done===true).length,'done');return out;
+  }
+  function streak(end,state,allowToday=true) {let n=0,d=end;for(let i=0;i<600;i++,d=add(d,-1))if(weekday(d)){const s=state(d);if(s==='trained')n++;else if(s!=='excused'&&!(allowToday&&d===end))break;}return n;}
+  return {valid,work,e1,history,target,records,compare,volume,streak,add};
+})();
+if(typeof module!=='undefined')module.exports=TreinoCore;
+
+// FIM TREINO CORE
+
 const IG = id => `https://www.instagram.com/breno.aceti/reel/${id}/`;
 const b = (id, txt) => `<span class="breno">Breno</span>${txt} <a href="${IG(id)}" target="_blank" rel="noopener">ver vídeo</a>`;
 
@@ -809,6 +1155,7 @@ const DAYS_LAYSA = fromPlan(PLAN_LAYSA);
 
 const EXTRA = [
  {id:"cardapio", name:"Cardápio", plate:"--p25"},
+ {id:"suplementos", name:"Suplementos", plate:"--p5"},
  {id:"regras", name:"Regras", plate:"--p20"},
  {id:"breno", name:"Breno", plate:"--p10"}
 ];
@@ -875,9 +1222,10 @@ function renderDayCore(d){
           ${flag?`<span class="tag drop">${flag}</span>`:""}
         </div>
       </div>
-      ${log ? `<p class="last" data-name="${esc(name)}"></p><p class="meta" hidden></p>` : ""}
+      ${log ? `<div class="meta" hidden></div>` : ""}
       ${boxes}
-      <details><summary>Execução</summary><ul>${cues.map(c=>`<li>${c}</li>`).join("")}</ul></details>
+      ${log && SUPA && !treinoPlus() ? `<div class="ex-acts"><button type="button" class="ghost" data-ditar="${i}" aria-pressed="false">${ICON_MIC}Ditar série</button><button type="button" class="ghost" data-filmar="${i}">${ICON_CAM}Filmar execução</button></div>` : ""}
+      <details><summary>Execução</summary><ul>${cues.map(c=>`<li>${c}</li>`).join("")}</ul>${log && SUPA && treinoPlus() ? `<button type="button" class="link-action film-action" data-filmar="${i}">${ICON_CAM}Filmar execução</button>` : ""}</details>
     </article>`;
   }).join("");
   const total = d.ex.reduce((a,e)=>a+(e[4] ? e[1] : 0),0);
@@ -886,8 +1234,11 @@ function renderDayCore(d){
     <div class="dayhead"><div><div class="eyebrow">${WD[parseDate(logDate).getDay()]} · ${brDate(logDate)}${logDate === trainDay() ? " · hoje" : ""}</div><h2>${d.name}</h2><p class="dsub">${d.sub}</p></div></div>
     ${swapBox(d)}
     <div class="dstats"><div class="dstat" style="--c:var(--pc)"><span class="st-ico">${ICO2.series}</span><div><b class="num">${total}</b><span>séries</span></div></div><div class="dstat" style="--c:var(--blue)"><span class="st-ico">${ICO2.tempo}</span><div><b class="num">~${Math.round(d.ex.reduce((a, e) => a + (e[4] ? e[1] * (40 + e[4]) : 0), 0) / 60)}</b><span>min</span></div></div><div class="dstat" style="--c:var(--kcal)"><span class="st-ico">${ICONF}</span><div><b class="num" id="daykcal">—</b><span>kcal</span></div></div></div>
+    ${treinoPlus() ? avisoBlocoTreino() : `<div class="daymetas" id="daymetas" hidden></div>`}
     <p class="daylog"><span id="logstate" aria-live="polite">${modeText()}</span></p>
     ${cards}
+    ${treinoPlus() ? `<button type="button" class="done-btn" data-resumo>Ver resumo deste treino</button>` : ""}
+    ${SUPA && !treinoPlus() ? `<button type="button" class="ghost shr" data-share="treino">${ICON_ENVIA}Compartilhar o treino desta data</button>` : ""}
     ${SUPA ? "" : `<div class="panel sendbox"><h3>Terminou?</h3>
       <p id="sendsum" class="sendsum"></p>
       <div class="sendrow"><a class="btn-wa" id="sendwa" href="https://wa.me/" target="_blank" rel="noopener">Enviar no WhatsApp</a><button type="button" class="ghost" id="copytxt">Copiar texto</button></div>
@@ -916,9 +1267,12 @@ function refreshSend(){
 const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
 // Data do treino: até as 5h ainda conta como o dia anterior (treinam das 21h às 00h), e a data
 // escolhida vale por 8 h, para um recarregamento no meio da sessão não trocar o dia.
-const trainDay = () => { const d = new Date(Date.now() - 5*3600*1000); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
+let nowFn = () => new Date();   // trocável nos testes
+// O dia vira à meia-noite (como a ofensiva do Duolingo). Quem ainda está anotando o treino depois da meia-noite continua na data do treino (ver logDate).
+const trainDay = () => { const d = nowFn(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; };
 const keepDate = date => store.set("logdate", {date, at: Date.now()});
-let logDate = (() => { const s = store.get("logdate"); return s && s.date && Date.now() - s.at < 8*3600*1000 ? s.date : trainDay(); })();
+const DATA_FICA = 3 * 3600 * 1000;   // a data escolhida/usada vale 3 h; depois volta para hoje (evita anotar no dia errado)
+let logDate = (() => { const s = store.get("logdate"); return s && s.date && Date.now() - s.at < DATA_FICA ? s.date : trainDay(); })();
 let dbRef = null, logMode = "carregando";
 const LOGS = {}, pending = {}, timers = {}, chains = {};
 const docId = (p, date) => `${p}_${date}`;
@@ -926,7 +1280,6 @@ const brDate = s => `${s.slice(8,10)}/${s.slice(5,7)}`;
 const num = v => (v === "" || v == null) ? "" : String(v).replace(".", ",");
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
 const filled = s => s && ((s.kg !== "" && s.kg != null) || (s.reps !== "" && s.reps != null));
-const fmtSets = sets => (sets || []).filter(filled).map(s => `${num(s.kg) || "–"}×${s.reps === "" || s.reps == null ? "–" : s.reps}`).join(" · ");
 const storageOk = (() => { try { localStorage.setItem("_t", "1"); const ok = localStorage.getItem("_t") === "1"; localStorage.removeItem("_t"); return ok; } catch(e) { return false; } })();
 const modeText = () => logMode === "online" ? "Salva online" : logMode === "local" ? (storageOk ? "Salva neste celular" : "Este navegador não guarda os dados: envie pelo WhatsApp antes de fechar") : "";
 try { for (let k = 0; k < localStorage.length; k++) { const key = localStorage.key(k); if (key && key.startsWith(CK)) LOGS[key.slice(CK.length)] = JSON.parse(localStorage.getItem(key)); } } catch(e) {}
@@ -956,7 +1309,7 @@ function setRows(d, i, name, sets, marks, reps){
   }).join("");
   const leg = d.id === "d2" || d.id === "d4";
   return `<div class="rows" id="rows-${d.id}-${i}"><div class="lg" data-name="${esc(name)}" data-reps="${esc(reps)}" data-sets="${sets}" data-leg="${leg}" data-kg="${kgLbl}"><span class="h">Série</span><span class="h">${kgLbl}</span><span class="h">Reps</span><span class="h">Feita</span>${rows}</div>
-    <div class="setctl"><button type="button" class="sbtn" data-setctl="-1" data-ex="${i}" aria-label="Uma série a menos"${total <= 1 ? " disabled" : ""}>−</button><span class="num">${total} ${total === 1 ? "série" : "séries"}</span><button type="button" class="sbtn" data-setctl="1" data-ex="${i}" aria-label="Uma série a mais">+</button></div></div>`;
+    <div class="setctl"><button type="button" class="sbtn" data-setctl="-1" data-ex="${i}" aria-label="Uma série a menos"${total <= 1 ? " disabled" : ""}>−</button><span class="num">${total} ${total === 1 ? "série" : "séries"}</span><button type="button" class="sbtn" data-setctl="1" data-ex="${i}" aria-label="Uma série a mais">+</button>${treinoPlus() && SUPA ? `<button type="button" class="link-action dictate-action" data-ditar="${i}" aria-pressed="false" aria-label="Ditar série de ${esc(name)}">Ditar</button>` : ""}</div></div>`;
 }
 function changeSets(i, dir){
   const d = person.days.find(x => x.id === current), [name, sets, reps] = d.ex[i];
@@ -992,17 +1345,29 @@ function metaFor(last, reps, sets, leg, name){
   const next = Math.max(0, help ? ref - step : ref + step);
   return `<b>${num(next)} kg</b> × ${lo}–${hi} (${help ? "menos ajuda" : "subiu"}: bateu ${hi} em todas)`;
 }
+const ICON_CAM = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>`;
+const ICON_SINO = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>`;
+const ICON_SHARE = `<svg class="ap-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="quadrado com seta para cima"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5v10h14V11h-1"/></svg>`;
+const ICON_ALVO = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>`;
+// Resumo das metas do dia (quantas cargas sobem, quantas buscam o topo das reps)
+function refreshMetasDia(){
+  const el = document.getElementById("daymetas"); if (!el) return;
+  const ms = [...document.querySelectorAll(".ex .meta:not([hidden])")].filter(m => !treinoPlus() || ["hold", "up"].includes(m.dataset.kind)), up = ms.filter(m => m.classList.contains("up")).length, topo = ms.length - up;
+  el.hidden = !ms.length;
+  el.innerHTML = ms.length ? `<span class="mt-ico" aria-hidden="true">${ICON_ALVO}</span><div><b>Metas ${logDate === trainDay() ? "de hoje" : "do dia"}</b><p>${[up ? `<b class="up">${up}</b> ${up === 1 ? "sugestão de aumento" : "sugestões de aumento"}` : "", topo ? `<b>${topo}</b> ${topo === 1 ? "exercício" : "exercícios"} buscando o topo das reps` : ""].filter(Boolean).join(" · ")}</p><small>Sugestões pelo último treino equivalente. Aumente só mantendo execução e sobrar da ficha.</small></div>` : "";
+}
 function refreshCarga(){
+  queueMicrotask(refreshMetasDia);
   if (!Object.keys(pending).length) setStatus(modeText());
   refreshSend();
   const doc = LOGS[docId(person.id, logDate)];
   document.querySelectorAll(".lg").forEach(box => {
     const name = box.dataset.name, sets = doc?.ex?.[name]?.sets || [];
     const last = lastFor(person.id, name, logDate);
-    const p = box.closest(".ex").querySelector(".last");
-    if (p) p.innerHTML = last ? `Última vez (${brDate(last.date)}): <b>${fmtSets(last.sets)}</b>` : "Primeira vez: anote kg e reps de cada série.";
     const mt = box.closest(".ex").querySelector(".meta");
-    if (mt) { const t = metaFor(last, box.dataset.reps, +box.dataset.sets, box.dataset.leg === "true", name); mt.innerHTML = t ? `Meta${logDate === trainDay() ? " de hoje" : ""}: ${t}` : ""; mt.hidden = !t; }
+    if (mt && treinoPlus()) { const e = person.days.find(d => d.id === current)?.ex.find(e => e[0] === name); if (e) { const t = metaTreino(e); mt.className = "meta" + (t.kind === "up" ? " up" : ""); mt.dataset.kind = t.kind; const html = renderMetaTreino(e); if (mt.innerHTML !== html) mt.innerHTML = html; mt.hidden = !html; } }
+    else if (mt) { const t = metaFor(last, box.dataset.reps, +box.dataset.sets, box.dataset.leg === "true", name), sobe = /subiu|menos ajuda/.test(t), i = t.indexOf("</b>") + 4;
+      mt.className = "meta" + (sobe ? " up" : ""); mt.innerHTML = t ? `<span class="mt-ico" aria-hidden="true">${ICON_ALVO}</span><div><small>${sobe ? "Meta: subir a carga" : "Meta"}${logDate === trainDay() ? " hoje" : ""}</small><p>${t.slice(0, i)}<span>${t.slice(i).replace(/^,\s*/, " · ")}</span></p></div>` : ""; mt.hidden = !t; }
     box.querySelectorAll("input").forEach(inp => {
       const s = +inp.dataset.set, f = inp.dataset.field, lv = last?.sets?.[s]?.[f];
       const ph = lv === "" || lv == null ? (f === "kg" ? box.dataset.kg : "reps") : (f === "kg" ? num(lv) : String(lv));
@@ -1027,16 +1392,19 @@ function onLogInput(inp){
 }
 // Grava um pedaço de uma série (kg, reps ou feita) no treino da pessoa nesta data
 function writeSet(name, n, s, patch){
-  const id = docId(person.id, logDate), antes = trained(person.id, logDate);
+  if (futuro()) return avisaFuturo();
+  const id = docId(person.id, logDate), antes = trained(person.id, logDate), previousDoc = LOGS[docId(person.id, logDate)];
   const doc = LOGS[id] ? JSON.parse(JSON.stringify(LOGS[id])) : {person:person.id, date:logDate, day:current, ex:{}};
   const e = doc.ex[name] || (doc.ex[name] = {sets:[]});
   while (e.sets.length < Math.max(n, s + 1)) e.sets.push({kg:"", reps:""});
   Object.assign(e.sets[s], patch);
+  if (treinoPlus()) { const cfg = person.days?.find(d => d.id === current)?.ex.find(x => x[0] === name); if (cfg) e.plan = {sets: cfg[1], reps: cfg[2], rir: cfg[3]}; if (doc.excused) doc.excused = false; }
   doc.updated = new Date().toISOString();
   LOGS[id] = doc; pending[id] = true; refreshSend(); keepDate(logDate);
-  if (!antes && logDate === trainDay() && isWeekday(logDate) && trained(person.id, logDate)) { const n = streakOf(person.id); toast(`${flameSvg(n)}<span><b>${n} ${n === 1 ? "dia" : "dias"} de ofensiva!</b> Treino de hoje contado.</span>`); }
+  if (!treinoPlus() && !antes && logDate === trainDay() && isWeekday(logDate) && trained(person.id, logDate)) { const n = streakOf(person.id); toast(`${flameSvg(n)}<span><b>${n} ${n === 1 ? "dia" : "dias"} de ofensiva!</b> Treino de hoje contado.</span>`); }
   setStatus("Salvando…");
   clearTimeout(timers[id]); timers[id] = setTimeout(() => saveLog(id), 700);
+  if (patch.done === true && !previousDoc?.ex?.[name]?.sets?.[s]?.done) recordeSerie(name, s, previousDoc);
 }
 function saveLog(id){
   chains[id] = (chains[id] || Promise.resolve()).then(async () => {
@@ -1102,7 +1470,7 @@ function supaDb(){
   let db = null;
   if (SUPA) db = supaDb();
   else try { db = await window.claude?.use?.("db"); } catch(e) {}
-  if (!db) { logMode = "local"; refreshCarga(); return; }
+  if (!db) { logMode = "local"; refreshCarga(); dadosDoServidor = true; checkOfensiva(); return; }
   dbRef = db; logMode = "online"; refreshCarga(); loadRel(); document.addEventListener("visibilitychange", () => { if (!document.hidden) loadRel(); });
   db.collection("treinos").orderBy("date", "desc").limit(500).onSnapshot(snap => {
     const server = {};
@@ -1112,6 +1480,7 @@ function supaDb(){
     }
     if (!snap.metadata.fromCache) syncLocal(server);
     refreshCarga(); refreshToday(); refreshStats();
+    if (!snap.metadata.fromCache && !dadosDoServidor) { dadosDoServidor = true; if (screen === "hoje") { const y = scrollY; view.innerHTML = renderToday(); refreshToday(); scrollTo(0, y); } checkOfensiva(); }
   }, () => { logMode = "local"; refreshCarga(); });
   db.collection("checkins").orderBy("date", "desc").limit(500).onSnapshot(snap => {
     const server = {};
@@ -1132,7 +1501,7 @@ const GOALS = {
   laysa:  {aguaTreino: 3000, aguaDescanso: 2000, sono: 8, sonoMin: 7},
   a3:     {aguaTreino: 3000, aguaDescanso: 2000, sono: 8, sonoMin: 7}
 };
-const CHK = {}, chkPending = {}, chkTimers = {}, chkChains = {};
+const CHK = {}, chkPending = {}, chkTimers = {}, chkChains = {}, chkStatus = {};
 const CHKK = NS + "chk:";
 try { for (let k = 0; k < localStorage.length; k++) { const key = localStorage.key(k); if (key && key.startsWith(CHKK)) CHK[key.slice(CHKK.length)] = JSON.parse(localStorage.getItem(key)); } } catch(e) {}
 const WD = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
@@ -1142,7 +1511,25 @@ const dayIdFor = s => { const w = parseDate(s).getDay(); return w >= 1 && w <= 5
 const dayOf = (p, s) => LOGS[docId(p, s)]?.day || dayIdFor(s);   // treino trocado no dia (ex.: fez o de quarta na quinta) vale mais que o calendário
 // Data da semana em que um treino foi feito (ou a data prevista no calendário)
 const dateOfDay = (p, dId, ref = logDate) => { const wk = weekOf(ref), tem = x => LOGS[docId(p, x)]?.day === dId; return wk.find(x => tem(x) && trained(p, x)) || wk.find(tem) || wk[+dId.slice(1) - 1]; };
-const goalsFor = (p, s) => { const g = GOALS[p] || GOALS.a3; return {agua: dayIdFor(s) ? g.aguaTreino : g.aguaDescanso, sono: g.sono, sonoMin: g.sonoMin}; };
+// Bebida alcoólica — regra do agente de nutrição (2026-10-12): 1 dose ≈ 14 g de álcool ≈ 1 lata de cerveja ≈ 150 kcal.
+// Pergunta de sexta a domingo; sem resposta não é zero. No dia seguinte: água extra e um recado conforme a faixa.
+const ALC = {
+  kcal: 150, aviso: 7,
+  cima: {rafael: 5, laura: 4, laysa: 4, a3: 4},   // a partir de quantas doses a recuperação cai de verdade
+  exemplos: ["Lata de cerveja 350 ml = 1", "Long neck = 1", "Chope 300 ml = 1", "Latão 473 ml = 1,5", "Garrafa 600 ml = 2", "Litrão 1 L = 3", "Taça de vinho ou espumante = 1", "Dose de destilado 50 ml = 1", "Gim-tônica ou drink simples = 1", "Caipirinha ou drink doce = 2"],
+  faixas: [
+    {titulo: "Sem álcool", msg: "Sem álcool ontem. Nada muda: água, proteína e sono na meta.", agua: 0},
+    {titulo: "Pouco", msg: "Efeito no músculo: desprezível. São ~150–300 kcal a mais. Água e proteína na meta normal.", agua: 0},
+    {titulo: "Moderado", msg: "Calorias a mais e sono mais picado. Hoje: +500 ml de água, proteína em todas as refeições e cama no horário.", agua: 500},
+    {titulo: "Bastante", msg: "Aqui a recuperação cai de verdade. Hoje: +1 L de água ao longo do dia, comida de verdade com proteína e cama cedo.", agua: 1000}
+  ],
+  pessoa: {rafael: "Seu gargalo é o sono: álcool em noite curta pesa mais. Coma o cardápio inteiro, bebida não substitui refeição.", laura: "2 doses = 1 dia do seu déficit. Não corte comida para compensar: o piso de calorias continua.", laysa: "Coma o cardápio inteiro: bebida não substitui refeição."},
+  seguranca: "Bebeu, não dirige. Com ressaca (tontura, enjoo, urina escura): água e comida primeiro, sem séries até a falha. Remédio de uso contínuo: pergunte ao médico antes de beber."
+};
+const alcDe = (p, s) => { const v = CHK[docId(p, s)]?.alcool; return v == null ? null : +v; };
+const faixaAlc = (p, n) => !n ? 0 : n <= 2 ? 1 : n >= (ALC.cima[p] || 4) ? 3 : 2;
+const aguaExtra = (p, s) => { const n = alcDe(p, addDays(s, -1)); return n ? ALC.faixas[faixaAlc(p, n)].agua : 0; };   // água a mais no dia seguinte
+const goalsFor = (p, s) => { const g = GOALS[p] || GOALS.a3; return {agua: (dayIdFor(s) ? g.aguaTreino : g.aguaDescanso) + aguaExtra(p, s), sono: g.sono, sonoMin: g.sonoMin}; };
 const chkOf = (p, s) => CHK[docId(p, s)] || {agua: 0, sono: 0};
 const ml = n => Math.round(+n || 0).toLocaleString("pt-BR");
 function weekOf(s){ const d = parseDate(s), back = (d.getDay() + 6) % 7; d.setDate(d.getDate() - back); return Array.from({length: 7}, (_, i) => { const x = new Date(d); x.setDate(d.getDate() + i); return fmtDate(x); }); }
@@ -1158,7 +1545,7 @@ function treinoProg(p, s){
 function dayScore(p, s){
   const g = goalsFor(p, s), c = chkOf(p, s), t = treinoProg(p, s);
   const parts = [Math.min(1, (+c.agua || 0) / g.agua), Math.min(1, (+c.sono || 0) / g.sono)];
-  if (t) parts.push(t.total ? t.done / t.total : 0);
+  if (t && !justificado(p, s)) parts.push(t.total ? t.done / t.total : 0);
   return Math.round(parts.reduce((a, b) => a + b, 0) / parts.length * 100);
 }
 const ICON = {
@@ -1194,17 +1581,54 @@ function animateRing(k, frac, v = 0, goal = 1){
   ringRaf[k] = requestAnimationFrame(tick);
   ringRaf[k + "t"] = setTimeout(() => { cancelAnimationFrame(ringRaf[k]); b.textContent = txt(v); }, dur + 80);   // garante o número final mesmo se a animação parar
 }
+const MESES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+let weekDir = "", calMes = null;   // direção da última troca de semana (para a animação) e mês aberto no calendário
+const semanasAtras = (seg, hoje) => { const n = Math.round((parseDate(weekOf(hoje)[0]) - parseDate(seg)) / 864e5 / 7); return n === 1 ? "semana passada" : `há ${n} semanas`; };
+const futuro = () => logDate > trainDay();
+function avisaFuturo(){ toast(`<span><b>Esse dia ainda não chegou.</b><br>Volte para hoje para registrar.</span>`); }
+function goDate(d, dir = ""){ logDate = d; keepDate(d); weekDir = dir; current = dayOf(person.id, logDate) || current; draw(); weekDir = ""; }
+// Calendário do mês (folha de baixo): ponto verde = treinou, anel = check-in feito
+function renderCal(){
+  const el = document.getElementById("cal"), hoje = trainDay(), [y, m] = calMes.split("-").map(Number);
+  const first = new Date(y, m - 1, 1), start = new Date(first); start.setDate(1 - ((first.getDay() + 6) % 7));
+  const cells = Array.from({length: 42}, (_, i) => { const d = new Date(start); d.setDate(start.getDate() + i); return fmtDate(d); }).filter((d, i, a) => i < 35 || a[35].slice(0, 7) === calMes);
+  el.innerHTML = `<div class="sheet-bg" data-calclose></div><div class="sheet-panel" role="dialog" aria-modal="true" aria-label="Calendário">
+    <div class="sheet-grab" aria-hidden="true"></div>
+    <div class="cal-h"><button type="button" class="cal-nav" data-calmes="-1" aria-label="Mês anterior">‹</button><h2>${MESES[m - 1]} ${y}</h2><button type="button" class="cal-nav" data-calmes="1" aria-label="Próximo mês">›</button></div>
+    <div class="cal-g cal-wd">${["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"].map(x => `<span>${x}</span>`).join("")}</div>
+    <div class="cal-g">${cells.map(d => { const fora = d.slice(0, 7) !== calMes, tr = trained(person.id, d), c = chkOf(person.id, d), ck = +c.agua > 0 || +c.sono > 0 || Array.isArray(c.refeicoes);
+      return `<button type="button" class="cal-d${fora ? " fora" : ""}${d === hoje ? " hoje" : ""}${d === logDate ? " on" : ""}${d > hoje ? " fut" : ""}${ck ? " ck" : ""}${justificado(person.id, d) ? " excused" : ""}" data-caldate="${d}" aria-label="${brDate(d)}${tr ? ", treinou" : justificado(person.id, d) ? ", dia justificado" : ""}"><b>${+d.slice(8, 10)}</b><i class="${tr ? "tr" : ""}"></i></button>`; }).join("")}</div>
+    <p class="hint cal-leg"><i class="tr"></i> treinou &nbsp; <i class="ckl"></i> check-in feito ${treinoPlus() ? ' &nbsp; <i class="excused"></i> justificado' : ""}</p>
+    <div class="chips two-c"><button type="button" class="chip" data-caldate="${hoje}">Ir para hoje</button><button type="button" class="chip" data-calclose>Fechar</button></div></div>`;
+}
+function openCal(){
+  let el = document.getElementById("cal");
+  if (!el) { el = document.createElement("div"); el.id = "cal"; el.className = "sheet"; document.body.appendChild(el);
+    el.addEventListener("click", e => {
+      if (e.target.closest("[data-calclose]")) return closeCal();
+      const mm = e.target.closest("[data-calmes]"); if (mm) { const [y, m] = calMes.split("-").map(Number), d = new Date(y, m - 1 + +mm.dataset.calmes, 1); calMes = fmtDate(d).slice(0, 7); return renderCal(); }
+      const dd = e.target.closest("[data-caldate]"); if (dd) { closeCal(); const antes = logDate; goDate(dd.dataset.caldate, dd.dataset.caldate < antes ? "l" : dd.dataset.caldate > antes ? "r" : ""); window.scrollTo({top: 0}); }
+    }); }
+  calMes = logDate.slice(0, 7); renderCal(); el.hidden = false; const abre = () => el.classList.add("open"); requestAnimationFrame(abre); setTimeout(abre, 60);
+}
+function closeCal(){ const el = document.getElementById("cal"); if (!el) return; el.classList.remove("open"); setTimeout(() => { el.hidden = true; }, 220); }
+function renderWeekNav(suplementos = false){
+  const hoje = trainDay(), wk = weekOf(logDate);
+  const week = wk.map(s => `<button type="button" class="wday${s === logDate ? " on" : ""}${s === hoje ? " today" : ""}" data-date="${s}" aria-pressed="${s === logDate}" aria-label="${WD[parseDate(s).getDay()]} ${brDate(s)}"><span>${WD[parseDate(s).getDay()]}</span><b>${s.slice(8,10)}</b>${suplementos ? "" : `<i class="dot" data-dot="${s}"></i>`}</button>`).join("");
+  const mes = (a, b) => { const m = d => MESES[+d.slice(5, 7) - 1]; return m(a) === m(b) ? `${m(a)} ${a.slice(0, 4)}` : `${m(a).slice(0, 3)} / ${m(b).slice(0, 3)} ${b.slice(0, 4)}`; };
+  return `<div class="calbar"><button type="button" class="cal-nav" data-week="-1" aria-label="Semana anterior">‹</button><button type="button" class="cal-mes" data-cal aria-label="Abrir o calendário">${ICON_CAL}<b>${mes(wk[0], wk[6])}</b><span>${wk.includes(hoje) ? "esta semana" : wk[0] > hoje ? "semana futura" : semanasAtras(wk[0], hoje)}</span></button><button type="button" class="cal-nav" data-week="1" aria-label="Próxima semana">›</button></div>
+    <div class="week${weekDir ? " slide-" + weekDir : ""}" id="weekstrip">${week}</div>
+    ${logDate === hoje ? `<p class="week-cap">${suplementos ? "Escolha o dia para consultar ou registrar. Sábado e domingo também entram no histórico." : "O anel de cada dia mostra quanto você completou: água, sono e treino."}</p>` : `<button type="button" class="backtoday" data-date="${hoje}">${logDate > hoje ? "Dia futuro (só para ver)" : "Vendo " + WD[parseDate(logDate).getDay()] + ", " + brDate(logDate)} · Voltar para hoje</button>`}`;
+}
 function renderToday(){
   for (const k in ringState) delete ringState[k];   // ao abrir a tela, os anéis enchem de novo a partir do zero
   const hoje = trainDay();
-  const week = weekOf(logDate).map(s => `<button type="button" class="wday${s === logDate ? " on" : ""}${s === hoje ? " today" : ""}" data-date="${s}" aria-pressed="${s === logDate}" aria-label="${WD[parseDate(s).getDay()]} ${brDate(s)}"><span>${WD[parseDate(s).getDay()]}</span><b>${s.slice(8,10)}</b><i class="dot" data-dot="${s}"></i></button>`).join("");
   return `<section class="list" aria-label="Hoje">
-    <div class="week">${week}</div>
-    ${logDate === hoje ? `<p class="week-cap">O anel de cada dia mostra quanto você completou: água, sono e treino.</p>` : `<button type="button" class="backtoday" data-date="${hoje}">Vendo ${WD[parseDate(logDate).getDay()]}, ${brDate(logDate)} · Voltar para hoje</button>`}
+    ${renderWeekNav()}
     ${renderStreak()}
     <h2 class="sec">Treino ${logDate === trainDay() ? "de hoje" : "de " + brDate(logDate)}</h2>
     <div id="todaytrain"></div>
-    <h2 class="sec">Check-in ${logDate === hoje ? "de hoje" : "de " + brDate(logDate)} <span class="count" id="ck-count" title="itens registrados no dia">0/5</span></h2>
+    <h2 class="sec">Check-in ${logDate === hoje ? "de hoje" : "de " + brDate(logDate)} <span class="count" id="ck-count" title="itens registrados no dia">0/${treinoPlus() ? 4 : 5}</span></h2>
     <div class="cards">
       <article class="ck" id="card-agua" style="--c:var(--blue)"><div class="ck-h"><span class="ico">${ICON.agua}</span>Água<button type="button" class="badge" data-cheer="agua" aria-label="Meta de água batida: ver a comemoração">Meta ✓</button></div>${ring("agua", "var(--blue)")}
         <div class="step"><button type="button" data-ck="agua" data-d="-1" aria-label="Menos 250 ml">−</button><button type="button" data-ck="agua" data-d="1" aria-label="Mais 250 ml">+</button></div>
@@ -1227,22 +1651,30 @@ function refreshToday(){
     animateRing(k, v / goal, v, goal);
   };
   setRing("agua", +c.agua || 0, g.agua, `de ${ml(g.agua)} ml`);
-  document.getElementById("ck-agua-note").textContent = `+ / − 250 ml · ${dayIdFor(logDate) ? "treino" : "descanso"}`;
+  document.getElementById("ck-agua-note").textContent = `+ / − 250 ml · ${dayIdFor(logDate) ? "treino" : "descanso"}${aguaExtra(person.id, logDate) ? " · +" + ml(aguaExtra(person.id, logDate)) + " ml pelo álcool" : ""}`;
   setRing("sono", +c.sono || 0, g.sono, "horas");
   document.getElementById("card-agua").classList.toggle("met", (+c.agua || 0) >= g.agua);
   document.getElementById("card-sono").classList.toggle("met", (+c.sono || 0) >= g.sono);
-  document.getElementById("ck-count").textContent = `${[+c.agua > 0, +c.sono > 0, feitasDe(person.id, logDate).length > 0, !!c.peso, c.dieta != null].filter(Boolean).length}/5`;
-  refreshExtras(); refreshProt();
+  const checks = [+c.agua > 0, +c.sono > 0, feitasDe(person.id, logDate).length > 0, !!c.peso];
+  if (!treinoPlus()) checks.push(c.dieta != null);
+  document.getElementById("ck-count").textContent = `${checks.filter(Boolean).length}/${checks.length}`;
+  refreshExtras(); refreshProt(); refreshAlc();
   document.querySelectorAll("[data-dot]").forEach(el => el.style.setProperty("--p", dayScore(person.id, el.dataset.dot)));
+  const oldStreak = document.querySelector?.("section.streak"); if (oldStreak && treinoPlus()) { oldStreak.outerHTML = renderStreak(); FogoUI.mount(document, calmo()); }
   const t = treinoProg(person.id, logDate), box = document.getElementById("todaytrain");
-  box.innerHTML = !person.days ? `<div class="panel"><p>A ficha ${person.art} ${person.name} ainda está sendo montada.</p></div>`
+  box.innerHTML = gymBanner() + (!person.days ? `<div class="panel"><p>A ficha ${person.art} ${person.name} ainda está sendo montada.</p></div>`
     : !t ? `<div class="panel"><h3>Dia de descanso</h3><p>Sábado e domingo não têm treino. Capriche na água e no sono.</p></div>`
-    : `<button type="button" class="todaycard" data-screen="treino" style="--pc:var(${t.d.plate})">
-        <div class="row"><div><div class="eyebrow">${t.d.wd} · ${t.d.sub}</div><h3>${t.d.name}</h3></div><span class="go">${ICON.seta}</span></div>
-        <div class="pbar" aria-hidden="true"><i style="width:${t.total ? Math.round(t.done / t.total * 100) : 0}%"></i></div>
-        <p class="num">${t.done}/${t.total} séries feitas</p></button>` + nutriCard();
+    : (() => { const exs = t.d.ex.filter(e => e[4]), min = Math.round(exs.reduce((a, e) => a + e[1] * (40 + e[4]), 0) / 60), feito = t.total && t.done >= t.total, st = feito ? "feito" : t.done ? "andando" : "afazer", hj = logDate === trainDay();
+      const doc = LOGS[docId(person.id, logDate)], kc = doc && trained(person.id, logDate) ? sessionStats(person.id, doc).kcal : null;
+      return `<div class="today-training"><button type="button" class="todaycard ${st}" data-screen="treino" style="--pc:var(${t.d.plate})">
+        <div class="tc-top"><span class="tc-day">${WD[parseDate(logDate).getDay()]} · ${brDate(logDate)}</span><span class="tc-st">${feito ? "Feito ✓" : t.done ? "Em andamento" : logDate > trainDay() ? "Previsto" : justificado(person.id, logDate) ? "Justificado" : hj ? "A fazer" : "Não feito"}</span></div>
+        <h3>${t.d.name}</h3><p class="tc-sub">${t.d.sub}</p>
+        <div class="tc-nums"><span><b class="num">${exs.length}</b>exercícios</span><span><b class="num">${t.total}</b>séries</span><span><b class="num">~${min}</b>min</span>${kc ? `<span><b class="num">~${kc}</b>kcal</span>` : ""}</div>
+        <div class="tc-prog"><div class="pbar" aria-hidden="true"><i style="width:${t.total ? Math.round(t.done / t.total * 100) : 0}%"></i></div><span class="num">${t.done}/${t.total}</span></div>
+        <span class="tc-cta">${feito ? "Ver o treino" : t.done ? "Continuar o treino" : hj ? "Começar o treino" : "Abrir o treino"}${ICON.seta}</span></button>${painelJustificativa()}</div>`; })() + nutriCard());
 }
 function writeChk(field, dir){
+  if (futuro()) return avisaFuturo();
   const id = docId(person.id, logDate);
   const c = CHK[id] ? {...CHK[id]} : {person: person.id, date: logDate, agua: 0, sono: 0};
   const before = +c[field] || 0, goal = goalsFor(person.id, logDate)[field];
@@ -1255,8 +1687,8 @@ function writeChk(field, dir){
   clearTimeout(chkTimers[id]); chkTimers[id] = setTimeout(() => saveChk(id), 600);
 }
 // Meta batida: o anel pula, o cartão brilha e solta confete na cor do cartão (sem confete para quem pediu menos movimento)
-function celebrate(field){
-  const card = document.getElementById("card-" + field); if (!card) return;
+function celebrate(field, target){
+  const card = target || document.getElementById("card-" + field); if (!card) return;
   try { navigator.vibrate && navigator.vibrate([30, 40, 30]); } catch(e) {}
   card.classList.remove("win"); void card.offsetWidth; card.classList.add("win");
   if (calmo()) { setTimeout(() => card.classList.remove("win"), 1800); return; }
@@ -1276,17 +1708,21 @@ function celebrate(field){
     ], {duration: 1300 + Math.random() * 600, easing: "cubic-bezier(.2,.7,.3,1)"}).onfinish = () => bit.remove();
   }
 }
-function setChkStatus(t){ const el = document.getElementById("ckstate"); if (el) el.textContent = t; }
+function setChkStatus(t, id = docId(person.id, logDate)){
+  chkStatus[id] = t;
+  if (id !== docId(person.id, logDate)) return;
+  for (const key of ["ckstate", "sup-save-state"]) { const el = document.getElementById(key); if (el) el.textContent = t; }
+}
 function saveChk(id){
   chkChains[id] = (chkChains[id] || Promise.resolve()).then(async () => {
     const body = CHK[id];
     store.set("chk:" + id, body);
     if (logMode === "online" && dbRef) {
-      try { await dbRef.collection("checkins").doc(id).set(body); delete chkPending[id]; try { localStorage.removeItem(CHKK + id); } catch(e) {} setChkStatus("Salvo online ✓"); return; }
+      try { await dbRef.collection("checkins").doc(id).set(body); delete chkPending[id]; try { localStorage.removeItem(CHKK + id); } catch(e) {} setChkStatus("Salvo online ✓", id); return; }
       catch(e) {}
     }
     delete chkPending[id];
-    setChkStatus(SUPA ? "Sem internet: salvo no celular, sobe quando voltar" : "Salvo neste aparelho ✓");
+    setChkStatus(SUPA ? "Não sincronizado: salvo no celular, tentaremos novamente" : "Salvo neste aparelho ✓", id);
   });
 }
 function syncChk(server){
@@ -1299,10 +1735,11 @@ function syncChk(server){
 // ───────────── Ofensiva: dias úteis seguidos com treino (sábado e domingo não contam nem quebram) ─────────────
 function trained(p, s){
   const doc = LOGS[docId(p, s)];
-  return !!doc && Object.values(doc.ex || {}).some(e => (e.sets || []).some(x => x.done || filled(x)));
+  return !!doc && Object.values(doc.ex || {}).some(e => (e.sets || []).some(x => treinoPlus() ? x.done === true : x.done || filled(x)));
 }
 const isWeekday = s => { const w = parseDate(s).getDay(); return w >= 1 && w <= 5; };
 function streakOf(p){
+  if (treinoPlus()) return TreinoCore.streak(addDays(trainDay(), -1), d => estadoDia(p, d), false);
   const today = trainDay(), d = parseDate(today); let n = 0;
   for (let i = 0; i < 600; i++) {
     const s = fmtDate(d);
@@ -1314,10 +1751,79 @@ function streakOf(p){
 function bestStreak(p){
   const dates = Object.values(LOGS).filter(x => x && x.person === p).map(x => x.date).sort();
   if (!dates.length) return 0;
-  const today = trainDay(), d = parseDate(dates[0]), end = parseDate(today); let run = 0, best = 0;
-  while (d <= end) { const s = fmtDate(d); if (isWeekday(s)) { if (trained(p, s)) best = Math.max(best, ++run); else if (s !== today) run = 0; } d.setDate(d.getDate() + 1); }
+  const today = trainDay(), d = parseDate(dates[0]), end = parseDate(treinoPlus() ? addDays(today, -1) : today); let run = 0, best = 0;
+  while (d <= end) { const s = fmtDate(d); if (isWeekday(s)) { if (trained(p, s)) best = Math.max(best, ++run); else if (s !== today && !justificado(p, s)) run = 0; } d.setDate(d.getDate() + 1); }
   return best;
 }
+// INICIO FOGO UI
+// Chama da ofensiva: estados visuais, sem alterar contagem nem dados de treino.
+const FogoUI = (() => {
+  const active = new Map(), previous = new Map();
+  const asset = name => `fogo/${name}-v1.webp`;
+  const ember = `<svg class="fogo-brasa" viewBox="0 0 64 96" aria-hidden="true"><ellipse class="brasa-aura" cx="32" cy="76" rx="23" ry="11"/><path class="brasa-cinza" d="m10 79 7-5 9 3 9-5 11 3 8 6-13 3-18-1z"/><path class="brasa-carvao" d="m19 77 6-7 9 2 5 7-9 3zM35 79l7-7 7 4 1 6-9 2z"/><path class="brasa-fenda" d="m23 76 5-3 5 4-4 2m12-3 4 2-3 2"/><circle class="brasa-faisca" cx="31" cy="66" r="1.15"/></svg>`;
+  function html(n, event = '', key = '') {
+    const lit = n > 0, transition = ['acendendo', 'apagando'].includes(event) ? event : '';
+    const tier = n >= 20 ? 20 : n >= 10 ? 10 : n >= 5 ? 5 : n > 0 ? 1 : 0;
+    const safeKey = String(key).replace(/[^a-z0-9_-]/gi, '');
+    return `<span class="flame-ico fogo-visual" data-fogo="${lit ? 'aceso' : 'brasa'}" data-fogo-event="${transition}" data-fogo-tier="${tier}"${safeKey ? ` data-fogo-key="${safeKey}"` : ''} aria-hidden="true">${ember}<img class="fogo-img" src="${asset('aceso')}" width="192" height="288" alt="" decoding="async" draggable="false"></span>`;
+  }
+  function forget(node) {
+    const old = active.get(node);
+    if (!old) return;
+    clearTimeout(old.timer); clearTimeout(old.guard);
+    old.img.onload = old.img.onerror = null;
+    active.delete(node);
+  }
+  function mount(root = document, calm = !document.body.classList.contains('mov')) {
+    for (const [node] of active) if (!node.isConnected) forget(node);
+    root.querySelectorAll('.fogo-visual').forEach(node => {
+      const img = node.querySelector('.fogo-img');
+      if (!img) return;
+      const target = node.dataset.fogo;
+      const paused = calm || document.hidden || !!node.closest('[hidden], .st-ico') || !!(node.closest('.toast') && !node.closest('.toast').classList.contains('show'));
+      const old = active.get(node);
+      if (old && old.target === target && old.paused === paused) return;
+      forget(node);
+      const job = {img, target, paused, timer: null, guard: null};
+      active.set(node, job);
+      const key = node.dataset.fogoKey, before = key ? previous.get(key) : null;
+      if (key) previous.set(key, target);
+      let event = node.dataset.fogoEvent;
+      delete node.dataset.fogoEvent;
+      if (!event && before && before !== target) event = target === 'aceso' ? 'acendendo' : 'apagando';
+      const current = () => active.get(node) === job && node.isConnected;
+      const settle = () => {
+        if (!current()) return;
+        clearTimeout(job.timer); clearTimeout(job.guard);
+        img.onload = img.onerror = null;
+        delete node.dataset.fogoPlaying;
+        delete node.dataset.fogoLoading;
+        img.onerror = () => { img.onerror = null; img.src = asset('aceso'); };
+        img.src = asset(target === 'aceso' && !paused ? 'loop' : 'aceso');
+      };
+      if (paused || !event) { settle(); return; }
+      // Nada anima até o arquivo chegar: duração começa no load, não na rede.
+      node.dataset.fogoPlaying = event;
+      node.dataset.fogoLoading = 'true';
+      img.onload = () => {
+        if (!current()) return;
+        clearTimeout(job.guard);
+        delete node.dataset.fogoLoading;
+        img.onload = null;
+        job.timer = setTimeout(settle, event === 'acendendo' ? 1800 : 2400);
+      };
+      img.onerror = settle;
+      job.guard = setTimeout(settle, 12000);
+      // URL única só nas transições evita reusar GIF/WebP já terminado no Safari.
+      img.src = `${asset(event)}?play=${++mount.seq}`;
+    });
+  }
+  mount.seq = 0;
+  return {html, mount};
+})();
+
+// FIM FOGO UI
+
 // A chama muda de cor conforme a ofensiva cresce
 const FLAME = [
   {min: 0,  a: "#5B5F66", b: "#8E929A", c: "#2A2D32", nome: "apagada"},
@@ -1327,37 +1833,219 @@ const FLAME = [
   {min: 20, a: "#14C8B0", b: "#7CF2C8", c: "#DFFFF4", nome: "lendária"}
 ];
 const flameOf = n => [...FLAME].reverse().find(f => n >= f.min);
-let flameSeq = 0;
-function flameSvg(n){
-  const f = flameOf(n), g = "fl" + (++flameSeq);
-  return `<svg class="flame-ico" viewBox="0 0 48 56" aria-hidden="true"><defs><linearGradient id="${g}" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="${f.b}"/><stop offset="1" stop-color="${f.a}"/></linearGradient></defs>
-    <path d="M24 2c2 9 14 14 14 29a14 14 0 0 1-28 0c0-7 4-12 7-16 0 5 2 8 5 9-3-8 0-16 2-22z" fill="url(#${g})"/>
-    <path d="M24 30c1 4 7 6 7 12a7 7 0 0 1-14 0c0-4 3-6 4-9 1 2 2 3 3 3-1-2 0-4 0-6z" fill="${f.c}" opacity=".95"/></svg>`;
-}
+function flameSvg(n, event = "", key = ""){ return FogoUI.html(n, event, key); }
 function renderStreak(){
   const p = person.id, n = streakOf(p), best = bestStreak(p), today = trainDay();
   const week = weekOf(today).slice(0, 5).map(s => {
-    const st = trained(p, s) ? "done" : s === today ? "today" : s < today ? "miss" : "future";
-    return `<span class="sd ${st}" aria-label="${WD[parseDate(s).getDay()]}: ${{done: "treinou", today: "hoje", miss: "faltou", future: "ainda não chegou"}[st]}"><i>${st === "done" ? "✓" : st === "miss" ? "×" : ""}</i><em>${WD[parseDate(s).getDay()]}</em></span>`;
+    const st = trained(p, s) ? "done" : justificado(p, s) ? "excused" : s === today ? "today" : s < today ? "miss" : "future";
+    return `<span class="sd ${st}" aria-label="${WD[parseDate(s).getDay()]}: ${{done: "treinou", excused: "dia justificado", today: "hoje", miss: "faltou", future: "ainda não chegou"}[st]}"><i>${st === "done" ? "✓" : st === "miss" ? "×" : st === "excused" ? "−" : ""}</i><em>${WD[parseDate(s).getDay()]}</em></span>`;
   }).join("");
-  const msg = trained(p, today) ? "Treino de hoje feito. Ofensiva garantida!"
-    : isWeekday(today) ? (n ? "Treine hoje para não perder a ofensiva." : "Comece hoje uma ofensiva nova.")
-    : "Fim de semana: a ofensiva fica guardada até segunda.";
-  return `<section class="streak" style="--fa:${flameOf(n).a};--fb:${flameOf(n).b}" aria-label="Ofensiva">
-    <div class="fl${n ? " lit" : ""}">${flameSvg(n)}<b class="num">${n}</b><span>${n === 1 ? "dia" : "dias"} de ofensiva</span></div>
+  const h = nowFn().getHours(), falta = 24 - h, risco = isWeekday(today) && !trained(p, today) && !justificado(p, today) && n > 0;
+  const msg = !n ? (trained(p, today) ? (best ? "Treino registrado. Sua chama volta quando o dia terminar." : "Treino registrado. Sua primeira chama acende quando o dia terminar.") : justificado(p, today) ? "Hoje é recuperação. Sua chama espera o próximo treino." : !isWeekday(today) ? "Descanse hoje. Segunda é dia de acender sua chama." : best ? "A brasa ficou. Seu próximo treino começa uma nova ofensiva." : "Sua próxima chama começa com um treino.")
+    : trained(p, today) ? (treinoPlus() ? "Treino registrado. Soma à ofensiva quando o dia terminar." : "Treino de hoje feito. Ofensiva garantida!")
+    : justificado(p, today) ? "Dia justificado: ofensiva preservada, sem somar treino."
+    : !isWeekday(today) ? "Fim de semana: a ofensiva fica guardada até segunda."
+    : h >= 21 ? `Faltam ${falta} h para a meia-noite. Sem treino, seus ${n} ${n === 1 ? "dia" : "dias"} viram zero.`
+    : h >= 17 ? `Hoje ainda não treinou: ${n} ${n === 1 ? "dia" : "dias"} em jogo.`
+    : `Treine hoje para manter os ${n} ${n === 1 ? "dia" : "dias"}.`;
+  return `<section class="streak${n ? "" : " dormant"}${risco && h >= 17 ? " risco" : ""}${risco && h >= 21 ? " urgente" : ""}" style="--fa:${flameOf(n).a};--fb:${flameOf(n).b}" aria-label="Ofensiva">
+    <div class="fl${n ? " lit" : ""}">${flameSvg(n, "", p)}<b class="num">${n}</b><span>${n ? (n === 1 ? "dia" : "dias") + " de ofensiva" : "pronta para acender"}</span></div>
     <div class="st-r"><p class="st-t">${msg}</p><div class="st-week">${week}</div><p class="st-best">Maior ofensiva: <b class="num">${best}</b> ${best === 1 ? "dia" : "dias"}</p></div>
   </section>`;
 }
+// ── Virada do dia: ganhou mais um dia (mensagem que anima) ou perdeu a ofensiva (tem que doer) ──
+const FRASES_GANHOU = [
+  "Mais um dia em que você não negociou com a preguiça.",
+  "É assim que se constrói: um dia chato de cada vez.",
+  "Você apareceu. É aqui que a maioria desiste.",
+  "Ontem está pago. Hoje a cobrança é outra.",
+  "Constância ganha de motivação. Você está provando.",
+  "Ninguém fez por você. Foi você, de novo.",
+  "O corpo que você quer está sendo construído nesses dias sem graça.",
+  "Quem treina quando não está a fim é quem muda."
+];
+const FRASES_MARCO = {5: "Uma semana inteira sem falhar. Isso já é rotina.", 10: "Duas semanas seguidas. Você virou a pessoa que treina.", 15: "Três semanas. Agora parar custa mais que continuar.", 20: "Um mês de dias úteis sem faltar. Pouca gente chega aqui.", 30: "Seis semanas. Isso não é fase: é quem você é."};
+const FRASES_PERDEU = [
+  "Tudo isso jogado fora por um treino que durava uma hora.",
+  "O sofá ganhou. Era isso que você queria?",
+  "Ninguém viu você faltar. O espelho vai mostrar.",
+  "A desculpa de ontem não levantou nenhum peso.",
+  "Disciplina não tira folga. Você tirou.",
+  "Você prometeu que ia treinar. Não apareceu. Sua ofensiva acabou por sua escolha.",
+  "Zerou. Dói? Ótimo. Guarda essa dor e leva para o treino de hoje.",
+  "Quem falta um dia aprende a faltar dois. Vai deixar?"
+];
+const fraseDoDia = (lista, chave) => { let hsh = 0; for (const ch of chave) hsh = (hsh * 31 + ch.charCodeAt(0)) >>> 0; return lista[hsh % lista.length]; };
+const diaUtilAntes = d => { let x = addDays(d, -1); while (!isWeekday(x)) x = addDays(x, -1); return x; };
+function ofensivaAte(p, dia){
+  if (treinoPlus()) return TreinoCore.streak(dia, d => estadoDia(p, d), false);
+  let n = 0, d = dia;
+  while (trained(p, d)) { n++; d = diaUtilAntes(d); }
+  return n;
+}
+let dadosDoServidor = false;   // só avalia a ofensiva depois que os treinos chegaram (senão acusaria perda sem ter os dados)
+function checkOfensiva(){
+  if (!dadosDoServidor || !person.days) return;
+  const p = person.id, hoje = trainDay(), ult = diaUtilAntes(hoje), k = "ofensiva:" + p, st = store.get(k), n = streakOf(p);
+  if (st?.dia === ult && st.avisado) { if (n > (st.n || 0)) store.set(k, {dia: ult, n, avisado: true}); return; }
+  const perdeu = !trained(p, ult) && !justificado(p, ult) ? ofensivaAte(p, diaUtilAntes(ult)) : 0;
+  store.set(k, {dia: ult, n, avisado: true});
+  if (perdeu) showOfensiva("perdeu", perdeu, ult);
+  else if (st && st.dia !== ult && trained(p, ult)) showOfensiva("ganhou", n, ult);
+}
+function showOfensiva(tipo, n, dia){
+  let el = document.getElementById("ofmodal");
+  if (!el) { el = document.createElement("div"); el.id = "ofmodal"; el.className = "ofmodal"; document.body.appendChild(el); el.addEventListener("click", e => { const os = e.target.closest("[data-ofshare]"); if (os) { compartilhar({title: "Ofensiva", text: `🔥 ${os.dataset.ofshare} ${+os.dataset.ofshare === 1 ? "dia" : "dias"} de ofensiva no treino. Sem faltar um dia útil.`}); return; } if (e.target.closest("[data-ofclose]")) { el.classList.remove("open"); setTimeout(() => { el.hidden = true; FogoUI.mount(document, calmo()); }, 250); } }); }
+  const dias = n === 1 ? "dia" : "dias", best = Math.max(n, bestStreak(person.id)), quando = dia === addDays(trainDay(), -1) ? "ontem" : WD[parseDate(dia).getDay()].toLowerCase() + ", " + brDate(dia);
+  const ganhou = tipo === "ganhou", f = flameOf(ganhou ? n : 0);
+  el.className = "ofmodal " + tipo; el.style.setProperty("--fa", f.a); el.style.setProperty("--fb", f.b);
+  el.innerHTML = ganhou
+    ? `<div class="of-box" role="dialog" aria-modal="true" aria-label="Ofensiva"><div class="of-fl">${flameSvg(n, "acendendo")}</div><p class="of-n num">${n}</p><h2>${dias} de ofensiva</h2>
+       <p class="of-f">${FRASES_MARCO[n] || fraseDoDia(FRASES_GANHOU, person.id + dia)}</p><p class="of-s">Você treinou ${quando}.${n >= best && n > 1 ? " É o seu recorde." : ` Recorde: ${best} ${best === 1 ? "dia" : "dias"}.`}</p>
+       <button type="button" class="done-btn" data-ofclose>Bora para hoje</button><button type="button" class="linkbtn" data-ofshare="${n}">Compartilhar a ofensiva</button></div>`
+    : `<div class="of-box" role="alertdialog" aria-modal="true" aria-label="Ofensiva perdida"><div class="of-fl apagada">${flameSvg(0, "apagando")}</div><p class="of-n num"><s>${n}</s> → 0</p><h2>Você perdeu ${n === 1 ? "sua ofensiva" : `${n} ${dias} de ofensiva`}</h2>
+       <p class="of-f">${fraseDoDia(FRASES_PERDEU, person.id + dia)}</p><p class="of-s">Sem treino ${quando}. Recorde que continua de pé: ${best} ${best === 1 ? "dia" : "dias"}.</p>
+       <button type="button" class="done-btn" data-ofclose>Recomeçar hoje</button></div>`;
+  el.hidden = false; FogoUI.mount(el, calmo()); const abre = () => el.classList.add("open"); requestAnimationFrame(abre); setTimeout(abre, 60);   // o timeout garante a abertura com a aba em segundo plano
+  try { navigator.vibrate && navigator.vibrate(ganhou ? [30, 40, 30] : [120, 60, 120, 60, 200]); } catch(e) {}
+}
+// Dia virou com o site aberto: atualiza a tela sozinho (sem tirar quem ainda está anotando o treino de ontem)
+let diaVisto = trainDay();
+function viraDia(){
+  const hoje = trainDay(); if (hoje === diaVisto) return;
+  const k = store.get("logdate"), anotando = k && k.date === diaVisto && Date.now() - k.at < DATA_FICA && trained(person.id, diaVisto);
+  if (logDate === diaVisto && !anotando) logDate = hoje;
+  diaVisto = hoje; current = dayOf(person.id, logDate) || current; draw(); checkOfensiva();
+}
+setInterval(viraDia, 30e3);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) { viraDia(); checkOfensiva(); } FogoUI.mount(document, calmo()); });
 function toast(html){
   let t = document.getElementById("toast");
   if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
-  t.innerHTML = html; t.classList.remove("show"); void t.offsetWidth; t.classList.add("show");
-  clearTimeout(toast.t); toast.t = setTimeout(() => t.classList.remove("show"), 2600);
+  t.innerHTML = html; t.classList.remove("show"); void t.offsetWidth; t.classList.add("show"); FogoUI.mount(t, calmo());
+  clearTimeout(toast.t); toast.t = setTimeout(() => { t.classList.remove("show"); FogoUI.mount(t, calmo()); }, 2600);
 }
 
 // ───────────── Check-in extra: qualidade do sono, alimentação, peso (campos do agente de nutrição) ─────────────
 const SONO_Q = ["Péssimo", "Ruim", "Ok", "Bom", "Ótimo"];
 const DIETA_OP = [[1, "Segui o plano"], [0.5, "Saí um pouco"], [0, "Saí do plano"]];
+const suplementoPerfil = p => store.get("suplementos:" + p) || {};
+const suplementoStatus = valor => valor == null ? "Não informado" : valor === "nao" ? "Não usa" : valor === "parou" ? "Parou de usar" : "Usa";
+const creatinaEstado = g => g == null ? "Sem registro" : g === 0 ? "Não tomou" : g < 3 ? "Abaixo da faixa usual (3–5 g)" : g <= 5 ? "Dentro da faixa usual (3–5 g)" : "Acima da faixa usual (3–5 g); confira o rótulo";
+const supDia = (p, s) => { const c = chkOf(p, s), d = store.get("supdia:" + docId(p, s)) || {}; return {creatina_g: Object.hasOwn(c, "creatina_g") ? c.creatina_g : d.creatina_g ?? null, whey_g: Object.hasOwn(c, "whey_g") ? c.whey_g : d.whey_g ?? null}; };
+const wheyProt = (p, g) => { const cfg = suplementoPerfil(p); return g === 0 ? 0 : g == null || !(cfg.whey_porcao > 0) || cfg.whey_prot == null || cfg.whey_prot > cfg.whey_porcao ? null : Math.round(g * cfg.whey_prot / cfg.whey_porcao * 10) / 10; };
+const wheyDia = (p, s) => { const c = chkOf(p, s), d = supDia(p, s); return d.whey_g == null ? null : d.whey_g === 0 ? 0 : Object.hasOwn(c, "whey_prot_g") ? c.whey_prot_g : wheyProt(p, d.whey_g); };
+const supEstado = g => g == null ? "Sem registro" : g === 0 ? "Não tomou" : `${num(g)} g`;
+const supHistorico = p => lastDays(7, logDate > trainDay() ? trainDay() : logDate).reverse().map(d => ({d, ...supDia(p, d)}));
+function supResultado(tipo){
+  const p = person.id, d = supDia(p, logDate), g = d[tipo + "_g"];
+  if (tipo === "creatina") return `<b>${creatinaEstado(g)}</b>`;
+  if (g == null || g === 0) return `<b>${supEstado(g)}</b>`;
+  const prot = wheyDia(p, logDate);
+  return prot == null ? `<b>Proteína ainda não calculada.</b> Confira o rótulo em Meus produtos e confirme novamente as gramas do dia.` : `<b>${num(prot)} g de proteína</b> fornecidos por ${num(g)} g de pó.`;
+}
+function renderSupAlimentacao(){
+  const p = person.id, meta = metas(p, logDate), c = chkOf(p, logDate), tem = regAlim(p, logDate) || c.prot_g != null;
+  const prot = tem ? comidoDe(p, logDate).prot : null;
+  return `<p class="sup-reg">${prot == null ? "Alimentação ainda sem registro neste dia." : `<b>${num(prot)} g de proteína</b> estimados nas refeições marcadas.`}${meta.total ? ` Referência diária: ${meta.faixa[0]}–${meta.faixa[1]} g.` : " Meta pessoal ainda não definida."}</p>
+    <p class="hint">O whey aparece separado. Não somamos automaticamente: uma refeição marcada pode já incluí-lo. Esses registros parciais não dizem sozinhos se você comeu pouco ou muito.</p>`;
+}
+function renderSupHistorico(){
+  return `<table class="sup-history"><caption>Últimos 7 dias até ${brDate(logDate > trainDay() ? trainDay() : logDate)}</caption><thead><tr><th scope="col">Dia</th><th scope="col">Creatina</th><th scope="col">Whey · pó</th></tr></thead><tbody>${supHistorico(person.id).map(d => `<tr><th scope="row"><button type="button" class="linkbtn" data-date="${d.d}" aria-label="Ver suplementos de ${brDate(d.d)}">${brDate(d.d)}</button></th><td>${supEstado(d.creatina_g)}</td><td>${supEstado(d.whey_g)}</td></tr>`).join("")}</tbody></table>`;
+}
+function renderSuplementos(){
+  const p = person.id, cfg = suplementoPerfil(p), c = supDia(p, logDate), bloqueado = futuro() ? "disabled" : "";
+  const status = (tipo, label) => `<div class="chips" role="group" aria-label="${label}">${[["sim", "Uso"], ["nao", "Não uso"], ["parou", "Parei"]].map(([v, t]) => `<button type="button" class="chip" data-sup-status="${tipo}" data-value="${v}" aria-pressed="${cfg[tipo] === v}">${t}</button>`).join("")}</div>`;
+  const campo = (nome, label, v) => `<label>${label}<input type="number" min="0" max="500" step="0.1" inputmode="decimal" name="${nome}" value="${esc(v ?? "")}" placeholder="g"></label>`;
+  const produto = tipo => `<label>Nome do produto<input type="text" maxlength="80" name="${tipo}_produto" value="${esc(cfg[tipo + "_produto"] || "")}" placeholder="Opcional"></label>`;
+  const foto = tipo => { const img = cfg[tipo + "_foto"]; return `<button type="button" class="ghost" data-sup-foto="${tipo}_foto">${ICON_CAM} Foto do rótulo</button>${typeof img === "string" && img.startsWith("data:image/jpeg;base64,") ? `<img class="sup-photo" src="${esc(img)}" alt="Rótulo de ${tipo}"><button type="button" class="linkbtn" data-sup-apaga="${tipo}_foto">Remover foto</button>` : ""}<p class="hint">A foto não é lida automaticamente. Confira os valores e salve o produto.</p>`; };
+  const registro = (tipo, nome, unidade, cor) => `<article class="panel tinted sup-card ${tipo}" style="--c:var(${cor})">
+    ${phd(ICON_POTE, nome, `<span class="tag">${esc(cfg[tipo + "_produto"] || "Total do dia")}</span>`)}
+    <label>Total tomado · ${unidade}<input type="number" min="0" max="${tipo === "creatina" ? 100 : 500}" step="0.1" inputmode="decimal" data-sup-dia="${tipo}_g" value="${esc(c[tipo + "_g"] ?? "")}" placeholder="Sem registro" aria-describedby="sup-${tipo}-resultado" ${bloqueado}></label>
+    <div class="sup-actions"><button type="button" class="ghost" data-sup-zero="${tipo}_g" ${bloqueado}>Não tomei</button><button type="button" class="linkbtn" data-sup-limpa="${tipo}_g" ${bloqueado}>Limpar registro</button></div>
+    <p class="sup-result" id="sup-${tipo}-resultado" role="status">${supResultado(tipo)}</p>
+    <p class="hint">${tipo === "creatina" ? "Referência usual: 3–5 g/dia de creatina, não de pó. Não dobre a dose para compensar um dia sem tomar." : "Registre o pó pesado, não o número de colheres. A proteína é calculada pelo rótulo salvo, sem dose fixa de whey."}</p>
+  </article>`;
+  return `<section class="list" id="suplementos" aria-label="Suplementos">
+    <div class="sup-dayhead"><div class="dayhead"><div><div class="eyebrow">Rotina ${person.art} ${esc(person.name)}</div><h2>Suplementos</h2><p class="dsub">Seu registro diário, seus produtos e seu histórico.</p></div></div><button type="button" class="avatar" data-perfil aria-label="Trocar pessoa ou abrir perfil">${esc(person.name.slice(0, 1))}</button></div>
+    ${renderWeekNav(true)}
+    <h3 class="sec">Registro ${logDate === trainDay() ? "de hoje" : "de " + brDate(logDate)}</h3>
+    <p class="hint">Vazio = sem registro. Zero = não tomou. Digite o total do dia; outro lançamento substitui esse valor, não soma.</p>
+    <div class="sup-grid">${registro("creatina", "Creatina", "g de creatina", "--violet")}${registro("whey", "Whey", "g de pó", "--blue")}</div>
+    <p class="ckstate" id="sup-save-state" role="status">${esc(chkStatus[docId(p, logDate)] || (SUPA ? "Gramas sincronizadas pelo check-in. Salva ao sair do campo." : "Registros guardados neste aparelho."))}</p>
+    <article class="panel tinted" style="--c:var(--kcal)">${phd(ICON.prato, "Proteína e alimentação")}<div id="sup-alimentacao">${renderSupAlimentacao()}</div><div class="chips"><button type="button" class="chip" data-screen="hoje">Registrar refeições</button><button type="button" class="chip" data-screen="cardapio">Ver cardápio</button></div></article>
+    <h3 class="sec">Meus produtos</h3><p class="hint">Cadastre uma vez. Produto e foto ficam neste aparelho; não mudam os registros dos dias anteriores.</p>
+    <div class="sup-grid">
+      <article class="panel sup-card">${phd(ICON_POTE, "Creatina")}<p class="hint">Uso informado: ${suplementoStatus(cfg.creatina_status)}. Não usa? Veja a orientação abaixo; suplemento é opcional.</p>${status("creatina_status", "Uso de creatina")}
+        <details data-sup-details="creatina"><summary>Produto e rótulo</summary><form data-sup-form="creatina">${produto("creatina")}<label>Tipo<select name="creatina_tipo"><option value="">Selecione</option><option value="monohidratada" ${cfg.creatina_tipo === "monohidratada" ? "selected" : ""}>Monohidratada</option><option value="outra" ${cfg.creatina_tipo === "outra" ? "selected" : ""}>Outra</option></select></label>${campo("creatina_porcao", "Creatina por porção do rótulo (g)", cfg.creatina_porcao)}${foto("creatina")}<button type="submit" class="done-btn">Salvar produto</button></form></details>
+      </article>
+      <article class="panel sup-card">${phd(ICON_POTE, "Whey")}<p class="hint">Uso informado: ${suplementoStatus(cfg.whey_status)}. Comida também pode completar a proteína.</p>${status("whey_status", "Uso de whey")}
+        <details data-sup-details="whey"><summary>Produto e rótulo</summary><form data-sup-form="whey">${produto("whey")}${campo("whey_porcao", "Pó por porção do rótulo (g)", cfg.whey_porcao)}${campo("whey_prot", "Proteína nessa porção (g)", cfg.whey_prot)}${foto("whey")}<button type="submit" class="done-btn">Salvar produto</button></form></details>
+      </article>
+    </div>
+    <article class="panel"><h3>Histórico recente</h3><p class="hint">Registro de consumo, não ofensiva. Sem registro não significa falta. Toque na data para conferir.</p><div id="sup-historico">${renderSupHistorico()}</div></article>
+    <article class="panel"><details><summary>Como usar os suplementos</summary><p><b>Creatina:</b> a monohidratada é a forma mais estudada para força e desempenho. A referência usual é 3–5 g por dia, incluindo descanso; pode aumentar água no músculo e peso na balança. Estar acima dessa faixa não é diagnóstico de toxicidade nem motivo para aumentar a dose.</p><p><b>Whey:</b> conveniência para completar proteína, não obrigação. Se sua alimentação já atende à meta, não precisa acrescentar whey só para marcar este cartão. Prefira conferir gramas no rótulo a usar “um scoop” como medida universal.</p><p class="hint">Tem doença renal/hepática, usa remédios ou está gestante? Converse com médico ou nutricionista. Whey contém proteína do leite; lactose varia conforme o produto. Informação geral, não orientação médica individual.</p></details></article>
+  </section>`;
+}
+function redesenhaSup(){
+  if (screen !== "suplementos") return;
+  const abertos = [...view.querySelectorAll("[data-sup-details][open]")].map(el => el.dataset.supDetails), y = scrollY;
+  drawCore();
+  for (const tipo of abertos) { const el = view.querySelector(`[data-sup-details="${tipo}"]`); if (el) el.open = true; }
+  scrollTo(0, y);
+}
+function refreshSuplementos(){
+  if (screen !== "suplementos") return;
+  const d = supDia(person.id, logDate);
+  for (const tipo of ["creatina", "whey"]) {
+    const input = view.querySelector(`[data-sup-dia="${tipo}_g"]`), result = document.getElementById(`sup-${tipo}-resultado`);
+    if (input && input !== document.activeElement) input.value = d[tipo + "_g"] ?? "";
+    if (result) { result.innerHTML = supResultado(tipo); result.classList.toggle("high", tipo === "creatina" && d.creatina_g > 5); result.classList.toggle("warn", tipo === "creatina" && d.creatina_g > 0 && d.creatina_g < 3); }
+  }
+  const hist = document.getElementById("sup-historico"), alim = document.getElementById("sup-alimentacao");
+  if (hist) hist.innerHTML = renderSupHistorico();
+  if (alim) alim.innerHTML = renderSupAlimentacao();
+}
+function salvaSuplemento(perfil, p = person.id){
+  try { localStorage.setItem(NS + "suplementos:" + p, JSON.stringify(perfil)); }
+  catch(e) { aviso("Não foi possível guardar neste aparelho.", "Confira o espaço disponível; o cadastro anterior não foi alterado."); return false; }
+  if (p === person.id) redesenhaSup();
+  return true;
+}
+function fotoRotulo(campo){
+  let inp = document.getElementById("supfotoin");
+  if (!inp) { inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*"; inp.id = "supfotoin"; inp.hidden = true; document.body.appendChild(inp);
+    inp.addEventListener("change", () => { const f = inp.files && inp.files[0], alvo = inp.dataset.campo, p = inp.dataset.person; inp.value = ""; if (!f || !alvo) return;
+      const img = new Image(), url = URL.createObjectURL(f);
+      img.onload = () => { const k = Math.min(1, 800 / Math.max(img.width, img.height)), c = document.createElement("canvas");
+        c.width = Math.max(1, Math.round(img.width * k)); c.height = Math.max(1, Math.round(img.height * k));
+        c.getContext("2d").drawImage(img, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+        if (salvaSuplemento({...suplementoPerfil(p), [alvo]: c.toDataURL("image/jpeg", .7)}, p)) aviso("Foto guardada neste celular.", "Confira os números do rótulo e salve o produto."); };
+      img.onerror = () => { URL.revokeObjectURL(url); aviso("Não consegui abrir essa foto.", "Tente outra imagem."); };
+      img.src = url; }); }
+  inp.dataset.campo = campo; inp.dataset.person = person.id; inp.click();
+}
+function atualizaSuplemento(campo, valor){ salvaSuplemento({...suplementoPerfil(person.id), [campo]: valor}); }
+function salvaProduto(form){
+  if (!form.reportValidity()) return false;
+  const tipo = form.dataset.supForm, campos = new FormData(form), perfil = {...suplementoPerfil(person.id)};
+  for (const [k, raw] of campos) perfil[k] = k.endsWith("_produto") || k.endsWith("_tipo") ? String(raw).trim() || null : raw === "" ? null : Number(raw);
+  if (tipo === "whey" && perfil.whey_prot != null && (!(perfil.whey_porcao > 0) || perfil.whey_prot > perfil.whey_porcao)) {
+    const el = form.elements.namedItem("whey_prot"); el.setCustomValidity("Informe uma porção maior que zero. A proteína não pode superar os gramas de pó dessa porção."); el.reportValidity(); return false;
+  }
+  if (!salvaSuplemento(perfil)) return false;
+  aviso("Produto salvo neste aparelho.", "Registros anteriores não mudam. Se corrigiu o rótulo, confirme novamente as gramas do dia que deseja corrigir.");
+  return true;
+}
+function registraSuplemento(campo, valor){
+  if (futuro()) return avisaFuturo();
+  if (!["creatina_g", "whey_g"].includes(campo) || (valor != null && (!Number.isFinite(valor) || valor < 0 || valor > (campo === "creatina_g" ? 100 : 500)))) return;
+  const patch = {[campo]: valor};
+  if (campo === "creatina_g") patch.creatina = valor == null ? null : valor > 0;
+  if (campo === "whey_g") patch.whey_prot_g = wheyProt(person.id, valor);
+  setChk(patch);
+  refreshSuplementos();
+}
 // Metas calculadas pelo peso e pelo objetivo — regra do agente de nutrição (2026-10-09).
 // Proteína = g/kg × peso; calorias = base + 16,5 × peso (a base já embute altura/idade, que não vão para o site).
 // Peso = pesagem na balança da academia ao chegar (~21h, antes do treino, sem tênis) menos 1,5 kg (roupa + comida do dia), para ficar no padrão de jejum.
@@ -1395,6 +2083,7 @@ const PROT = new Proxy({}, {get: (_, p) => { const m = metas(p); return m.faixa 
 const KCAL = new Proxy({}, {get: (_, p) => { const m = metas(p); return m.kcal ? `${m.kcal[0].toLocaleString("pt-BR")}–${m.kcal[1].toLocaleString("pt-BR")} kcal` : undefined; }});
 const META_PESO = {rafael: {txt: "+0,16 a +0,32 kg por semana", lo: 0.16, hi: 0.32}, laura: {txt: "−0,15 a −0,3 kg por semana", lo: -0.3, hi: -0.15}, laysa: {txt: "estável (reagir só se a média andar 2–3 semanas)", lo: -0.15, hi: 0.15}};
 function setChk(patch){
+  if (futuro()) return avisaFuturo();
   const id = docId(person.id, logDate);
   const c = CHK[id] ? {...CHK[id]} : {person: person.id, date: logDate, agua: 0, sono: 0};
   Object.assign(c, patch); c.updated = new Date().toISOString();
@@ -1420,7 +2109,6 @@ const NUTRI = {
     pessoa: {rafael: "1 bolinha (~35 g) + carboidrato à vontade (2 pães ou 1 prato de arroz).", laura: "1 bolinha (~35 g) + carboidrato pequeno (1 fruta ou 1 pão).", laysa: "1 bolinha (~28 g) + carboidrato médio (1 pão ou 1 banana com aveia).", a3: "1 bolinha (~25 g) + 1 fruta ou 1 pão."}},
   creatina: "Creatina 3–5 g por dia, em qualquer horário, inclusive no fim de semana."
 };
-let nowFn = () => new Date();   // trocável nos testes
 // Refeições do dia = cardápio do agente de nutrição ajustado à meta calculada pelo peso
 // (soma das kcal = meio da faixa de calorias; soma da proteína = proteína alvo). Marcar todas = bater a meta.
 function refeicoesDe(p, s = logDate, tipo = dayIdFor(s) ? "treino" : "descanso"){
@@ -1452,6 +2140,7 @@ function protCard(){
       <div class="al-l"><div class="al-v"><b class="num" id="al-k">0</b><span id="al-km"></span></div><div class="st-bar" style="--c:var(--kcal)"><i id="al-kb"></i></div></div>
       <div class="al-l"><div class="al-v"><b class="num" id="al-p">0</b><span id="al-pm"></span></div><div class="st-bar" style="--c:var(--coral)"><i id="al-pb"></i></div></div>
     </div>
+    <p class="alc-linha" id="al-alc" hidden></p>
     <ul class="al-list">${rs.map((r, i) => `<li><button type="button" class="al-r" data-ref="${i}" aria-pressed="false"><span class="al-c" aria-hidden="true">✓</span><span class="al-n"><b>${esc(r.nome)}</b><small>${esc(r.hora)} · ${r.itens.map(esc).join(" · ")}</small></span><span class="al-k num">${r.kcal.toLocaleString("pt-BR")} kcal<small>${r.prot} g proteína</small></span></button></li>`).join("")}</ul>
     <p class="hint">Toque em cada refeição que comeu. Os valores são do seu cardápio (Perfil → Cardápio) ajustados à sua meta; comeu algo parecido? Vale marcar — veja as trocas no Cardápio.</p></article>`;
 }
@@ -1464,6 +2153,8 @@ function refreshProt(){
   document.getElementById("al-kb").style.width = Math.min(100, c.kcal / mk * 100) + "%";
   document.getElementById("al-pb").style.width = Math.min(100, c.prot / m.total * 100) + "%";
   card.classList.toggle("met", metaBatida(person.id, logDate));
+  const an = alcDe(person.id, logDate), ae = document.getElementById("al-alc");
+  if (ae) { ae.hidden = !an; ae.textContent = an ? `Álcool: +${(an * ALC.kcal).toLocaleString("pt-BR")} kcal (total do dia ${(c.kcal + an * ALC.kcal).toLocaleString("pt-BR")} kcal). A meta se bate só com comida.` : ""; }
 }
 function toggleRef(i){
   const f = feitasDe(person.id, logDate), on = f.includes(i), nf = on ? f.filter(x => x !== i) : [...f, i].sort((a, b) => a - b);
@@ -1474,8 +2165,9 @@ function toggleRef(i){
 }
 // Cartão da comida em volta do treino: antes (17h–21h), durante (21h–23h30), depois (23h30 em diante); só no dia de treino de hoje
 function nutriCard(){
-  if (!person.days || logDate !== trainDay() || !dayIdFor(logDate)) return "";
-  const d = nowFn(), m = d.getHours() * 60 + d.getMinutes();
+  if (treinoPlus()) return "";   // Sem horário pessoal configurado, não presume a fase do treino.
+  const d = nowFn(), m = d.getHours() * 60 + d.getMinutes(), diaTreino = m < 5 * 60 ? addDays(trainDay(), -1) : trainDay();
+  if (!person.days || logDate !== diaTreino || !dayIdFor(logDate)) return "";
   const k = m >= 17 * 60 && m < 21 * 60 ? "antes" : m >= 21 * 60 && m < 23 * 60 + 30 ? "durante" : (m >= 23 * 60 + 30 || m < 5 * 60) ? "depois" : null;
   if (!k) return "";
   const n = NUTRI[k], pp = n.pessoa ? (n.pessoa[person.id] || n.pessoa.a3).replace(/1 bolinha \(~\d+ g\)/, () => { const pt = refeicoesDe(person.id, logDate).find(r => /Pós/.test(r.nome)); return pt ? `~${pt.kcal} kcal e ${pt.prot} g de proteína` : "proteína"; }) : "";
@@ -1485,13 +2177,42 @@ function nutriCard(){
     ${n.evitar ? `<p class="nut-e">${n.evitar}</p>` : ""}
     <p class="hint">${n.porque ? n.porque + " " : ""}${k === "depois" ? NUTRI.creatina + " " : ""}Do agente de nutrição do seu personal.</p></article>`;
 }
+const ICON_COPO = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l-1.5 9a4.5 4.5 0 0 1-9 0z"/><path d="M12 16.5V21M8.5 21h7M7 8h10"/></svg>`;
+let alcAberto = false;   // nos dias de semana o cartão só aparece se a pessoa abrir
+function alcCard(){
+  const wd = parseDate(logDate).getDay(), fds = wd === 5 || wd === 6 || wd === 0, n = alcDe(person.id, logDate);
+  if (!fds && n == null && !alcAberto) return `<button type="button" class="alc-mais" data-alcabre>+ bebida alcoólica</button>`;
+  return `<article class="ck prot alc" id="card-alc" style="--c:var(--warn)"><div class="ck-h"><span class="ico">${ICON_COPO}</span>Bebida alcoólica<span class="pt-v num" id="alc-v"></span></div>
+    <p class="alc-q">Quantas doses ${logDate === trainDay() ? "hoje" : "em " + brDate(logDate)}? <small>Marque no dia em que a noite começou.</small></p>
+    <div class="alc-row" role="group" aria-label="Doses de bebida alcoólica">${[[0, "Não bebi"], [1, "1"], [2, "2"], [3, "3"], [4, "4"], [5, "5"], [6, "6+"]].map(([v, t]) => `<button type="button" class="chip" data-alc="${v}" aria-pressed="false">${t}</button>`).join("")}</div>
+    <p class="ck-note" id="alc-note"></p>
+    <details class="pt-ex"><summary>O que é 1 dose</summary><ul>${ALC.exemplos.map(x => `<li>${x}</li>`).join("")}</ul><p class="hint">${ALC.seguranca} Informação geral, não substitui médico ou nutricionista.</p></details></article>`;
+}
+// Recado do dia seguinte (em cima do check-in)
+function alcOntem(){
+  const n = alcDe(person.id, addDays(logDate, -1)); if (!n) return "";
+  const f = ALC.faixas[faixaAlc(person.id, n)], pp = ALC.pessoa[person.id];
+  return `<article class="panel tinted" style="--c:var(--warn)">${phd(ICON_COPO, `${logDate === trainDay() ? "Ontem" : "Na véspera"}: ${n >= 6 ? "6 ou mais" : n} ${n === 1 ? "dose" : "doses"}`, `<span class="delta">${f.titulo}</span>`)}
+    <p class="alc-m">${f.msg}</p>${f.agua ? `<p class="nut-p">A meta de água de hoje já subiu <b>+${ml(f.agua)} ml</b>.</p>` : ""}${pp && faixaAlc(person.id, n) >= 2 ? `<p class="hint">${pp}</p>` : ""}</article>`;
+}
+function refreshAlc(){
+  const card = document.getElementById("card-alc"); if (!card) return;
+  const n = alcDe(person.id, logDate);
+  card.querySelectorAll("[data-alc]").forEach(b => b.setAttribute("aria-pressed", String(n != null && +b.dataset.alc === n)));
+  document.getElementById("alc-v").textContent = n ? `+${(n * ALC.kcal).toLocaleString("pt-BR")} kcal` : "";
+  document.getElementById("alc-note").textContent = n == null ? "Sem resposta não conta como zero." : n === 0 ? "Sem álcool: nada muda." : `${ALC.faixas[faixaAlc(person.id, n)].titulo}. Amanhã o site ajusta a água e te lembra do que fazer.`;
+}
 function renderExtras(){
-  return `<div class="cards">${protCard()}
-      <article class="ck mini-ck" id="card-peso" style="--c:var(--peso)"><div class="ck-h"><span class="ico">${ICON.balanca}</span>Peso</div>
+  return `${alcOntem()}<div class="cards">${protCard()}${alcCard()}
+      ${treinoPlus() ? `<article class="ck mini-ck" id="card-peso" style="--c:var(--peso)">
+        <div class="pesorow"><span class="peso-icon" aria-hidden="true">${ICON.balanca}</span>
+          <label class="ck-h" for="peso">Peso corporal</label>
+          <div class="peso-field"><input id="peso" class="pesoin" type="text" inputmode="decimal" autocomplete="off" placeholder="Anotar" aria-label="Peso corporal em quilogramas" aria-describedby="pesohint"><span class="peso-unit" aria-hidden="true">kg</span></div>
+          <p class="ck-note" id="pesohint">Ao chegar, antes do treino e sem tênis.</p></div></article>` : `<article class="ck mini-ck" id="card-peso" style="--c:var(--peso)"><div class="ck-h"><span class="ico">${ICON.balanca}</span>Peso</div>
         <div class="pesorow"><input id="peso" class="pesoin" inputmode="decimal" autocomplete="off" placeholder="kg" aria-label="Peso em kg"><span>kg</span></div>
-        <p class="ck-note" id="pesohint">na academia, ao chegar: antes de treinar, sem tênis</p></article>
-      <button type="button" class="ck mini-ck dietbtn" id="card-dieta" data-sheet="dieta" style="--c:var(--coral)"><span class="ck-h"><span class="ico">${ICON.prato}</span>Alimentação</span>
-        <b class="diet-st" id="dietst">Não marcada</b><span class="ck-note" id="dietsub">Toque para marcar no fim do dia</span></button>
+        <p class="ck-note" id="pesohint">na academia, ao chegar: antes de treinar, sem tênis</p></article>`}
+      ${treinoPlus() ? "" : `<button type="button" class="ck mini-ck dietbtn" id="card-dieta" data-sheet="dieta" style="--c:var(--coral)"><span class="ck-h"><span class="ico">${ICON.prato}</span>Alimentação</span>
+        <b class="diet-st" id="dietst">Não marcada</b><span class="ck-note" id="dietsub">Toque para marcar no fim do dia</span></button>`}
     </div>`;
 }
 function refreshExtras(){
@@ -1501,10 +2222,14 @@ function refreshExtras(){
   const pin = document.getElementById("peso");
   if (pin && pin !== document.activeElement) pin.value = c.peso ? num(c.peso) : "";
   const h = document.getElementById("pesohint");
-  if (h) { const t = pesoTrend(person.id, logDate); h.textContent = t && t.delta != null ? `média 7 dias ${num(t.avg.toFixed(1))} kg (${t.delta >= 0 ? "+" : "−"}${num(Math.abs(t.delta).toFixed(1))})` : "na academia, ao chegar: antes de treinar, sem tênis"; }
+  if (h) {
+    const t = pesoTrend(person.id, logDate);
+    const near = treinoPlus() && naAcademia && gymPerson === person.id && academiaSalva() && logDate === trainDay();
+    h.textContent = t && t.delta != null ? (treinoPlus() ? 'Média 7 dias: '+num(t.avg.toFixed(1))+' kg · '+(t.delta>=0?'+':'−')+num(Math.abs(t.delta).toFixed(1))+' kg' : 'média 7 dias '+num(t.avg.toFixed(1))+' kg ('+(t.delta>=0?'+':'−')+num(Math.abs(t.delta).toFixed(1))+')') : near ? 'Perto da academia que você configurou. Registre seu peso.' : treinoPlus() ? 'Ao chegar, antes do treino e sem tênis.' : 'na academia, ao chegar: antes de treinar, sem tênis';
+  }
   const st = document.getElementById("dietst"), sub = document.getElementById("dietsub");
   if (st) { const op = DIETA_OP.find(([v]) => c.dieta != null && v === +c.dieta); st.textContent = op ? op[1] : "Não marcada"; st.classList.toggle("marcada", !!op);
-    sub.textContent = op ? [`${comidoDe(person.id, logDate).kcal.toLocaleString("pt-BR")} kcal`, c.creatina ? "creatina ✓" : ""].filter(Boolean).join(" · ") : "Toque para marcar no fim do dia"; }
+    sub.textContent = op ? `${comidoDe(person.id, logDate).kcal.toLocaleString("pt-BR")} kcal` : "Toque para marcar no fim do dia"; }
   // O que muda quando a noite foi ruim (base: conhecimento/04 e regra de deload da ficha)
   const tip = document.getElementById("sonotip");
   if (tip) {
@@ -1524,6 +2249,7 @@ function openSheet(kind){
       if (e.target.closest("[data-close]")) return closeSheet();
       const di = e.target.closest("[data-dieta]"); if (di) { const v = +di.dataset.dieta, c = chkOf(person.id, logDate); setChk({dieta: c.dieta != null && +c.dieta === v ? null : v}); return renderSheet(); }
       const fl = e.target.closest("[data-flag]"); if (fl) { const f = fl.dataset.flag; setChk({[f]: !chkOf(person.id, logDate)[f]}); return renderSheet(); }
+      if (e.target.closest("[data-supir]")) { closeSheet(); goScreen("suplementos"); return; }
     });
     document.addEventListener("keydown", e => { if (e.key === "Escape" && !sh.hidden) closeSheet(); });
   }
@@ -1536,9 +2262,9 @@ function renderSheet(){
   sh.innerHTML = `<div class="sheet-bg" data-close></div><div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-t">
     <div class="sheet-grab" aria-hidden="true"></div>
     <h2 id="sheet-t">Como foi a alimentação ${quando}?</h2>
-    <p class="hint">Marque no fim do dia. "O plano" é o que o seu personal passou: ${KCAL[person.id] ? KCAL[person.id] + " e " : ""}proteína ${PROT[person.id] || "da sua meta"} por dia, mais creatina 3–5 g.</p>
+    <p class="hint">Marque no fim do dia. "O plano" é o que o seu personal passou: ${KCAL[person.id] ? KCAL[person.id] + " e " : ""}proteína ${PROT[person.id] || "da sua meta"} por dia. Se usa suplementos, registre na aba Suplementos.</p>
     <div class="opts">${DIETA_OP.map(([v, t]) => `<button type="button" class="opt" data-dieta="${v}" aria-pressed="${c.dieta != null && +c.dieta === v}"><b>${t}</b><small>${DIETA_DESC[v]}</small></button>`).join("")}</div>
-    <div class="togs"><div class="tog info"><span>${comidoDe(person.id, logDate).kcal.toLocaleString("pt-BR")} kcal · ${comidoDe(person.id, logDate).prot} g</span><small>marque as refeições no check-in</small></div><button type="button" class="tog" data-flag="creatina" aria-pressed="${!!c.creatina}"><span>Tomei creatina</span><small>3–5 g</small></button></div>
+    <div class="togs"><div class="tog info"><span>${comidoDe(person.id, logDate).kcal.toLocaleString("pt-BR")} kcal · ${comidoDe(person.id, logDate).prot} g</span><small>marque as refeições no check-in</small></div><button type="button" class="tog" data-supir aria-label="Abrir a aba Suplementos"><span>Suplementos</span><small>abrir a aba e anotar creatina e whey</small></button></div>
     <button type="button" class="done-btn" data-close>Pronto</button>
   </div>`;
 }
@@ -1659,10 +2385,12 @@ function renderProgress(){
   const porRef = Object.entries(refStat).map(([n, [h, t]]) => [n, h, t]);
   const kMedia = alDias.length ? Math.round(avg(alDias.map(s => comidoDe(p, s).kcal))) : 0, pMedia = alDias.length ? Math.round(avg(alDias.map(s => comidoDe(p, s).prot))) : 0;
   const creat = lastDays(7, today).filter(s => chkOf(p, s).creatina).length;
+  const creatTile = suplementoPerfil(p).creatina_status === "sim" ? tile(creat + "/7", "dias com creatina") : "";
+  const alcDias = lastDays(7, today).map(s => alcDe(p, s)).filter(v => v != null), alcSem = alcDias.reduce((a, v) => a + v, 0), alcCima = alcDias.filter(v => v >= (ALC.cima[p] || 4)).length;
   const kcalBars = stats.slice(-10).map(s => ({l: dd(s.d.date).slice(0, 2), v: s.kcal || 0, tip: `${dd(s.d.date)}: ${s.kcal != null ? "~" + s.kcal + " kcal · " : ""}${s.min} min · ${s.sets} séries`}));
   // Cartões do topo: ofensiva (dias úteis da semana), treinos feitos x previstos, volume e calorias
   const ofen = streakOf(p), semDias = weekOf(today).slice(0, 5);
-  const previstos = person.days ? lastDays(28, today).filter(s => (s >= BLOCO.start && dayIdFor(s)) || trained(p, s)).length : 0;
+  const previstos = person.days ? lastDays(28, today).filter(s => (s >= BLOCO.start && dayIdFor(s) && !justificado(p, s)) || trained(p, s)).length : 0;
   const n = sess.length, fl = flameOf(ofen);
   const statCards = [
     stat({ico: flameSvg(ofen), c: fl.a, l: "Ofensiva", v: ofen, u: ofen === 1 ? "dia" : "dias",
@@ -1675,13 +2403,14 @@ function renderProgress(){
       foot: vol ? (n > 1 ? `~${(vol / n / 1000).toLocaleString("pt-BR", {maximumFractionDigits: 1})} t por treino` : "kg × reps somados") : "kg × reps somados"}),
     stat({ico: ICONF, c: "var(--kcal)", l: "Calorias", v: kcal ? "~" + kcal.toLocaleString("pt-BR") : "—", u: kcal ? "kcal" : "",
       foot: semPeso ? "registre o peso no Hoje para calcular" : kcal && n > 1 ? `~${Math.round(kcal / n)} por treino` : "gastas nos treinos"})
-  ].join("");
+  ].filter((_, i) => !treinoPlus() || i < 2).join("");
   return `<section class="list prog" aria-label="Progresso">
     <h2>Progresso</h2>
-    ${renderPainel(p)}
-    ${relCard(p)}
+    ${treinoPlus() ? "" : renderPainel(p)}
+    ${treinoPlus() ? "" : relCard(p)}
     <p class="sub">4 semanas até ${today === trainDay() ? "hoje" : brDate(today)} · a data muda no calendário do Hoje</p>
     <div class="stats">${statCards}</div>
+    ${treinoPlus() ? relCard(p) : ""}
 
     <article class="panel tinted" style="--c:var(--coral)">${phd(ICON_PILHA, "Desempenho", wPct != null ? `<span class="delta ${wPct >= 0 ? "up" : "down"}">${wPct >= 0 ? "▲" : "▼"} ${Math.abs(wPct)}% na última semana</span>` : "")}
       <p class="sub">Volume por semana (kg × reps)</p>
@@ -1689,6 +2418,7 @@ function renderProgress(){
       ${ev.length ? `<p class="sub">Força estimada (1RM) que mais subiu</p><ul class="evo">${ev.map(e => `<li><span>${e.name}</span><b class="num ${e.pct >= 0 ? "up" : "down"}">${e.pct >= 0 ? "+" : ""}${e.pct.toFixed(0)}%</b></li>`).join("")}</ul>` : `<p class="hint">Depois de 2 treinos do mesmo exercício aparece quanto a força estimada subiu.</p>`}
     </article>
 
+    ${renderVolumeMuscular()}
     <article class="panel tinted" style="--c:var(--peso)">${phd(ICON.balanca, "Peso", trend?.delta != null ? `<span class="delta">${trend.delta >= 0 ? "+" : "−"}${num(Math.abs(trend.delta).toFixed(2))} kg na semana</span>` : "")}
       ${ptsP.length ? lineChart({pts: ptsP, avgPts: avgP, color: "var(--peso)"}) + `<p class="sub">Pontos: cada pesagem · linha: média de 7 dias</p>` : `<p class="hint">Registre o peso na tela Hoje, todo dia ao acordar.</p>`}
       ${meta ? `<p class="hint">Meta: ${meta.txt}.</p>` : ""}
@@ -1711,9 +2441,9 @@ function renderProgress(){
       ${bars({data: alBars, color: "var(--kcal)", max: Math.ceil(mk * 1.2 / 500) * 500, ref: mk, fmtY: v => (v / 1000).toLocaleString("pt-BR", {maximumFractionDigits: 1}) + " mil"})}<p class="sub">Calorias comidas por dia (14 dias) · linha tracejada = meta · toque numa barra para ver a proteína</p>` : `<p class="hint">Marque as refeições no check-in do Hoje para ver aqui quanto você come por dia.</p>`}
     </article>
 
-    <article class="panel tinted" style="--c:var(--coral)">${phd(ICON.prato, "Alimentação")}
-      ${dNow ? `<div class="mini two">${tile(dNow.ader + "%", "na dieta (7 dias)", dPrev ? `semana anterior: ${dPrev.ader}%` : "")}${tile(creat + "/7", "dias com creatina")}</div>` : `<p class="hint">Marque a alimentação na tela Hoje para ver a aderência da semana.</p>`}
-    </article>
+    ${treinoPlus() ? renderOutrosRegistros(creatTile, alcDias, alcSem, alcCima) : `<article class="panel tinted" style="--c:var(--coral)">${phd(ICON.prato, "Alimentação")}
+      ${dNow ? `<div class="mini ${creatTile ? "two" : ""}">${tile(dNow.ader + "%", "na dieta (7 dias)", dPrev ? `semana anterior: ${dPrev.ader}%` : "")}${creatTile}</div>${alcDias.length ? `<div class="mini two">${tile(alcSem + (alcSem === 1 ? " dose" : " doses"), "álcool (7 dias)", `~${(alcSem * ALC.kcal).toLocaleString("pt-BR")} kcal`)}${tile(alcDias.filter(v => v > 0).length, "dias com bebida", alcCima ? `${alcCima} acima do limite` : "")}</div>${alcSem >= ALC.aviso || alcCima ? `<p class="alert">${alcSem >= ALC.aviso ? `${alcSem} doses na semana: a partir de ${ALC.aviso} já pesa no sono e na recuperação.` : "Teve dia acima do seu limite: a recuperação daquela noite caiu."}</p>` : ""}` : ""}` : `<p class="hint">Marque a alimentação na tela Hoje para ver a aderência da semana.</p>`}
+    </article>`}
 
     <article class="panel tinted" style="--c:var(--kcal)">${phd(ICONF, "Calorias gastas no treino")}
       ${kcalBars.length ? bars({data: kcalBars, color: "var(--kcal)", fmtY: v => num(v)}) : `<p class="hint">Aparece depois do primeiro treino registrado.</p>`}
@@ -1936,7 +2666,7 @@ const PENDING = p => `<section class="list pending" style="--pc:var(--p5)">
 
 function drawWho(){
   who.hidden = true; who.innerHTML = "";
-  const pf = document.getElementById("perfilbtn"); if (pf) { pf.textContent = person.name.slice(0, 1); pf.style.setProperty("--av", `var(${person.cor || "--lime"})`); pf.setAttribute("aria-label", `Perfil ${person.art} ${person.name}`); }
+  const pf = document.getElementById("perfilbtn"); if (pf) { pf.textContent = person.name.slice(0, 1); pf.style.setProperty("--av", `var(${person.cor || "--lime"})`); pf.style.backgroundImage = fotoDe(person.id) ? `url(${fotoDe(person.id)})` : ""; pf.classList.toggle("tem-foto", !!fotoDe(person.id)); pf.setAttribute("aria-label", `Perfil ${person.art} ${person.name}`); }
 }
 function drawHead(){
   head.innerHTML = `<h1>Olá, ${person.name}!</h1>`;
@@ -1947,7 +2677,7 @@ function drawTabs(){
   tabs.innerHTML = person.days.map(t => `<button type="button" role="tab" data-tab="${t.id}" aria-selected="${t.id===current}" style="--pc:var(${t.plate})"><span class="wd"><span class="plate"></span>${t.wd}</span><span class="nm">${t.name}</span></button>`).join("");
 }
 function drawDock(){
-  const sec = ["hoje","treino","progresso"].includes(screen) ? screen : "";
+  const sec = ["hoje","treino","progresso","suplementos"].includes(screen) ? screen : "";
   dock.querySelectorAll("[data-screen]").forEach(b => b.dataset.screen === sec ? b.setAttribute("aria-current", "page") : b.removeAttribute("aria-current"));
   document.body.dataset.tela = screen;
   const tm = screen === "treino" && treinoView === "dia";
@@ -1955,10 +2685,11 @@ function drawDock(){
   document.body.classList.toggle("has-timer", tm);
 }
 const BLOCO = {start: "2026-10-08", weeks: 6};
-const GUIA_DESC = {cardapio: "Um dia de exemplo e tabela de trocas", dieta: "Calorias, proteína e suplementos", regras: "Sobrar, falha, drop, progressão e deload", medidas: "Peso, medidas e próxima avaliação", breno: "O que veio dos vídeos do Breno Aceti"};
+const GUIA_DESC = {cardapio: "Um dia de exemplo e tabela de trocas", dieta: "Calorias, proteína e suplementos", suplementos: "Creatina e whey: cadastro e quanto tomou", regras: "Sobrar, falha, drop, progressão e deload", medidas: "Peso, medidas e próxima avaliação", breno: "O que veio dos vídeos do Breno Aceti"};
 const dm = s => s.slice(8, 10) + "/" + s.slice(5, 7);
-const GUIA_ICO = {cardapio: ICON.prato, dieta: ICON.prato, regras: ICON_LIVRO, medidas: ICON_FITA, breno: ICON_PLAY};
-const GUIA_COR = {cardapio: "var(--kcal)", dieta: "var(--coral)", regras: "var(--lime)", medidas: "var(--peso)", breno: "var(--blue)"};
+const ICON_POTE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8z"/><path d="M5 5.5h14M9.5 3h5"/><path d="M9.5 13.5h5"/></svg>`;
+const GUIA_ICO = {cardapio: ICON.prato, dieta: ICON.prato, suplementos: ICON_POTE, regras: ICON_LIVRO, medidas: ICON_FITA, breno: ICON_PLAY};
+const GUIA_COR = {cardapio: "var(--kcal)", dieta: "var(--coral)", suplementos: "var(--violet)", regras: "var(--lime)", medidas: "var(--peso)", breno: "var(--blue)"};
 const kg1 = v => num((Math.round(v * 10) / 10).toFixed(1));
 function blocoInfo(){
   const w0 = weekOf(BLOCO.start)[0], n = Math.round((parseDate(weekOf(trainDay())[0]) - parseDate(w0)) / 864e5 / 7) + 1;
@@ -1991,6 +2722,276 @@ function renderCardapio(){
     <p class="hint">${esc(CARDAPIO.aviso || "")}</p>
   </section>`;
 }
+const fotoDe = id => store.get("foto:" + id) || "";
+const fotoCss = id => { const f = fotoDe(id); return f ? `;background-image:url(${f})` : ""; };
+// Abre o seletor de fotos do celular; a foto é recortada em quadrado, reduzida para 256 px e guardada no aparelho
+function escolherFoto(){
+  let inp = document.getElementById("fotoin");
+  if (!inp) { inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*"; inp.id = "fotoin"; inp.hidden = true; document.body.appendChild(inp);
+    inp.addEventListener("change", () => { const f = inp.files && inp.files[0]; inp.value = ""; if (!f) return;
+      const img = new Image(), url = URL.createObjectURL(f);
+      img.onload = () => { const c = document.createElement("canvas"), n = 256, lado = Math.min(img.width, img.height); c.width = c.height = n;
+        c.getContext("2d").drawImage(img, (img.width - lado) / 2, (img.height - lado) / 2, lado, lado, 0, 0, n, n); URL.revokeObjectURL(url);
+        store.set("foto:" + person.id, c.toDataURL("image/jpeg", .82)); const y = scrollY; draw(); scrollTo(0, y); toast("<span><b>Foto de perfil atualizada.</b><br>Ela fica só neste celular.</span>"); };
+      img.onerror = () => { URL.revokeObjectURL(url); toast("<span><b>Não consegui abrir essa foto.</b><br>Tente outra imagem.</span>"); };
+      img.src = url; }); }
+  inp.click();
+}
+// ══════════ Compartilhar, microfone (ditado), câmera/galeria e localização ══════════
+const ICON_MIC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>`;
+const ICON_PIN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>`;
+const ICON_ENVIA = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5v10h14V11h-1"/></svg>`;
+const aviso = (t, sub = "") => toast(`<span><b>${t}</b>${sub ? "<br>" + sub : ""}</span>`);
+
+// ── Compartilhar: folha do celular (WhatsApp etc.); sem ela, copia o texto ou baixa o arquivo ──
+async function compartilhar({title = "Treino", text = "", files = []}){
+  try {
+    if (navigator.share && (!files.length || (navigator.canShare && navigator.canShare({files})))) { await navigator.share(files.length ? {title, text, files} : {title, text}); return; }
+  } catch(e) { if (e && e.name === "AbortError") return; }
+  if (files.length) { const a = document.createElement("a"); a.href = URL.createObjectURL(files[0]); a.download = files[0].name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); return aviso("Arquivo salvo no aparelho.", "Agora é só mandar pelo WhatsApp."); }
+  try { await navigator.clipboard.writeText(text); aviso("Texto copiado.", "Cole no WhatsApp."); } catch(e) { aviso("Não consegui compartilhar neste navegador."); }
+}
+
+// ── Microfone: ditar carga e repetições ("60 por 12", "sessenta e dois e meio por dez") ──
+const N_PT = {zero: 0, um: 1, uma: 1, dois: 2, duas: 2, tres: 3, quatro: 4, cinco: 5, seis: 6, sete: 7, oito: 8, nove: 9, dez: 10, onze: 11, doze: 12, treze: 13, quatorze: 14, catorze: 14, quinze: 15, dezesseis: 16, dezessete: 17, dezoito: 18, dezenove: 19,
+  vinte: 20, trinta: 30, quarenta: 40, cinquenta: 50, sessenta: 60, setenta: 70, oitenta: 80, noventa: 90, cem: 100, cento: 100, duzentos: 200};
+function numerosDe(fala){
+  const tk = fala.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/(\d),(\d)/g, "$1.$2").split(/[^a-z0-9.]+/).filter(Boolean), out = [];
+  let cur = null, tipo = "";
+  const flush = () => { if (cur != null) out.push(cur); cur = null; tipo = ""; };
+  for (let i = 0; i < tk.length; i++) {
+    const t = tk[i];
+    if (/^\d+(\.\d+)?$/.test(t)) { flush(); out.push(+t); continue; }
+    if (t === "e") continue;
+    if ((t === "meio" || t === "meia") && cur != null) { cur += .5; flush(); continue; }
+    if (t in N_PT) { const v = N_PT[t], tp = v >= 100 ? "c" : v >= 20 ? "d" : "u";
+      if (cur != null && ((tipo === "c" && tp !== "c") || (tipo === "d" && tp === "u" && v < 10))) { cur += v; tipo = tp; } else { flush(); cur = v; tipo = tp; }
+      continue; }
+    flush();
+  }
+  flush(); return out;
+}
+let ditando = null;
+function ditar(aoOuvir, botao){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) return aviso("O ditado não funciona neste navegador.", "Use o microfone do teclado do celular.");
+  if (ditando) { try { ditando.stop(); } catch(e) {} return; }
+  const r = new SR(); r.lang = "pt-BR"; r.interimResults = false; r.maxAlternatives = 1; ditando = r;
+  if (botao) botao.setAttribute("aria-pressed", "true");
+  const fim = () => { ditando = null; if (botao) botao.setAttribute("aria-pressed", "false"); };
+  r.onresult = e => aoOuvir(e.results[0][0].transcript);
+  r.onerror = e => { fim(); aviso(e.error === "not-allowed" || e.error === "service-not-allowed" ? "Microfone bloqueado." : "Não entendi.", e.error === "not-allowed" || e.error === "service-not-allowed" ? "Libere em Ajustes → Treino → Microfone e Reconhecimento de Fala." : "Fale de novo: \"60 por 12\"."); };
+  r.onend = fim;
+  try { r.start(); aviso("Ouvindo…", "Fale a carga e as repetições: \"60 por 12\"."); } catch(e) { fim(); }
+}
+function ditarSerie(i, botao){
+  const d = person.days.find(x => x.id === current), box = document.querySelector(`#ex-${d.id}-${i} .lg`); if (!box) return;
+  ditar(fala => {
+    const n = numerosDe(fala); if (!n.length) return aviso("Não ouvi números.", `Entendi: "${esc(fala)}"`);
+    const pares = n.length === 1 ? [[null, n[0]]] : Array.from({length: Math.floor(n.length / 2)}, (_, k) => [n[2 * k], n[2 * k + 1]]), feitas = [];
+    for (const [kg, reps] of pares) {
+      const linhas = [...box.querySelectorAll('input[data-field="reps"]')], alvo = linhas.find(x => x.value.trim() === ""); if (!alvo) break;
+      const st = alvo.dataset.set, kgIn = box.querySelector(`input[data-field="kg"][data-set="${st}"]`);
+      if (kg != null && kgIn) { kgIn.value = num(kg); onLogInput(kgIn); } else if (kgIn && kgIn.value.trim() === "" && kgIn.dataset.last) { kgIn.value = num(kgIn.dataset.last); onLogInput(kgIn); }
+      alvo.value = String(Math.round(reps)); onLogInput(alvo);
+      const b = box.querySelector(`.set[data-s="${st}"]`); if (b && b.getAttribute("aria-pressed") !== "true") b.click();
+      feitas.push(`Série ${+st + 1}: ${kgIn && kgIn.value ? kgIn.value + " kg × " : ""}${Math.round(reps)}`);
+    }
+    feitas.length ? aviso(feitas.join(" · "), `Entendi: "${esc(fala)}"`) : aviso("Todas as séries já estão preenchidas.");
+  }, botao);
+}
+
+// ── Fotos de evolução: ficam só neste aparelho (IndexedDB) ──
+const fotosDb = () => new Promise((ok, no) => { const r = indexedDB.open("treino-fotos" + NS.replace("/", "-"), 1); r.onupgradeneeded = () => r.result.createObjectStore("fotos", {keyPath: "id", autoIncrement: true}); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); });
+async function fotosTx(modo, fn){ const db = await fotosDb(); return new Promise((ok, no) => { const tx = db.transaction("fotos", modo), rq = fn(tx.objectStore("fotos")); tx.oncomplete = () => ok(rq && rq.result); tx.onerror = () => no(tx.error); }); }
+let FOTOS = [];
+async function carregaFotos(){
+  try { const all = (await fotosTx("readonly", st => st.getAll())) || []; FOTOS.forEach(f => URL.revokeObjectURL(f.url));
+    FOTOS = all.filter(f => f.person === person.id).sort((a, b) => a.date < b.date ? 1 : a.date > b.date ? -1 : b.id - a.id).map(f => ({...f, url: URL.createObjectURL(f.blob)})); } catch(e) { FOTOS = []; }
+  redesenhaPerfil();
+}
+// Reduz a imagem para no máximo 1280 px no lado maior
+const reduz = (fonte, w, h) => new Promise(ok => { const k = Math.min(1, 1280 / Math.max(w, h)), c = document.createElement("canvas"); c.width = Math.round(w * k); c.height = Math.round(h * k); c.getContext("2d").drawImage(fonte, 0, 0, c.width, c.height); c.toBlob(ok, "image/jpeg", .85); });
+async function guardaFoto(blob, date = trainDay()){ await fotosTx("readwrite", st => st.add({person: person.id, date, blob})); }
+function fotosDaGaleria(){
+  let inp = document.getElementById("fotosin");
+  if (!inp) { inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*"; inp.multiple = true; inp.id = "fotosin"; inp.hidden = true; document.body.appendChild(inp);
+    inp.addEventListener("change", async () => { const fs = [...(inp.files || [])]; inp.value = ""; let n = 0;
+      for (const f of fs.slice(0, 12)) { try { const img = await new Promise((ok, no) => { const im = new Image(); im.onload = () => ok(im); im.onerror = no; im.src = URL.createObjectURL(f); });
+        await guardaFoto(await reduz(img, img.width, img.height), fmtDate(new Date(f.lastModified || Date.now()))); URL.revokeObjectURL(img.src); n++; } catch(e) {} }
+      await carregaFotos(); aviso(n ? `${n} ${n === 1 ? "foto guardada" : "fotos guardadas"}.` : "Não consegui abrir as fotos.", n ? "Elas ficam só neste celular." : ""); }); }
+  inp.click();
+}
+function verFoto(id){
+  const f = FOTOS.find(x => x.id === id); if (!f) return;
+  let el = document.getElementById("fotov"); if (!el) { el = document.createElement("div"); el.id = "fotov"; el.className = "camv"; document.body.appendChild(el); }
+  el.innerHTML = `<img src="${f.url}" alt="Foto de evolução de ${brDate(f.date)}"><div class="cam-top"><b>${brDate(f.date)}</b><button type="button" class="ghost" data-x>Fechar</button></div><div class="cam-bar"><button type="button" class="ghost" data-apaga>Apagar</button><button type="button" class="done-btn" data-env>Compartilhar</button></div>`;
+  el.hidden = false;
+  el.onclick = async e => {
+    if (e.target.closest("[data-x]")) el.hidden = true;
+    else if (e.target.closest("[data-env]")) compartilhar({title: "Evolução", text: `Evolução ${person.name} · ${brDate(f.date)}`, files: [new File([f.blob], `evolucao-${f.date}.jpg`, {type: "image/jpeg"})]});
+    else if (e.target.closest("[data-apaga]") && confirm("Apagar esta foto deste celular?")) { await fotosTx("readwrite", st => st.delete(id)); el.hidden = true; carregaFotos(); }
+  };
+}
+
+// ── Câmera: foto de evolução ou vídeo da execução (até 30 s; o vídeo não fica guardado, só é compartilhado) ──
+let cam = null;
+function paraCamera(){ if (cam && cam.stream) cam.stream.getTracks().forEach(t => t.stop()); if (cam) { clearInterval(cam.tic); cam.stream = null; } }
+function fechaCamera(){ paraCamera(); cam = null; const el = document.getElementById("cam"); if (el) { el.hidden = true; el.innerHTML = ""; } }
+async function ligaCamera(){
+  const el = document.getElementById("cam"); paraCamera();
+  try { cam.stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: cam.lado, width: {ideal: 1280}, height: {ideal: 720}}, audio: false}); const v = el.querySelector("video"); v.srcObject = cam.stream; await v.play().catch(() => {}); }
+  catch(e) { fechaCamera(); aviso(e && e.name === "NotAllowedError" ? "Câmera bloqueada." : "Não consegui abrir a câmera.", e && e.name === "NotAllowedError" ? "Libere em Ajustes → Treino (ou Safari) → Câmera." : ""); }
+}
+async function abrirCamera(modo, nome = ""){
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return aviso("Este navegador não abre a câmera pelo site.");
+  let el = document.getElementById("cam");
+  if (!el) { el = document.createElement("div"); el.id = "cam"; el.className = "camv"; document.body.appendChild(el);
+    el.addEventListener("click", async e => {
+      if (!cam) return;
+      if (e.target.closest("[data-x]")) return fechaCamera();
+      if (e.target.closest("[data-vira]")) { cam.lado = cam.lado === "user" ? "environment" : "user"; return ligaCamera(); }
+      if (e.target.closest("[data-refaz]")) return abrirCamera(cam.modo, cam.nome);
+      if (e.target.closest("[data-env]") && cam.arquivo) return compartilhar({title: "Execução", text: `Execução: ${cam.nome} · ${person.name} · ${brDate(logDate)}`, files: [cam.arquivo]});
+      if (!e.target.closest("[data-vai]")) return;
+      const v = el.querySelector("video");
+      if (cam.modo === "foto") { const b = await reduz(v, v.videoWidth, v.videoHeight); await guardaFoto(b); fechaCamera(); await carregaFotos(); return aviso("Foto de evolução guardada.", "Ela fica só neste celular."); }
+      if (cam.rec) return cam.rec.stop();
+      if (typeof MediaRecorder === "undefined") return aviso("Este navegador não grava vídeo pelo site.");
+      const tipo = ["video/mp4", "video/webm"].find(t => MediaRecorder.isTypeSupported(t)) || "", partes = [];
+      cam.rec = new MediaRecorder(cam.stream, tipo ? {mimeType: tipo} : undefined);
+      cam.rec.ondataavailable = ev => { if (ev.data && ev.data.size) partes.push(ev.data); };
+      cam.rec.onstop = () => { const mt = (cam.rec.mimeType || tipo || "video/mp4").split(";")[0], blob = new Blob(partes, {type: mt}); paraCamera();
+        cam.arquivo = new File([blob], `execucao-${cam.nome.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").slice(0, 40) || "treino"}.${mt.includes("mp4") ? "mp4" : "webm"}`, {type: mt}); cam.rec = null;
+        el.innerHTML = `<video playsinline controls src="${URL.createObjectURL(blob)}"></video><div class="cam-top"><b>${esc(cam.nome)}</b><button type="button" class="ghost" data-x>Fechar</button></div><div class="cam-bar"><button type="button" class="ghost" data-refaz>Refazer</button><button type="button" class="done-btn" data-env>Compartilhar ou salvar</button></div>`; };
+      cam.rec.start(); let seg = 0; const b = el.querySelector("[data-vai]"), t = el.querySelector(".cam-t"); b.classList.add("rec"); b.setAttribute("aria-label", "Parar a gravação");
+      cam.tic = setInterval(() => { seg++; t.textContent = `0:${String(seg).padStart(2, "0")} / 0:30`; if (seg >= 30 && cam && cam.rec) cam.rec.stop(); }, 1000);
+    }); }
+  cam = {modo, nome, lado: modo === "foto" ? "user" : "environment"};
+  el.innerHTML = `<video playsinline autoplay muted></video><div class="cam-top"><b>${modo === "foto" ? "Foto de evolução" : esc(nome)}</b><button type="button" class="ghost" data-x>Fechar</button></div><div class="cam-bar"><button type="button" class="ghost" data-vira>Virar câmera</button><button type="button" class="cam-shot" data-vai aria-label="${modo === "foto" ? "Tirar a foto" : "Começar a gravar"}"></button><span class="cam-t">${modo === "foto" ? "" : "até 30 s"}</span></div>`;
+  el.hidden = false; ligaCamera();
+}
+
+// ── Localização: marcar a academia e avisar ao chegar (só com o app aberto; a posição fica no aparelho) ──
+const distM = (a, b) => { const R = 6371000, r = x => x * Math.PI / 180, dl = r(b.lat - a.lat), dn = r(b.lon - a.lon), h = Math.sin(dl / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dn / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); };
+let naAcademia = false, gymVisto = 0, gymMsg = "", gymPerson = "";
+const academiaSalva = () => { const g = store.get(treinoPlus() ? "gym-v2:" + person.id : "gym"); return g && (!treinoPlus() || g.confirmed === true) ? g : null; };
+function marcarAcademia(){
+  if (!navigator.geolocation) return aviso("Este navegador não informa a localização.");
+  if (treinoPlus() && !confirm("Você está na academia agora? Salvar esta posição como a academia de " + person.name + " neste aparelho?")) return;
+  const owner = person.id, key = treinoPlus() ? "gym-v2:" + owner : "gym";
+  gymMsg = "Pegando a sua posição…"; redesenhaPerfil();
+  navigator.geolocation.getCurrentPosition(p => {
+    const g = {lat: p.coords.latitude, lon: p.coords.longitude, acc: Math.round(p.coords.accuracy || 0), at: Date.now(), confirmed: true};
+    if (treinoPlus() && g.acc > 150) { gymMsg = "Localização imprecisa. Tente novamente perto de uma janela."; redesenhaPerfil(); return; }
+    store.set(key, g);
+    if (person.id !== owner) return;
+    gymMsg = ""; naAcademia = true; gymPerson = owner; gymVisto = 0; redesenhaPerfil();
+    aviso("Academia configurada.", "Posição salva só neste aparelho. O peso continua no campo Peso do Hoje.");
+  }, e => { if (person.id !== owner) return; gymMsg = e.code === 1 ? "Localização bloqueada. Libere em Ajustes → Treino (ou Safari) → Localização." : "Não consegui pegar a posição. Tente perto de uma janela."; redesenhaPerfil(); }, {enableHighAccuracy: true, timeout: 15000});
+}
+function checaAcademia(){
+  const g = academiaSalva();
+  if (!g) { naAcademia = false; return; }
+  const owner = person.id;
+  if (gymPerson !== owner) { gymPerson = owner; naAcademia = false; gymVisto = 0; }
+  if (!navigator.geolocation || Date.now() - gymVisto < 5 * 60e3) return;
+  gymVisto = Date.now();
+  navigator.geolocation.getCurrentPosition(p => {
+    if (person.id !== owner || academiaSalva()?.at !== g.at) return;
+    const accuracy = p.coords.accuracy || 0;
+    const perto = (!treinoPlus() || accuracy <= 150) && distM(g, {lat: p.coords.latitude, lon: p.coords.longitude}) <= Math.max(150, accuracy + (g.acc || 0));
+    if (perto !== naAcademia) { naAcademia = perto; refreshToday(); }
+  }, () => { naAcademia = false; }, {maximumAge: 120000, timeout: 10000});
+}
+function gymBanner(){
+  if (treinoPlus()) return "";   // Um único campo de peso no Hoje; não presume chegada.
+  if (!naAcademia || !store.get("gym") || logDate !== trainDay()) return "";
+  const temPeso = !!chkOf(person.id, logDate).peso;
+  return `<article class="panel tinted" style="--c:var(--blue)">${phd(ICON_PIN, "Você chegou na academia")}<p class="alc-m">${temPeso ? "Peso de hoje já anotado ✓. Bom treino!" : "Antes de treinar: suba na balança (depois do banheiro, sem tênis) e anote o peso."}</p>${temPeso ? "" : `<button type="button" class="done-btn" data-irpeso>Anotar o peso agora</button>`}</article>`;
+}
+function permPanel(){
+  if (!SUPA) return "";
+  const g = academiaSalva(), lin = (ico, c, t, sub, botoes) => `<li style="--c:${c}"><span class="ico">${ico}</span><span class="mt-l">${t}<small>${sub}</small></span><span class="pm-b">${botoes}</span></li>`;
+  return `<article class="panel"><h3>Permissões do aparelho</h3><ul class="pf-metas pm">
+    ${lin(ICON_CAM, "var(--coral)", "Câmera", "Foto de evolução e vídeo da execução", `<button type="button" class="chip" data-fotocam>Testar</button>`)}
+    ${lin(ICON_MIC, "var(--lime)", "Microfone", "Ditar carga e repetições no treino", `<button type="button" class="chip" data-mictest>Testar</button>`)}
+    ${lin(ICON_PIN, "var(--blue)", "Localização", g ? `Configurada neste aparelho para ${person.name} (precisão ~${g.acc} m)` : "Não configurada. Só consulta GPS após você salvar a posição na academia; não usa horário.", g ? `<button type="button" class="chip" data-gymdel>Remover</button>` : `<button type="button" class="chip" data-gymset>Estou na academia: configurar</button>`)}
+    ${lin(ICON_ENVIA, "var(--peso)", "Compartilhar", "Mandar treino, foto ou vídeo pelo WhatsApp", `<button type="button" class="chip" data-shareapp>Testar</button>`)}
+  </ul>${gymMsg ? `<p class="ap-msg" role="status">${esc(gymMsg)}</p>` : ""}<p class="hint">O celular só pergunta na hora de usar. Foto, vídeo e posição ficam neste aparelho: nada disso vai para o servidor.</p></article>
+  <article class="panel"><div class="ph"><h3>Fotos de evolução</h3><span class="delta">só neste celular</span></div>
+    <div class="chips two-c"><button type="button" class="chip" data-fotocam>Tirar foto</button><button type="button" class="chip" data-fotogal>Escolher da galeria</button></div>
+    ${FOTOS.length ? `<div class="fg">${FOTOS.slice(0, 12).map(f => `<button type="button" class="fg-i" data-fotover="${f.id}" aria-label="Foto de ${brDate(f.date)}"><img src="${f.url}" alt="" loading="lazy"><span class="num">${dd(f.date)}</span></button>`).join("")}</div>` : `<p class="hint">Tire uma foto no mesmo lugar e na mesma luz a cada reavaliação (a próxima é a partir de 16/11) para comparar.</p>`}</article>`;
+}
+
+// ── App instalável e notificações ──
+const ehIOS = () => /iPhone|iPad|iPod/.test(navigator.userAgent || "") || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const instalado = () => !!navigator.standalone || (typeof matchMedia === "function" && matchMedia("(display-mode: standalone)").matches);
+const temPush = () => !!SUPA && !!SUPA.push && typeof Notification !== "undefined" && "serviceWorker" in navigator && typeof PushManager !== "undefined";
+let swReg = null, pushSub = null, pushMsg = "", instalaEv = null;   // registro do service worker, assinatura deste aparelho, aviso e convite de instalação (Android)
+async function pushApi(body){ const r = await fetch(SUPA.push, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)}); return r.json(); }
+const b64Bytes = t => Uint8Array.from(atob(t.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((t.length + 3) % 4)), c => c.charCodeAt(0));
+function redesenhaPerfil(){ if (screen === "perfil") { const y = scrollY; view.innerHTML = shownStats = renderPerfil(); scrollTo(0, y); } }
+async function iniciaApp(){
+  if (!SUPA || !("serviceWorker" in navigator)) return;
+  try { swReg = await navigator.serviceWorker.register("sw.js"); if (temPush()) pushSub = await swReg.pushManager.getSubscription(); } catch(e) {}
+  if (pushSub) pushSegue();
+  redesenhaPerfil(); if (screen === "perfil") carregaFotos();
+}
+// Ativar: o pedido de permissão tem que ser a primeira coisa do toque (regra do iPhone)
+async function ativarPush(){
+  if (!temPush()) return;
+  let perm; try { perm = await Notification.requestPermission(); } catch(e) { perm = "denied"; }
+  if (perm !== "granted") { pushMsg = perm === "denied" ? "Você bloqueou as notificações. Para liberar: Ajustes do celular → Notificações → Treino." : "Sem permissão, não dá para avisar."; return redesenhaPerfil(); }
+  pushMsg = "Ativando…"; redesenhaPerfil();
+  try {
+    if (!swReg) swReg = await navigator.serviceWorker.register("sw.js");
+    await navigator.serviceWorker.ready;
+    const {key} = await pushApi({action: "key"});
+    pushSub = await swReg.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: b64Bytes(key)});
+    const r = await pushApi({action: "subscribe", person: person.id, env: SUPA.env, sub: pushSub.toJSON(), ua: navigator.userAgent});
+    if (!r.ok) throw new Error(r.erro || "falhou");
+    pushMsg = ""; redesenhaPerfil(); testarPush();
+  } catch(e) { pushMsg = "Não consegui ativar agora: " + (e.message || e); redesenhaPerfil(); }
+}
+async function testarPush(){
+  if (!pushSub) return;
+  pushMsg = "Enviando o teste…"; redesenhaPerfil();
+  try { const r = await pushApi({action: "test", endpoint: pushSub.endpoint}); pushMsg = r.status >= 200 && r.status < 300 ? "Teste enviado: deve chegar em alguns segundos." : "O envio falhou (código " + (r.status || r.erro) + "). Desative e ative de novo."; }
+  catch(e) { pushMsg = "Sem internet para enviar o teste."; }
+  redesenhaPerfil();
+}
+async function desativarPush(){
+  if (!pushSub) return;
+  try { await pushApi({action: "unsubscribe", endpoint: pushSub.endpoint}); await pushSub.unsubscribe(); } catch(e) {}
+  pushSub = null; pushMsg = "Notificações desligadas neste aparelho."; redesenhaPerfil();
+}
+// Trocou de perfil neste aparelho: as notificações passam a seguir a pessoa escolhida
+function pushSegue(){ if (pushSub) pushApi({action: "subscribe", person: person.id, env: SUPA.env, sub: pushSub.toJSON(), ua: navigator.userAgent}).catch(() => {}); }
+function appPanel(){
+  if (!SUPA) return "";
+  const ios = ehIOS(), inst = instalado();
+  const passo = (n, t) => `<li><span class="ap-n">${n}</span><span>${t}</span></li>`;
+  const instalar = inst ? `<p class="ap-ok">App instalado neste celular ✓</p>`
+    : ios ? `<p class="hint">No iPhone, as notificações só funcionam com o app na tela de início. Leva 20 segundos:</p><ol class="ap-passos">${passo(1, "Abra este site no <b>Safari</b> (no Chrome do iPhone não funciona).")}${passo(2, `Toque em <b>Compartilhar</b> ${ICON_SHARE} na barra de baixo.`)}${passo(3, "Role e toque em <b>Adicionar à Tela de Início</b>, depois em <b>Adicionar</b>.")}${passo(4, "Abra o app pelo ícone novo e volte aqui para ativar as notificações.")}</ol>`
+    : instalaEv ? `<button type="button" class="done-btn" data-instalar>Instalar o app</button><p class="hint">Fica com ícone na tela inicial e abre em tela cheia.</p>`
+    : `<p class="hint">Para instalar: no menu do navegador (⋮), toque em <b>Instalar app</b> ou <b>Adicionar à tela inicial</b>.</p>`;
+  const perm = typeof Notification !== "undefined" ? Notification.permission : "";
+  const notif = !temPush() ? (ios && !inst ? "" : `<p class="hint">Este navegador não tem notificações de site.</p>`)
+    : pushSub ? `<p class="ap-ok">Notificações ligadas neste aparelho ✓</p><div class="chips two-c"><button type="button" class="chip" data-pushtest>Enviar teste</button><button type="button" class="chip" data-pushoff>Desativar</button></div>`
+    : perm === "denied" ? `<p class="alert">As notificações estão bloqueadas. Para liberar: Ajustes do celular → Notificações → Treino.</p>`
+    : `<button type="button" class="done-btn" data-pushon>Ativar notificações</button>`;
+  return `<article class="panel tinted app-p" style="--c:var(--lime)">${phd(ICON_SINO, "App e notificações")}
+    ${instalar}${notif}${pushMsg ? `<p class="ap-msg" role="status">${esc(pushMsg)}</p>` : ""}
+    ${temPush() || (ios && !inst) ? `<ul class="ap-lista"><li><b>17h</b> o treino do dia e quantos dias de ofensiva estão em jogo</li><li><b>22h</b> se ainda não treinou: a ofensiva morre à meia-noite</li><li><b>8h</b> ganhou mais um dia ou perdeu a ofensiva</li></ul><p class="hint">Só em dia útil e só quando faz sentido (quem já treinou não recebe cobrança).</p>` : ""}</article>`;
+}
+// Tela ligada durante o treino (o celular não apaga com o timer de descanso rodando)
+let telaLigada = null;
+async function cuidaDaTela(){
+  const quer = screen === "treino" && treinoView === "dia" && !document.hidden;
+  try { if (quer && !telaLigada && navigator.wakeLock) { telaLigada = await navigator.wakeLock.request("screen"); telaLigada.addEventListener("release", () => { telaLigada = null; }); }
+        else if (!quer && telaLigada) { await telaLigada.release(); telaLigada = null; } } catch(e) { telaLigada = null; }
+}
 function renderPerfil(){
   const p = person.id, g = GOALS[p] || GOALS.a3, hoje = trainDay(), cor = `var(${person.cor || "--lime"})`;
   const pesos = lastDays(30).map(d => ({d, v: pesoAt(p, d)})).filter(x => x.v);
@@ -2011,10 +3012,10 @@ function renderPerfil(){
   return `<section class="list perfil" style="--pc:${cor}">
     <div class="pf-top"><button type="button" class="ghost back" data-screen="hoje" aria-label="Voltar para o Hoje">‹</button><p class="eyebrow">Meu perfil</p></div>
     <article class="panel pf-hero">
-      <div class="pf-id"><span class="avatar big" style="--av:${cor}" aria-hidden="true">${person.name.slice(0, 1)}</span><div><h2>${person.name}</h2><p class="pf-goal">${person.goal || "Ficha em construção: falta a avaliação"}</p></div></div>
+      <div class="pf-id"><button type="button" class="avatar big foto-btn${fotoDe(p) ? " tem-foto" : ""}" data-foto style="--av:${cor}${fotoCss(p)}" aria-label="Escolher foto de perfil na galeria">${person.name.slice(0, 1)}<i aria-hidden="true">${ICON_CAM}</i></button><div><h2>${person.name}</h2><p class="pf-goal">${person.goal || "Ficha em construção: falta a avaliação"}</p><p class="pf-foto"><button type="button" class="linkbtn" data-foto>${fotoDe(p) ? "Trocar foto" : "Escolher foto da galeria"}</button>${fotoDe(p) ? ` · <button type="button" class="linkbtn" data-fototira>remover</button>` : ""}</p></div></div>
       ${person.days ? `<div class="pf-bloco"><div class="pf-bl-h"><b>Bloco 1 · ${person.bloco}</b><span>${bl.acabou ? "terminou" : `semana ${bl.sem} de ${BLOCO.weeks}`}</span></div><div class="pf-segs" aria-hidden="true">${segs}</div><small>${bl.acabou ? "Hora da reavaliação: medidas, peso e cargas" : `Reavaliação a partir de ${dm(bl.reav)} · treino de seg a sex`}</small></div>` : ""}
     </article>
-    <article class="panel"><h3>Trocar de perfil</h3><div class="pf-swap">${PEOPLE.map(x => `<button type="button" class="pf-p" data-person="${x.id}" aria-pressed="${x.id === p}" aria-label="${x.id === p ? "Você está no perfil " + x.art + " " + x.name : "Trocar para " + x.name}"><span class="avatar sm" style="--av:var(${x.cor || "--lime"})" aria-hidden="true">${x.name.slice(0, 1)}</span><span>${x.name}</span></button>`).join("")}</div></article>
+    <article class="panel"><h3>Trocar de perfil</h3><div class="pf-swap">${PEOPLE.map(x => `<button type="button" class="pf-p" data-person="${x.id}" aria-pressed="${x.id === p}" aria-label="${x.id === p ? "Você está no perfil " + x.art + " " + x.name : "Trocar para " + x.name}"><span class="avatar sm${fotoDe(x.id) ? " tem-foto" : ""}" style="--av:var(${x.cor || "--lime"})${fotoCss(x.id)}" aria-hidden="true">${x.name.slice(0, 1)}</span><span>${x.name}</span></button>`).join("")}</div></article>
     ${person.days ? `<div class="stats">${stat({ico: ICON_HALTER, c: "var(--lime)", l: "Esta semana", v: semana, u: `de ${dias}`, vis: `<div class="sx-week" aria-hidden="true">${weekOf(hoje).slice(0, 5).map(d => `<i class="${trained(p, d) ? "on" : d === hoje ? "hoje" : ""}"></i>`).join("")}</div>`, foot: semana >= dias ? "semana completa" : `${dias - semana === 1 ? "falta 1 treino" : `faltam ${dias - semana} treinos`}`})}${stat({ico: flameSvg(atual), c: flameOf(atual).a, l: "Ofensiva", v: atual, u: atual === 1 ? "dia" : "dias", foot: `recorde: ${recorde} ${recorde === 1 ? "dia" : "dias"}`})}${stat({ico: ICON.balanca, c: "var(--peso)", l: "Peso", v: pesoV.replace(" kg", ""), u: pesoV === "—" ? "" : "kg", foot: pesoS})}${stat({ico: ICON_CAL, c: "var(--blue)", l: "Total", v: total, u: total === 1 ? "treino" : "treinos", foot: "desde " + dm(BLOCO.start)})}</div>` : ""}
     <article class="panel"><h3>Minhas metas</h3><ul class="pf-metas">
       ${meta(ICON.agua, "var(--blue)", "Água", ml(treinoHoje ? g.aguaTreino : g.aguaDescanso) + " ml", treinoHoje ? `em dia de treino, como hoje<br>descanso: ${ml(g.aguaDescanso)} ml` : `em dia de descanso, como hoje<br>treino: ${ml(g.aguaTreino)} ml`)}
@@ -2023,6 +3024,8 @@ function renderPerfil(){
       ${meta(ICON.prato, "var(--coral)", "Proteína", PROT[p] || "a definir", mt.faixa ? `${num(mt.gkg)} g por kg × ${num(mt.peso)} kg ≈ ${mt.total} g, dividida nas refeições` : "depois da avaliação")}
       ${mp ? meta(ICON.balanca, "var(--peso)", "Peso", mp[0], mp[1]) : ""}
     </ul>${mt.revisao ? `<p class="alert">Seu peso saiu da faixa prevista: as metas precisam de revisão do personal.</p>` : ""}<p class="hint">Calculadas pelo seu peso e objetivo (regra do agente de nutrição), recalculadas toda segunda. Pese-se na balança da academia ao chegar (~21h), antes do treino, depois do banheiro e sem tênis, sempre na mesma balança, seg/qua/sex. O site desconta 1,5 kg (roupa + comida do dia) para ficar no padrão de jejum: vale a tendência da semana, não o número do dia.</p></article>
+    ${appPanel()}
+    ${permPanel()}
     <article class="panel"><h3>Animações</h3><div class="chips three" role="group" aria-label="Animações">${[["on", "Completas"], ["off", "Suaves"], ["auto", "Do celular"]].map(([k, t]) => `<button type="button" class="chip" data-anim="${k}" aria-pressed="${motion === k}">${t}</button>`).join("")}</div><p class="hint">${motion === "on" ? "Cartões entrando, números subindo, barras crescendo e efeitos ao tocar." : motion === "off" ? "Só aparece e some suave, sem movimento na tela." : "Segue o ajuste do celular: se ele estiver com animações reduzidas, fica suave."}</p></article>
     <h3 class="pf-sec">Guias</h3>
     <div class="menu">${EXTRA.map(t => `<button type="button" data-screen="${t.id}" style="--c:${GUIA_COR[t.id] || "var(--muted)"}"><span class="mi"><span class="st-ico">${GUIA_ICO[t.id] || ""}</span><span>${t.name}<small>${GUIA_DESC[t.id] || ""}</small></span></span><span aria-hidden="true">›</span></button>`).join("")}</div>
@@ -2034,11 +3037,15 @@ function renderMais(){
 }
 let shownStats = "";
 function refreshStats(){
+  if (screen === "suplementos") { refreshSuplementos(); return; }
   if (screen !== "perfil" && screen !== "progresso") return;
   const h = screen === "perfil" ? renderPerfil() : renderProgress();
   const sem = x => x.replace(/fld+/g, "");   // ids dos gradientes da chama mudam a cada render
   if (sem(h) === sem(shownStats)) return;
-  const y = scrollY; view.innerHTML = shownStats = h; window.scrollTo(0, y);
+  const y = scrollY, volumeOpen = view.querySelector(".volume-muscular")?.open;
+  view.innerHTML = shownStats = h;
+  const volume = view.querySelector(".volume-muscular"); if (volume && volumeOpen) volume.open = true;
+  window.scrollTo(0, y);
 }
 // Animação de entrada: cartões sobem em cascata, números contam do zero, barras crescem e linhas se desenham
 let animNext = true, animOff = 0;
@@ -2067,14 +3074,138 @@ function enterAnim(){
 }
 setInterval(() => { if (screen === "hoje" && !document.hidden) refreshToday(); }, 5 * 60e3);
 document.addEventListener("visibilitychange", () => { if (!document.hidden && screen === "hoje") refreshToday(); });
-function draw(){ drawCore(); if (animNext) { animNext = false; enterAnim(); } }
+if (typeof window.addEventListener === "function") {
+  window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); instalaEv = e; redesenhaPerfil(); });
+  window.addEventListener("appinstalled", () => { instalaEv = null; redesenhaPerfil(); });
+}
+document.addEventListener("visibilitychange", cuidaDaTela);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) checaAcademia(); });
+iniciaApp(); if (SUPA) setTimeout(checaAcademia, 1500);
+// INICIO TREINO UI
+// Integração das regras com a ficha; inserida no HTML pelo build.
+// Recursos aprovados pelo Rafael em 2026-10-14 valem nos dois ambientes; tabela e notificação continuam separadas por SUPA.
+const treinoPlus = () => true;
+const planoEx = e => ({name:e[0],sets:e[1],reps:e[2],rir:e[3],leg:(MUS[e[0]]?.p||[]).some(m=>['quadriceps','hamstrings','glutes','calves','abductors'].includes(m))});
+const historicoEx = (name,before=logDate,day=current,p=person.id) => TreinoCore.history(LOGS,p,name,before,day);
+const estadoDia = (p,d) => trained(p,d)?'trained':justificado(p,d)?'excused':'';
+const justificado = (p,d) => treinoPlus() && d<=trainDay() && isWeekday(d) && LOGS[docId(p,d)]?.excused===true && !trained(p,d);
+function metaTreino(e,before=logDate,day=current,sessionDate=before){
+  const t=TreinoCore.target(historicoEx(e[0],before,day),planoEx(e));
+  const week=Math.round((parseDate(weekOf(sessionDate)[0])-parseDate(weekOf(BLOCO.start)[0]))/6048e5)+1;
+  if(week===1)return {...t,kind:'baseline',reason:'Semana de referência: mantenha sobrar 3 no topo da faixa. Sem aumento automático.',kg:null};
+  if(week>BLOCO.weeks)return {...t,kind:'review',reason:'Bloco encerrado: siga o deload/reavaliação combinado; sem aumento automático.',kg:null};
+  return t;
+}
+const unidadeCarga = name => /halter|búlgaro|martelo/i.test(name)?'kg/halter':/graviton/i.test(name)?'kg de assistência':'kg';
+const alvoTexto = (t,e) => (t.kg==null?'':num(t.kg)+' '+unidadeCarga(e[0])+' · ')+t.reps;
+function renderMetaTreino(e){
+ const t=metaTreino(e);
+ if(!['up','hold','changed'].includes(t.kind))return '';
+ if(t.kind==='changed')return '<div class="mt-copy"><small>Ficha atualizada</small><p class="hint">Registre as cargas deste treino.</p></div>';
+ if(!Number.isFinite(t.kg))return '';
+ const title=t.kind==='up'?'Sugestão de aumento':'Mantenha a carga';
+ const value='<p class="mt-value"><b>'+esc(num(t.kg))+' <span class="mt-unit">'+esc(unidadeCarga(e[0]))+'</span></b><span class="mt-reps">× '+esc(t.reps)+' reps</span></p>';
+ const notice=t.kind==='up'?'<p class="hint">'+esc(t.reason)+'</p>':'';
+ return '<span class="mt-ico" aria-hidden="true">'+ICON_ALVO+'</span><div class="mt-copy"><small>'+title+'</small>'+value+notice+(t.stalled?'<p class="hint">Sem avanço em três treinos. Converse com o personal antes de mudar a ficha.</p>':'')+'</div>';
+}
+function avisoBlocoTreino(){
+ if(!treinoPlus())return '';
+ const e=person.days?.find(d=>d.id===current)?.ex.find(e=>e[3]!=='—');if(!e)return '';
+ const t=metaTreino(e);
+ return t.kind==='baseline'?'<p class="hint bloco-notice">Semana de referência: termine cada série sentindo que faria mais 3 repetições.</p>':t.kind==='review'?'<p class="hint bloco-notice">Bloco encerrado. Siga a semana leve ou a nova ficha combinada com o personal.</p>':'';
+}
+const seriesTexto = ss => (ss||[]).filter(s=>s.done===true).map(s=>TreinoCore.valid(s)?num(s.kg)+' × '+s.reps:'✓ sem kg/reps completos').join(' · ')||'Nenhuma série confirmada';
+function linhasResumo(){
+ const doc=LOGS[docId(person.id,logDate)],day=doc?.day||current,d=person.days?.find(x=>x.id===day);if(!doc||!d)return [];
+ return d.ex.filter(e=>doc.ex?.[e[0]]?.sets?.some(s=>s.done||filled(s))).map(e=>{
+   const now=doc.ex[e[0]].sets,prev=historicoEx(e[0],logDate,day).at(-1),last=prev?.ex[e[0]]?.sets||[];
+   return {e,now,last,prev,comparison:TreinoCore.compare(now,last,planoEx(e)),target:metaTreino(e,addDays(logDate,1),day,addDays(logDate,7))};
+ });
+}
+function seriesCompactas(ss,e){
+ const rows=(ss||[]).filter(s=>s.done===true),groups=[];
+ for(const s of rows){
+  const text=TreinoCore.valid(s)?num(s.kg)+' '+unidadeCarga(e[0])+' × '+s.reps:'sem kg/reps completos',prev=groups.at(-1);
+  if(prev?.text===text)prev.n++;else groups.push({text,n:1});
+ }
+ return groups.map(g=>g.n+' '+(g.n===1?'série':'séries')+' de '+g.text).join(' · ')||'Nenhuma série confirmada';
+}
+function proximaResumo(r){
+ const t=r.target;
+ if(['first','manual'].includes(t.kind))return 'Siga a ficha';
+ if(t.kind==='baseline')return 'Semana de referência: termine com 3 repetições de reserva';
+ if(t.kind==='review')return 'Semana leve ou nova ficha com o personal';
+ if(t.kind==='changed')return 'Ficha atualizada: registre uma nova referência';
+ if(t.kind==='incomplete')return 'Complete o registro antes de ajustar a carga';
+ if(t.kind==='mixed')return 'Mantenha as cargas de cada série';
+ return alvoTexto(t,r.e)+' reps';
+}
+function resumoTexto(){
+ const rows=linhasResumo();if(!rows.length)return '';
+ return 'Resumo · '+person.name+' · '+brDate(logDate)+'\n\n'+rows.map(r=>r.e[0]+'\n'+seriesCompactas(r.now,r.e)+'\n'+(['first','empty'].includes(r.comparison.kind)?'':r.comparison.label+'\n')+'Próxima: '+proximaResumo(r)+(r.target.kind==='up'?'\n'+r.target.reason:'')).join('\n\n');
+}
+function renderResumo(){
+ const rows=linhasResumo();
+ return '<h2>Resumo · '+brDate(logDate)+'</h2>'+(rows.length?rows.map(r=>{
+  const change=['first','empty'].includes(r.comparison.kind)?'':'<p class="resumo-change">'+({up:'▲ ',down:'▼ ',same:'= '}[r.comparison.kind]||'')+esc(r.comparison.label)+'</p>';
+  return '<article class="resumo-row"><h3>'+esc(r.e[0])+'</h3><p class="resumo-sets">'+esc(seriesCompactas(r.now,r.e))+'</p>'+change+'<p class="resumo-next">Próxima: <b>'+esc(proximaResumo(r))+'</b></p>'+(r.target.kind==='up'?'<p class="hint">'+esc(r.target.reason)+'</p>':'')+'<details><summary>Ver séries e comparação</summary><dl><dt>Anterior'+(r.prev?' · '+brDate(r.prev.date):'')+'</dt><dd>'+esc(seriesTexto(r.last))+'</dd><dt>Nesta sessão</dt><dd>'+esc(seriesTexto(r.now))+'</dd></dl><p class="hint">Só séries marcadas com ✓ entram no resumo.</p></details></article>';
+ }).join('')+'<button type="button" class="done-btn" data-share-resumo>Compartilhar resumo</button>':'<p>Nenhuma série anotada nesta data.</p>');
+}
+function openTreinoDialog(kind){
+ let el=document.getElementById('treino-dialog');if(!el){el=document.createElement('dialog');el.id='treino-dialog';el.className='treino-dialog';document.body.appendChild(el);
+ el.addEventListener('click',ev=>{if(ev.target===el||ev.target.closest('[data-treino-close]'))el.close();if(ev.target.closest('[data-share-resumo]'))compartilhar({title:'Resumo do treino',text:resumoTexto()});
+ const b=ev.target.closest('[data-excuse]');if(b){salvaJustificativa(b.dataset.excuse);el.close();}});}
+ el.innerHTML='<button type="button" class="ghost" data-treino-close>Fechar</button>'+(kind==='resumo'?renderResumo():renderJustificativa());el.setAttribute('aria-label',kind==='resumo'?'Resumo do treino':'Dia justificado');el.showModal();
+}
+function renderJustificativa(){
+ return '<h2>Justificar '+brDate(logDate)+'</h2><p>Preserva a ofensiva, mas não soma treino nem séries. Pode desfazer depois.</p><p class="hint">O motivo fica só neste aparelho. No site público aparece apenas “Dia justificado”.</p><div class="opts">'+[['doente','Doente'],['viagem','Viagem'],['lesao','Lesão']].map(([v,t])=>'<button type="button" class="opt" data-excuse="'+v+'">'+t+'</button>').join('')+(justificado(person.id,logDate)?'<button type="button" class="opt" data-excuse="">Remover justificativa</button>':'')+'</div>';
+}
+function salvaJustificativa(reason){
+ if(futuro())return avisaFuturo();if(!isWeekday(logDate)||!person.days)return;
+ if(reason&&trained(person.id,logDate))return aviso('Já há treino registrado nesta data.','Não apague séries para justificar um dia treinado.');
+ const id=docId(person.id,logDate),doc=LOGS[id]?JSON.parse(JSON.stringify(LOGS[id])):{person:person.id,date:logDate,day:dayOf(person.id,logDate),ex:{}};
+ doc.excused=!!reason;doc.updated=new Date().toISOString();LOGS[id]=doc;pending[id]=true;store.set('motivo:'+id,reason||null);store.set('cargas:'+id,doc);keepDate(logDate);
+ clearTimeout(timers[id]);saveLog(id);const y=scrollY;draw();scrollTo(0,y);toast(reason?'Dia justificado. Ofensiva preservada, sem contar treino.':'Justificativa removida.');
+}
+function painelJustificativa(){
+ if(!treinoPlus()||!person.days||!isWeekday(logDate)||trained(person.id,logDate)||futuro())return '';
+ if(!justificado(person.id,logDate))return '<button type="button" class="link-action justify-action" data-justify>Justificar ausência</button>';
+ return '<div class="excuse-active"><span>Dia justificado · não conta como treino</span><button type="button" class="link-action" data-justify>Ver ou desfazer</button><small id="logstate" role="status">'+esc(modeText())+'</small></div>';
+}
+function renderVolumeMuscular(){
+ if(!treinoPlus()||!person.days)return '';
+ const week=weekOf(logDate),end=logDate<trainDay()?logDate:trainDay(),docs=Object.values(LOGS).filter(d=>d.person===person.id&&d.date>=week[0]&&d.date<=week[6]&&d.date<=end);
+ const data=TreinoCore.volume(person.days,docs,MUS),period=week[0]>trainDay()?'Semana futura: só previsão da ficha.':'Realizadas até '+brDate(end)+'.';
+ return '<details class="panel volume-muscular"><summary>Séries por músculo</summary><p class="hint">Semana de '+brDate(week[0])+' · '+period+'</p><table><caption>Realizadas × previstas na ficha semanal</caption><thead><tr><th scope="col">Grupo</th><th scope="col">Feitas</th><th scope="col">Ficha</th></tr></thead><tbody>'+Object.entries(data).sort((a,b)=>b[1].planned-a[1].planned).map(([m,v])=>'<tr><th scope="row">'+esc(MUSCLE_PT[m]||m)+'</th><td>'+num(v.done)+'</td><td>'+num(v.planned)+'</td></tr>').join('')+'</tbody></table><p class="hint">Principal = 1; secundário = 0,5. Só séries marcadas com ✓; caminhada não conta. Estimativa pelo mapa muscular, não uma meta universal.</p></details>';
+}
+function recordeSerie(name,index,previousDoc){
+ if(!treinoPlus()||logDate!==trainDay())return;
+ const doc=LOGS[docId(person.id,logDate)],s=doc?.ex?.[name]?.sets?.[index],e=person.days?.find(d=>d.id===current)?.ex.find(e=>e[0]===name);if(!e)return;
+ const prev=TreinoCore.history(LOGS,person.id,name,logDate,current).flatMap(d=>d.ex[name].sets).concat((previousDoc?.ex?.[name]?.sets||[]).filter((_,i)=>i!==index));
+ const records=TreinoCore.records(prev,s,planoEx(e));if(!records.length)return;
+ const k='pr:'+docId(person.id,logDate)+':'+name+':'+index,fingerprint=JSON.stringify([s.kg,s.reps]);if(store.get(k)===fingerprint)return;store.set(k,fingerprint);
+ toast('<b>'+esc(records.map(r=>r.label).join(' + '))+'</b><span>'+esc(name)+' · '+esc(seriesTexto([s]))+'</span>');
+ const card=[...document.querySelectorAll('.ex')].find(el=>el.querySelector('.lg')?.dataset.name===name);if(card)celebrate('recorde',card);
+}
+
+function renderOutrosRegistros(creatTile,alcDias,alcSem,alcCima){
+ if(!creatTile&&!alcDias.length)return '';
+ const alcool=alcDias.length?'<div class="mini two">'+tile(alcSem+(alcSem===1?' dose':' doses'),'álcool (7 dias)')+tile(alcDias.filter(v=>v>0).length,'dias com bebida')+'</div>':'';
+ const alerta=alcSem>=ALC.aviso||alcCima?'<p class="alert">'+(alcSem>=ALC.aviso?alcSem+' doses na semana: a partir de '+ALC.aviso+' já pesa no sono e na recuperação.':'Teve dia acima do seu limite: a recuperação daquela noite caiu.')+'</p>':'';
+ return '<article class="panel tinted" style="--c:var(--coral)">'+phd(ICON.prato,'Outros registros')+(creatTile?'<div class="mini">'+creatTile+'</div>':'')+alcool+alerta+'</article>';
+}
+
+// FIM TREINO UI
+function draw(){ drawCore(); FogoUI.mount(document, calmo()); cuidaDaTela(); if (animNext) { animNext = false; enterAnim(); } }
 function drawCore(){
+  document.body.classList.toggle("treino-plus", treinoPlus());
   drawWho(); drawHead(); drawTabs(); drawDock();
   if (screen === "hoje") { view.innerHTML = renderToday(); refreshToday(); return; }
   if (screen === "mais") { screen = "perfil"; }
   if (screen === "progresso") { view.innerHTML = shownStats = renderProgress(); return; }
   if (screen === "perfil") { view.innerHTML = shownStats = renderPerfil(); return; }
   if (screen === "cardapio") { view.innerHTML = `<button type="button" class="ghost back" data-screen="perfil">‹ Perfil</button>` + renderCardapio(); return; }
+  if (screen === "suplementos") { view.innerHTML = renderSuplementos(); return; }
   if (EXTRA.find(t => t.id === screen)) { view.innerHTML = `<button type="button" class="ghost back" data-screen="perfil">‹ Perfil</button>` + (person.panels || PANELS)[screen]; return; }
   if (!person.days){ view.innerHTML = PENDING(person); return; }
   if (treinoView === "semana") { view.innerHTML = renderSemana(); return; }
@@ -2086,11 +3217,28 @@ function drawCore(){
 function showTip(t){ const c = t.closest(".chart"), tip = c.querySelector(".tip"), r = t.getBoundingClientRect(), cr = c.getBoundingClientRect(); tip.textContent = t.dataset.tip; tip.hidden = false; tip.style.left = Math.min(Math.max(0, r.left - cr.left + r.width / 2 - tip.offsetWidth / 2), cr.width - tip.offsetWidth) + "px"; }
 view.addEventListener("pointerover", e => { const t = e.target.closest("[data-tip]"); if (t) showTip(t); });
 view.addEventListener("pointerout", e => { const t = e.target.closest("[data-tip]"); if (t && e.pointerType === "mouse") t.closest(".chart").querySelector(".tip").hidden = true; });
-const goScreen = s => { animNext = true; if (s === "treino") { treinoView = "dia"; current = dayOf(person.id, logDate) || current; } screen = s; store.set("screen", s); draw(); window.scrollTo({top:0}); };
+const goScreen = s => { animNext = true; if (s === "perfil") carregaFotos(); if (s === "hoje") checaAcademia(); if (s === "treino") { treinoView = "dia"; current = dayOf(person.id, logDate) || current; } screen = s; store.set("screen", s); draw(); window.scrollTo({top:0}); };
 dock.addEventListener("click", e => { const b = e.target.closest("[data-screen]"); if (b) goScreen(b.dataset.screen); });
 document.getElementById("perfilbtn").addEventListener("click", () => goScreen("perfil"));
-view.addEventListener("input", e => { if (e.target.closest(".lg")) onLogInput(e.target); });
-view.addEventListener("change", e => { if (e.target.id === "peso") { const v = Number(e.target.value.trim().replace(",", ".")); setChk({peso: v > 20 && v < 300 ? Math.round(v * 10) / 10 : null}); return; } if (e.target.id === "logdate" && e.target.value) { logDate = e.target.value; keepDate(logDate); current = dayOf(person.id, logDate) || current; draw(); } });
+// Arrastar a faixa da semana: para a direita = semana anterior, para a esquerda = próxima
+let swipe = null;
+view.addEventListener("touchstart", e => { const w = e.target.closest("#weekstrip"); swipe = w ? {x: e.touches[0].clientX, y: e.touches[0].clientY} : null; }, {passive: true});
+view.addEventListener("touchend", e => { if (!swipe) return; const dx = e.changedTouches[0].clientX - swipe.x, dy = e.changedTouches[0].clientY - swipe.y; swipe = null;
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.5) { e.preventDefault(); goDate(addDays(logDate, dx > 0 ? -7 : 7), dx > 0 ? "l" : "r"); } });
+// Dia futuro: dá para ver o treino previsto, mas não registrar
+view.addEventListener("click", e => { if (futuro() && e.target.closest(".set, [data-ck], [data-sq], [data-ref], [data-sheet], [data-setctl], [data-setday], [data-alc], [data-ditar]")) { e.stopImmediatePropagation(); e.preventDefault(); avisaFuturo(); } }, true);
+view.addEventListener("input", e => {
+  if (e.target.closest(".lg")) onLogInput(e.target);
+  const form = e.target.closest("[data-sup-form]"); if (form) form.querySelectorAll("input").forEach(el => el.setCustomValidity(""));
+});
+view.addEventListener("submit", e => { const form = e.target.closest("[data-sup-form]"); if (form) { e.preventDefault(); salvaProduto(form); } });
+view.addEventListener("change", e => {
+  const sd = e.target.dataset.supDia;
+  if (sd) {
+    if (!e.target.reportValidity()) return;
+    registraSuplemento(sd, e.target.value === "" ? null : Math.round(e.target.valueAsNumber * 10) / 10);
+    return; }
+  if (e.target.id === "peso") { const v = Number(e.target.value.trim().replace(",", ".")); setChk({peso: v > 20 && v < 300 ? Math.round(v * 10) / 10 : null}); return; } if (e.target.id === "logdate" && e.target.value) { logDate = e.target.value; keepDate(logDate); current = dayOf(person.id, logDate) || current; draw(); } });
 who.addEventListener("click", e=>{
   const btn = e.target.closest("[data-person]"); if(!btn) return;
   person = PEOPLE.find(p=>p.id===btn.dataset.person); store.set("person", person.id);
@@ -2122,8 +3270,37 @@ view.addEventListener("click", e=>{
   if (sd){ setDayOf(sd.dataset.setday); return; }
   const sv = e.target.closest("[data-setday-ver]");
   if (sv){ current = sv.dataset.setdayVer; draw(); window.scrollTo({top: 0}); return; }
+  const wkb = e.target.closest("[data-week]");
+  if (wkb){ goDate(addDays(logDate, 7 * +wkb.dataset.week), +wkb.dataset.week < 0 ? "l" : "r"); return; }
+  if (e.target.closest("[data-cal]")){ openCal(); return; }
+  const zero = e.target.closest("[data-sup-zero]"); if (zero) { registraSuplemento(zero.dataset.supZero, 0); return; }
+  const limpa = e.target.closest("[data-sup-limpa]"); if (limpa) { registraSuplemento(limpa.dataset.supLimpa, null); return; }
+  const sst = e.target.closest("[data-sup-status]");
+  if (sst){ const k = sst.dataset.supStatus, v = sst.dataset.value; atualizaSuplemento(k, suplementoPerfil(person.id)[k] === v ? null : v); return; }
+  const sft = e.target.closest("[data-sup-foto]"); if (sft){ fotoRotulo(sft.dataset.supFoto); return; }
+  const sap = e.target.closest("[data-sup-apaga]"); if (sap){ atualizaSuplemento(sap.dataset.supApaga, null); return; }
+  if (e.target.closest("[data-fototira]")){ store.set("foto:" + person.id, ""); const y = scrollY; draw(); scrollTo(0, y); return; }
+  if (e.target.closest("[data-foto]")){ escolherFoto(); return; }
+  if (e.target.closest("[data-resumo]")) { openTreinoDialog("resumo"); return; }
+  if (e.target.closest("[data-justify]")) { openTreinoDialog("justifica"); return; }
+  const sh = e.target.closest("[data-share]");
+  if (sh){ const t = treinoText(); t ? compartilhar({title: "Treino", text: t}) : aviso("Nada anotado ainda.", "Anote alguma série antes de compartilhar."); return; }
+  const dt = e.target.closest("[data-ditar]"); if (dt){ ditarSerie(+dt.dataset.ditar, dt); return; }
+  const fm = e.target.closest("[data-filmar]"); if (fm){ const d0 = person.days.find(x => x.id === current); abrirCamera("video", d0.ex[+fm.dataset.filmar][0]); return; }
+  if (e.target.closest("[data-fotocam]")){ abrirCamera("foto"); return; }
+  if (e.target.closest("[data-fotogal]")){ fotosDaGaleria(); return; }
+  const fv = e.target.closest("[data-fotover]"); if (fv){ verFoto(+fv.dataset.fotover); return; }
+  const mt0 = e.target.closest("[data-mictest]"); if (mt0){ ditar(fala => aviso("Microfone funcionando.", `Entendi: "${esc(fala)}"${numerosDe(fala).length ? " → " + numerosDe(fala).map(num).join(" e ") : ""}`), mt0); return; }
+  if (e.target.closest("[data-gymset]")){ marcarAcademia(); return; }
+  if (e.target.closest("[data-gymdel]")){ store.set(treinoPlus() ? "gym-v2:" + person.id : "gym", null); naAcademia = false; gymVisto = 0; gymMsg = ""; redesenhaPerfil(); return; }
+  if (e.target.closest("[data-shareapp]")){ compartilhar({title: "Ficha de Treino", text: "Nosso app de treino: " + location.href.split("?")[0]}); return; }
+  if (e.target.closest("[data-irpeso]")){ const pi = document.getElementById("peso"); if (pi) { pi.scrollIntoView({block: "center"}); pi.focus({preventScroll: true}); } return; }
+  if (e.target.closest("[data-pushon]")){ ativarPush(); return; }
+  if (e.target.closest("[data-pushtest]")){ testarPush(); return; }
+  if (e.target.closest("[data-pushoff]")){ desativarPush(); return; }
+  if (e.target.closest("[data-instalar]")){ if (instalaEv) { instalaEv.prompt(); instalaEv = null; } return; }
   const pick = e.target.closest("[data-person]");
-  if (pick){ person = PEOPLE.find(x => x.id === pick.dataset.person); store.set("person", person.id); current = dayOf(person.id, logDate) || "d1"; goScreen("hoje"); return; }
+  if (pick){ person = PEOPLE.find(x => x.id === pick.dataset.person); store.set("person", person.id); current = dayOf(person.id, logDate) || "d1"; goScreen("hoje"); checkOfensiva(); pushSegue(); FOTOS = []; return; }
   const sc = e.target.closest("[data-setctl]");
   if (sc){ changeSets(+sc.dataset.ex, +sc.dataset.setctl); return; }
   const sheetBtn = e.target.closest("[data-sheet]");
@@ -2132,6 +3309,9 @@ view.addEventListener("click", e=>{
   if (sq){ const v = +sq.dataset.sq; setChk({sono_q: chkOf(person.id, logDate).sono_q === v ? null : v}); return; }
   const di = e.target.closest("[data-dieta]");
   if (di){ const v = +di.dataset.dieta, c = chkOf(person.id, logDate); setChk({dieta: c.dieta != null && +c.dieta === v ? null : v}); return; }
+  if (e.target.closest("[data-alcabre]")){ alcAberto = true; const y = scrollY; view.innerHTML = renderToday(); refreshToday(); scrollTo(0, y); return; }
+  const al = e.target.closest("[data-alc]");
+  if (al){ const v = +al.dataset.alc; setChk({alcool: alcDe(person.id, logDate) === v ? null : v}); return; }
   const rf = e.target.closest("[data-ref]");
   if (rf){ toggleRef(+rf.dataset.ref); return; }
   const fl = e.target.closest("[data-flag]");
@@ -2139,7 +3319,7 @@ view.addEventListener("click", e=>{
   const nav = e.target.closest("[data-screen]");
   if (nav){ goScreen(nav.dataset.screen); return; }
   const dayBtn = e.target.closest("[data-date]");
-  if (dayBtn){ logDate = dayBtn.dataset.date; keepDate(logDate); current = dayOf(person.id, logDate) || current; draw(); return; }
+  if (dayBtn){ goDate(dayBtn.dataset.date); return; }
   const cheer = e.target.closest("[data-cheer]");
   if (cheer){ celebrate(cheer.dataset.cheer); return; }
   const ck = e.target.closest("[data-ck]");
