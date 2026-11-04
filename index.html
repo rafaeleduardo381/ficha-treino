@@ -591,6 +591,13 @@ body.mov .ex-acts .ghost[aria-pressed="true"]{animation:of-pulso 1.2s ease-in-ou
 .md-ef{display:flex;flex-wrap:wrap;gap:4px}.md-ef i{font-style:normal;font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;background:color-mix(in srgb,var(--violet) 16%,var(--surface));color:var(--violet)}
 .md-efs{border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px 14px}.md-efs legend{font-size:.8rem;font-weight:700;color:var(--soft);margin-bottom:6px}
 .md-f select{width:100%;background:none;border:0;color:var(--ink);font:inherit;font-weight:700;padding:12px 0}.md-f select option{background:var(--surface)}
+.mp{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.mp-f{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:end}.mp-f label{grid-column:1/-1;font-size:.8rem;font-weight:700;color:var(--soft)}
+.mp-in{display:flex;align-items:center;gap:6px;background:var(--surface2);border:1px solid var(--line);border-radius:14px;padding:0 12px}.mp-in input{all:unset;flex:1;min-width:0;padding:12px 0;font-family:var(--f-mono);font-weight:700;font-size:1.05rem;color:var(--ink)}.mp-in em{font-style:normal;color:var(--muted);font-weight:700}
+.mp-f .done-btn{height:46px;padding:0 16px;margin:0;width:auto;min-width:0}.mp-f .ghost{grid-column:1/-1}
+.mp-top{display:flex;align-items:baseline;gap:8px}.mp-top span{font-size:.8rem;font-weight:700;color:var(--soft)}.mp-top b{font-size:1.25rem}.mp-top .ghost{margin-left:auto}
+.mp-falta{margin:0;font-size:.85rem;color:var(--soft)}.mp-msg{margin:0;font-size:.8rem;color:var(--warn)}.mp-msg:empty{display:none}
+.mp-rec{margin:0;font-size:.82rem;color:var(--soft);display:block}.mp-rec small{display:block;margin-top:2px}.mp-rec small,.mp-av{font-size:.75rem;color:var(--muted)}.mp-av{color:var(--warn)}
 .md-ck{display:flex;align-items:center;gap:6px;font-size:.85rem;color:var(--soft)}
 .sq{display:block;border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surface2)}
 .sq-h{margin:0 0 8px;font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -1114,6 +1121,10 @@ const TreinoCore = (() => {
   const work = ss => (ss || []).filter(valid);
   const assisted = p => /graviton/i.test(p.name);
   const ambiguous = p => /\bou\b/i.test(p.name);
+  // Pesos que existem na academia (Rafael, 2026-11-04): halteres de 2 em 2 kg; barra e Smith sobem 3 kg (menor anilha, por lado no Smith);
+  // máquinas com pilha (abdutora, extensora...), polia, leg press e anilha do abdominal de 5 em 5; mochila (casa) de 1 em 1
+  const passoCarga = (name, kg = 0) => /mochila/i.test(name) ? (kg < 10 ? 1 : 2) : /halter|búlgaro|martelo/i.test(name) ? 2 : /smith|com barra|barra w/i.test(name) ? 3 : 5;
+  const proxCarga = (name, kg) => { const s = passoCarga(name, kg); return s === 2 && !/mochila/i.test(name) ? (Math.floor(kg / 2 + 1e-9) + 1) * 2 : Math.round((kg + s) * 100) / 100; };   // halter ímpar (ex.: 5 kg) sobe para o próximo par
   const timed = p => /\bs\b|seg|min|\//i.test(p.reps);
   const e1 = s => valid(s) && s.kg > 0 && s.reps <= 12 ? s.kg * (1 + s.reps / 30) : null;
   const add = (s,n) => { const d=new Date(s+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10); };
@@ -1157,7 +1168,7 @@ const TreinoCore = (() => {
     const stalled=mins.length===3&&mins.every(v=>v!=null)&&mins[1]<=mins[0]&&mins[2]<=mins[1];
     const held={...base,kind:'hold',kg,stalled,reason:full?'Mesma carga; busque o topo da faixa mantendo o sobrar da ficha.':'Séries faltantes ou não confirmadas: sem aumento de carga.'};
     if(!A&&kg===0)return !p.casa?{...held,reason:'Sem carga externa registrada. Siga a ficha; sem peso inventado.'}:full&&check(last,hi,0)?{...base,kind:'up',kg:0,previousKg:0,degrau:true,explain:true,reason:'Bateu o topo em todas as séries: hora de subir de degrau. O próximo nível está em "Sobe para", na Execução.'}:{...held,explain:true,reason:'Peso do corpo: busque '+hi+' reps em todas as séries, sem perder a execução.'};   // treino em casa: progride pelo degrau
-    const mochila=/mochila/i.test(p.name),step=(mochila||/halter|búlgaro|martelo/i.test(p.name))&&!A?(kg<10?1:2):5;   // pesos que existem: halter de 1 ou 2 kg; mochila com garrafas de 1 L; máquina, polia, barra, Smith (por lado), leg press e graviton de 5 kg
+    const mochila=/mochila/i.test(p.name),step=A?5:passoCarga(p.name,kg);   // pesos que existem na academia: ver passoCarga
     const efetiva=k=>A?(p.bw>0?p.bw-k:null):k,salto=k=>{const e=efetiva(k);return !mochila&&e!=null&&e>0&&step/e>0.15;};   // mochila sobe de garrafa em garrafa: sem regra de salto grande   // graviton: carga efetiva = peso do corpo − assistência
     // subiu com salto grande e não chegou ao piso: volta para a carga anterior
     const ant=hist.length>1?trabalho(hist.at(-2)):null;
@@ -1165,7 +1176,7 @@ const TreinoCore = (() => {
       return {...base,kind:'hold',back:true,explain:true,kg:ant.kg,reps:String(hi+4),reason:'Não chegou a '+lo+' reps com '+kgTx(kg)+' kg: volte para '+kgTx(ant.kg)+' kg e faça '+(hi+4)+' reps antes de tentar de novo.'};
     if(!full||!check(last,hi,kg))return held;
     if(A&&kg===0)return {...held,reason:'Sem assistência: tente a barra fixa (meta 3×8).',explain:true};
-    const next=Math.max(0,Math.round((kg+(A?-step:step))*100)/100);
+    const next=A?Math.max(0,kg-step):proxCarga(p.name,kg);
     const reserve=String(p.rir),singular=reserve==='1';
     const condition=reserve==='0'?'Se completou as repetições com boa execução':reserve==='0–1'||reserve==='0-1'?'Se manteve o esforço da ficha com boa execução':'Se ainda faria mais '+reserve+' '+(singular?'repetição':'repetições')+' com boa execução';
     if(salto(kg)){   // salto passa de 15% da carga: primeiro topo +2 reps em todas as séries por 2 sessões
@@ -1203,7 +1214,7 @@ const TreinoCore = (() => {
     for(const d of logs)for(const [name,e] of Object.entries(d.ex||{}))if(eligible.has(name))sum(name,(e.sets||[]).filter(s=>s.done===true).length,'done');return out;
   }
   function streak(end,state,allowToday=true) {let n=0,d=end;for(let i=0;i<600;i++,d=add(d,-1))if(weekday(d)){const s=state(d);if(s==='trained')n++;else if(s!=='excused'&&!(allowToday&&d===end))break;}return n;}
-  return {valid,work,e1,history,target,records,compare,volume,streak,add};
+  return {passoCarga,proxCarga,valid,work,e1,history,target,records,compare,volume,streak,add};
 })();
 if(typeof module!=='undefined')module.exports=TreinoCore;
 
@@ -1635,7 +1646,7 @@ function aquecSugestao(d, i, name){
   const t = treinoPlus() ? metaTreino(e) : null, ult = historicoEx(name).at(-1)?.ex?.[name]?.sets || [];
   const kg = t && Number.isFinite(t.kg) && t.kg > 0 ? t.kg : Math.max(0, ...ult.filter(s => TreinoCore.valid(s)).map(s => s.kg));
   if (!(kg > 0)) return [];
-  const passo = /halter|búlgaro|martelo/i.test(name) ? (kg < 10 ? 1 : 2) : 5, r = v => Math.max(passo, Math.round(v / passo) * passo);
+  const passo = TreinoCore.passoCarga(name), r = v => Math.max(passo, Math.round(v / passo) * passo);
   const a = r(kg * .5), b = r(kg * .75);
   return b < kg && b > a ? [[a, 10], [b, 5]] : a < kg ? [[a, 10]] : [];
 }
@@ -1663,7 +1674,7 @@ function dropSugestao(d, i, name){
   for (let q = 0; q < nQ; q++) {
     const pct = (cfg.reducao_pct[q] ?? cfg.reducao_pct.at(-1) ?? 20) / 100;
     if (!(kg > 0)) { out.push(null); continue; }
-    const passo = /halter|búlgaro|martelo/i.test(name) ? (kg <= 10 ? 1 : 2) : 5, r = Math.round(kg * (1 - pct) / passo * 1000) / 1000;
+    const passo = TreinoCore.passoCarga(name), r = Math.round(kg * (1 - pct) / passo * 1000) / 1000;
     let n = (r % 1 === 0.5 ? Math.floor(r) : Math.round(r)) * passo; if (n >= kg) n = kg - passo;   // peso que existe mais perto do % (empate para baixo); sempre abaixo da queda anterior
     if (n < base * (cfg.piso_pct ?? 45) / 100) n = 0;   // nenhuma queda abaixo de ~45% do peso da série (~30% da 1RM): a que não cabe não entra
     kg = n > 0 ? n : 0; out.push(kg > 0 ? kg : null);
@@ -1794,7 +1805,7 @@ function metaFor(last, reps, sets, leg, name){
   const ref = help ? Math.min(...inRange.map(s => s.kg)) : Math.max(...inRange.map(s => s.kg));
   const top = ok.filter(s => (help ? s.kg <= ref : s.kg >= ref) && s.reps >= hi).length >= sets;
   if (!top) return `<b>${num(ref)} kg</b>, buscando ${hi} reps em todas as séries`;
-  const step = help ? 2.5 : /halter/i.test(name) ? (ref < 10 ? 1 : 2) : leg && ref >= 20 ? 5 : 2.5;
+  const step = help ? 5 : TreinoCore.passoCarga(name);
   const next = Math.max(0, help ? ref - step : ref + step);
   return `<b>${num(next)} kg</b> × ${lo}–${hi} (${help ? "menos ajuda" : "subiu"}: bateu ${hi} em todas)`;
 }
@@ -1892,7 +1903,7 @@ async function loadSaude(){
     const r = await fetch(`${SUPA.url}/rest/v1/${SUPA.saude || "saude"}?select=*`, {headers: {apikey: SUPA.key, Authorization: "Bearer " + SUPA.key}});
     if (!r.ok) return;
     for (const x of await r.json()) SAUDE[x.person] = x;
-    redesenhaMeds();
+    redesenhaMeds(); refreshMetaPeso();
   } catch(e) {}
 }
 async function salvaSaude(meds){
@@ -2139,6 +2150,7 @@ function renderWeekNav(suplementos = false){
     ${logDate === hoje ? `<p class="week-cap">${suplementos ? "Escolha o dia para consultar ou registrar. Sábado e domingo também entram no histórico." : "O anel de cada dia mostra quanto você completou: água, sono e treino."}</p>` : `<button type="button" class="backtoday" data-date="${hoje}">${logDate > hoje ? "Dia futuro (só para ver)" : "Vendo " + WD[parseDate(logDate).getDay()] + ", " + brDate(logDate)} · Voltar para hoje</button>`}`;
 }
 function renderToday(){
+  if (renderToday.p !== person.id) metaPesoEdit = false; renderToday.p = person.id;
   for (const k in ringState) delete ringState[k];   // ao abrir a tela, os anéis enchem de novo a partir do zero
   const hoje = trainDay();
   return `<section class="list" aria-label="Hoje">
@@ -2812,7 +2824,7 @@ function renderExtras(){
         <div class="ck-h"><span class="ico">${ICON.balanca}</span><label class="pz-t" for="peso">Peso corporal</label><span class="pz-st" id="pz-st"></span></div>
         <div class="pz-v" id="pz-v" hidden><p class="pz-big"><b class="num" id="pz-num"></b><span>kg</span></p><button type="button" class="ghost pz-ed" data-pesoedit>Editar</button></div>
         <div class="pz-in" id="pz-in"><div class="step pz-step"><button type="button" data-pstep="-1" aria-label="Menos 0,1 kg">−</button><div class="pz-field"><input id="peso" class="pz-input" type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" aria-label="Peso corporal em quilogramas" aria-describedby="pesohint"><span class="pz-unit" aria-hidden="true">kg</span></div><button type="button" data-pstep="1" aria-label="Mais 0,1 kg">+</button></div><button type="button" class="pz-save" id="pz-save" data-pesosave disabled>Salvar</button></div>
-        <p class="pz-note" id="pesohint"></p></article>` : `<article class="ck mini-ck" id="card-peso" style="--c:var(--peso)"><div class="ck-h"><span class="ico">${ICON.balanca}</span>Peso</div>
+        <p class="pz-note" id="pesohint"></p><div id="mp-box">${metaPesoBloco()}</div></article>` : `<article class="ck mini-ck" id="card-peso" style="--c:var(--peso)"><div class="ck-h"><span class="ico">${ICON.balanca}</span>Peso</div>
         <div class="pesorow"><input id="peso" class="pesoin" inputmode="decimal" autocomplete="off" placeholder="kg" aria-label="Peso em kg"><span>kg</span></div>
         <p class="ck-note" id="pesohint">na academia, ao chegar: antes de treinar, sem tênis</p></article>`}
       ${treinoPlus() ? "" : `<button type="button" class="ck mini-ck dietbtn" id="card-dieta" data-sheet="dieta" style="--c:var(--coral)"><span class="ck-h"><span class="ico">${ICON.prato}</span>Alimentação</span>
@@ -2919,6 +2931,51 @@ const addDays = (s, n) => { const d = parseDate(s); d.setDate(d.getDate() + n); 
 const lastDays = (n, end = trainDay()) => Array.from({length: n}, (_, i) => addDays(end, i - n + 1));
 const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : null;
 function pesoAt(p, s){ const v = CHK[docId(p, s)]?.peso; return v ? +v : null; }
+// Peso recomendado por pessoa (agente de nutrição, 2026-11-04; mudar só com aprovação do Rafael). Peso na balança da academia − 1,5 kg (Davy sem desconto)
+const PESO_REC = {"rafael":{"faixa":[66,70],"ritmo":[0.16,0.32],"txt":"Ganho de massa devagar: 66–70 kg, +0,2 a 0,3 kg por semana","piso":57.5,"teto":77},
+ "laura":{"faixa":[60,62],"ritmo":[-0.3,-0.15],"txt":"Perder gordura sem perder músculo: 60–62 kg, −0,15 a −0,3 kg por semana","piso":50.5,"teto":68},
+ "laysa":{"faixa":[55,57],"ritmo":[0.1,0.2],"txt":"Ganhar músculo com calma: voltar a 55 kg e chegar a 57, +0,1 a 0,2 kg por semana","piso":52,"teto":64.5},
+ "davy":{"faixa":[80,85],"ritmo":[-0.8,-0.4],"txt":"Perder gordura com saúde: 80–85 kg, −0,4 a −0,8 kg por semana, sem pressa","piso":72,"teto":93}};
+let metaPesoEdit = false;
+const metaPesoDe = p => { const v = +SAUDE[p]?.meta_peso; return v > 0 ? v : null; };
+function pesoAtualMeta(p){   // média das últimas 7 pesagens com o desconto da balança (mesma régua das metas)
+  const ws = Object.values(CHK).filter(c => c && c.person === p && +c.peso > 0 && c.date <= trainDay()).sort((a, b) => a.date.localeCompare(b.date)).slice(-7).map(c => +c.peso - (METAS_REGRA.desconto[p] ?? DESCONTO_PESO));
+  return ws.length ? avg(ws) : null;
+}
+function metaPesoBloco(){
+  const p = person.id, R = PESO_REC[p]; if (!R) return "";
+  const meta = metaPesoDe(p), atual = pesoAtualMeta(p), kg = v => num(Math.round(v * 10) / 10);
+  const rec = `<p class="mp-rec">Recomendado: <b>${kg(R.faixa[0])}–${kg(R.faixa[1])} kg</b><small>${esc(R.txt)}</small></p>`;
+  if (metaPesoEdit || !meta) return `<div class="mp"><form class="mp-f" data-mp-form><label for="mp-in">Peso que quer alcançar</label><span class="mp-in"><input id="mp-in" name="v" inputmode="decimal" autocomplete="off" placeholder="${kg((R.faixa[0] + R.faixa[1]) / 2)}" value="${meta ? kg(meta) : ""}"><em>kg</em></span><button type="submit" class="done-btn">Salvar</button>${meta ? '<button type="button" class="ghost" data-mp-x>Cancelar</button>' : ""}</form><p class="mp-msg" id="mp-msg"></p>${rec}</div>`;
+  let falta = "";
+  if (atual != null) {
+    const d = meta - atual, rm = (R.ritmo[0] + R.ritmo[1]) / 2;
+    if (Math.abs(d) < 0.3) falta = "Você chegou na sua meta. Agora é manter.";
+    else if (Math.sign(d) === Math.sign(rm)) { const a = Math.abs(d / R.ritmo[1]), b = Math.abs(d / R.ritmo[0]); falta = `${d > 0 ? "Faltam" : "Faltam perder"} <b>${kg(Math.abs(d))} kg</b> · ~${Math.round(Math.min(a, b))} a ${Math.round(Math.max(a, b))} semanas no ritmo certo`; }
+    else falta = `Você está a <b>${kg(Math.abs(d))} kg</b> da meta, na direção contrária ao seu objetivo.`;
+  } else falta = "Pese-se na academia para o app calcular quanto falta.";
+  const fora = meta < R.faixa[0] || meta > R.faixa[1] ? `<small class="mp-av">Sua meta está fora da recomendada (${kg(R.faixa[0])}–${kg(R.faixa[1])} kg). Pode manter: vamos acompanhar pela média das semanas.</small>` : "";
+  return `<div class="mp"><div class="mp-top"><span>Sua meta</span><b class="num">${kg(meta)} kg</b><button type="button" class="ghost" data-mp-ed>Mudar</button></div><p class="mp-falta">${falta}</p>${fora}${rec}</div>`;
+}
+function salvaMetaPeso(v){
+  const p = person.id, R = PESO_REC[p], msg = document.getElementById("mp-msg");
+  const n = Math.round(Number(String(v).replace(",", ".")) * 10) / 10;
+  if (!(n > 0)) { if (msg) msg.textContent = "Digite o peso em kg, ex.: 68,5"; return; }
+  if (R && (n < R.piso || n > R.teto)) { if (msg) msg.textContent = `Essa meta está fora do limite saudável para você. Escolha entre ${num(R.piso)} e ${num(R.teto)} kg.`; return; }
+  const atual = pesoAtualMeta(p), sobe = R ? (R.ritmo[0] + R.ritmo[1]) / 2 > 0 : null;
+  if (R && atual != null && Math.abs(n - atual) >= 0.3 && (n > atual) !== sobe && !confirm(`Essa meta vai na direção contrária ao seu objetivo de ${sobe ? "ganhar massa" : "perder gordura"}. Confirma?`)) return;
+  metaPesoEdit = false;
+  const row = {...(SAUDE[p] || {id: p, person: p, medicamentos: []}), meta_peso: n, updated: new Date().toISOString()};
+  SAUDE[p] = row; refreshMetaPeso();
+  if (SUPA) fetch(`${SUPA.url}/rest/v1/${SUPA.saude || "saude"}?on_conflict=id`, {method: "POST", headers: {apikey: SUPA.key, Authorization: "Bearer " + SUPA.key, "Content-Type": "application/json", Prefer: "resolution=merge-duplicates,return=minimal"}, body: JSON.stringify({id: p, person: p, medicamentos: row.medicamentos || [], meta_peso: n, updated: row.updated})})
+    .then(r => toast(r.ok ? "Meta de peso salva ✓" : "Não salvou: tente de novo com internet")).catch(() => toast("Não salvou: tente de novo com internet"));
+}
+function refreshMetaPeso(){ const b = document.getElementById("mp-box"); if (b) b.innerHTML = metaPesoBloco(); }
+document.addEventListener("click", ev => {
+  if (ev.target.closest("[data-mp-ed]")) { metaPesoEdit = true; refreshMetaPeso(); document.getElementById("mp-in")?.focus(); }
+  if (ev.target.closest("[data-mp-x]")) { metaPesoEdit = false; refreshMetaPeso(); }
+});
+document.addEventListener("submit", ev => { const f = ev.target.closest?.("[data-mp-form]"); if (!f) return; ev.preventDefault(); salvaMetaPeso(f.v.value); });
 function pesoTrend(p, end){
   const w = lastDays(7, end).map(s => pesoAt(p, s)).filter(v => v), prev = lastDays(7, addDays(end, -7)).map(s => pesoAt(p, s)).filter(v => v);
   if (!w.length) return null;
@@ -3009,7 +3066,7 @@ function relCard(p, r = REL[p], titulo = "Resumo da semana"){
     ${r.titulo ? `<p class="rel-t">${esc(r.titulo)}</p>` : ""}
     ${chips.length ? `<div class="rel-n">${chips.map(c => `<span>${c}</span>`).join("")}</div>` : ""}
     ${blk("Foi bem", r.destaques, "ok")}${blk("Atenção", r.atencao, "at")}${blk("Próxima semana", r.proxima, "nx")}
-    <p class="hint">Feito pelo seu personal todo domingo com os treinos e o check-in da semana.</p></article>`;
+    <p class="hint">Feito pelo seu personal todo domingo com os seus números da semana.</p></article>`;
 }
 // Histórico por exercício no Progresso (a meta do treino não mostra mais a "Última"): toque abre a lista de datas
 function histLista(p){
@@ -3026,11 +3083,11 @@ function relAtalho(p){
 function renderCoach(){
   const p = person.id, todos = RELS[p] || (REL[p] ? [REL[p]] : []), [ult, ...ant] = todos;
   const ate = trainDay(), semTreino = person.days && !Object.values(LOGS).some(d => d.person === p && d.date > addDays(ate, -14) && d.date <= ate && trained(p, d.date));
-  const lembrete = semTreino ? `<article class="panel tinted coach-lem" style="--c:var(--warn)">${phd(ICON_LIVRO, "Registre seus treinos")}<p>Faz duas semanas que não aparece treino seu por aqui. Marque cada série na aba Treino, mesmo que faça só parte da ficha: é com esses números que eu monto a sua avaliação de domingo.</p></article>` : "";
+  const lembrete = semTreino ? `<article class="panel tinted coach-lem" style="--c:var(--warn)">${phd(ICON_LIVRO, "Cadê os treinos, porra?")}<p>Duas semanas sem um treino registrado aqui. Ou você sumiu da academia ou tá treinando e não anota, e as duas coisas são vacilo. Marca cada série na aba Treino, mesmo que faça só metade da ficha: sem número eu não consigo te cobrar direito.</p></article>` : "";
   return `<section class="list coach" aria-label="Coach">
-    <div class="dayhead"><div><div class="eyebrow">Seu personal</div><h2>Coach</h2><p class="dsub">Avaliação feita todo domingo com os treinos e o check-in da semana.</p></div></div>
+    <div class="dayhead"><div><div class="eyebrow">Seu personal carrasco</div><h2>Coach</h2><p class="dsub">Todo domingo ele pega os seus números da semana e fala na cara. Sem passar pano.</p></div></div>
     ${lembrete}
-    ${ult ? relCard(p, ult, "Avaliação da semana") : `<article class="panel"><p>Ainda não há avaliação para ${esc(person.name)}. A primeira sai no domingo, às 10h, com os treinos registrados na semana.</p></article>`}
+    ${ult ? relCard(p, ult, "Avaliação da semana") : `<article class="panel"><p>Ainda não tem avaliação pra ${esc(person.name)}. Domingo às 10h sai a primeira, com o que você registrar na semana. Se não registrar nada, a bronca vem do mesmo jeito.</p></article>`}
     ${ant.length ? `<h3 class="sec">Semanas anteriores</h3>${ant.map(r => `<details class="panel coach-ant"><summary>${dd(r.semana)}–${dd(addDays(r.semana, 6))}${r.titulo ? " · " + esc(r.titulo) : ""}</summary>${relCard(p, r, "Avaliação da semana")}</details>`).join("")}` : ""}
   </section>`;
 }
@@ -3284,7 +3341,7 @@ const PANELS = {
   </ul></div>
   <div class="panel"><h3>Drop na última</h3><p>Na última série, quando chegar ao fim das repetições, tire uns 20–30% do peso na hora e continue até quase não conseguir mais. Só nos exercícios marcados.</p></div>
   <div class="panel"><h3>1ª semana da ficha</h3><p>Semana de teste em todos os exercícios: escolha a carga que deixa sobrar 3 no topo da faixa de repetições, <b>sem drop e sem isometria</b>, e anote as cargas. Nos exercícios que você já fazia, parta da carga que já usava. Da 2ª semana em diante, "sobrar" e drops como está na ficha.</p></div>
-  <div class="panel"><h3>Progressão dupla</h3><p>Bateu o topo da faixa de reps em todas as séries sobrando o que a ficha pede? Sobe a carga: <b>halteres +1 kg</b> (até 10 kg) ou +2 kg; <b>máquina, polia, barra, Smith e leg press +5 kg</b>, e volta para o piso da faixa. Se o salto passar de ~15% da carga, primeiro faça o topo +2 reps em todas as séries por 2 sessões, depois suba. No graviton, tire 5 kg de assistência.</p></div>
+  <div class="panel"><h3>Progressão dupla</h3><p>Bateu o topo da faixa de reps em todas as séries sobrando o que a ficha pede? Sobe a carga: <b>halteres +2 kg</b>; <b>barra e Smith +3 kg</b> (no Smith, de cada lado); <b>máquina, polia e leg press +5 kg</b>, e volta para o piso da faixa. Se o salto passar de ~15% da carga, primeiro faça o topo +2 reps em todas as séries por 2 sessões, depois suba. No graviton, tire 5 kg de assistência.</p></div>
   <div class="panel"><h3>Execução</h3><ul>
    <li>Aquecimento: 5 min leve + 50% × 8, 70% × 4, 85% × 1–2 no primeiro exercício de cada grupo.</li>
    <li>Descida controlada em ~2 s, sem quicar; priorize a posição alongada.</li>
